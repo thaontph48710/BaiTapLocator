@@ -1,6 +1,7 @@
 package bai_tap_webelement_webdiver;
 
 import leads.LocatorsLeadsCRM;
+import leads.LocatorsLogin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,11 +23,11 @@ public static void createChromeDriver() {
 
 public static void loginCRM() {
     System.out.println("Login CRM");
-    driver.findElement(By.xpath(LocatorsLeadsCRM.inputEmail)).clear();
-    driver.findElement(By.xpath(LocatorsLeadsCRM.inputEmail)).sendKeys("admin@example.com");
-    driver.findElement(By.xpath(LocatorsLeadsCRM.inputPassWord)).clear();
-    driver.findElement(By.xpath(LocatorsLeadsCRM.inputPassWord)).sendKeys("123456");
-    driver.findElement(By.xpath(LocatorsLeadsCRM.buttonLogin)).click();
+    driver.findElement(By.xpath(LocatorsLogin.inputEmail)).clear();
+    driver.findElement(By.xpath(LocatorsLogin.inputEmail)).sendKeys("admin@example.com");
+    driver.findElement(By.xpath(LocatorsLogin.inputPassWord)).clear();
+    driver.findElement(By.xpath(LocatorsLogin.inputPassWord)).sendKeys("123456");
+    driver.findElement(By.xpath(LocatorsLogin   .buttonLogin)).click();
 }
 
 }
