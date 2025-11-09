@@ -1,4 +1,4 @@
-package Task;
+package task;
 
 public class LocatorsCRMTask {
 
@@ -39,22 +39,22 @@ public class LocatorsCRMTask {
     public String iconDueDate= "//input[@id='duedate']/following-sibling::div";
 
     public String dropdownPrioryty = "//button[@data-id='priority']";
-    public static String ListPrioryty(String value) {
-        String ListPrioryty = "//button[@data-id='priority']/following-sibling::div//span[normalize-space()='" +value+ "']";
-        return ListPrioryty;
+    public static String getValuePrioryty(String value) {
+        String getValuePrioryty = "//button[@data-id='priority']/following-sibling::div//span[normalize-space()='" +value+ "']";
+        return getValuePrioryty;
     }
 
     public String dropdownRepeatEvery = "//button[@data-id='repeat_every']";
-    public static String ListRepeatEvery(String value) {
-        String ListRepeatEvery = "//button[@data-id='repeat_every']/following-sibling::div//span[normalize-space()='" +value+ "']";
-        return ListRepeatEvery;
+    public static String getRepeatEvery(String value) {
+        String getRepeatEvery = "//button[@data-id='repeat_every']/following-sibling::div//span[normalize-space()='" +value+ "']";
+        return getRepeatEvery;
     }
 
     public String LabelForRelatedTo = "//label[normalize-space()='Related To']";
     public String dropdownRelatedTo = "//button[@data-id='rel_type']";
-    public static String ListRelatedTo(String value) {
-        String ListRepeatTo = "//button[@data-id='rel_type']/following-sibling::div//span[normalize-space()='" +value+"']";
-        return ListRepeatTo;
+    public static String listRelatedTo(String value) {
+        String listRelatedTo = "//button[@data-id='rel_type']/following-sibling::div//span[normalize-space()='" +value+"']";
+        return listRelatedTo;
     }
     public String LabelProject = "//span[@class='rel_id_label']";
     public String inputSearchProject = "//button[@data-id='rel_id']";
@@ -63,26 +63,26 @@ public class LocatorsCRMTask {
 
     public String dropdownAssignees = "//button[@data-id='assignees']";
     public String inputSearchAssignees = "//button[@data-id='assignees']/following-sibling::div//input[@type='search']";
-    public static String ListAssignees(String value) {
-        String ListAssignees = "//button[@data-id='assignees']/following-sibling::div//span[normalize-space()='" +value+ "']";
-        return ListAssignees;
+    public static String listAssignees(String value) {
+        String listAssignees = "//button[@data-id='assignees']/following-sibling::div//span[normalize-space()='" +value+ "']";
+        return listAssignees;
     }
 
 
     public String dropdownFollowers= "//button[@data-id='followers[]']";
     public String inputSearchFollowers = "//button[@data-id='followers[]']/following-sibling::div//input[@type='search']";
-    public static String ListFollowers(String value) {
-        String ListFollowers = "//button[@data-id='followers[]']/following-sibling::div//span[normalize-space()='" +value+ "']";
-        return ListFollowers;
+    public static String listFollowers(String value) {
+        String listFollowers = "//button[@data-id='followers[]']/following-sibling::div//span[normalize-space()='" +value+ "']";
+        return listFollowers;
     }
 
 
 
     public String inputTag = "//div[@id='inputTagsWrapper']//input[@placeholder='Tag']";
     public String dropdownTag = "//div[@id='inputTagsWrapper']//ul[@id='ui-id-2']";
-    public static String ListTag (String value ) {
-        String ListTag  = "//input[@id='tags']/following-sibling::ul[@id='ui-id-2']//div[normalize-space()='" +value+ "']";
-        return ListTag ;
+    public static String listTag (String value ) {
+        String listTag  = "//input[@id='tags']/following-sibling::ul[@id='ui-id-2']//div[normalize-space()='" +value+ "']";
+        return listTag ;
     }
 
     public String inputTaskDescription = "//textarea[@id='description']";
