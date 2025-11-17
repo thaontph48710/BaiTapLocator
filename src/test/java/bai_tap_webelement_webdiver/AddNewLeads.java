@@ -148,7 +148,7 @@ public class AddNewLeads extends LoginCRM {
 
 
 
-    public void verifyNewLeadInEditPopup(String leadName, String status, String source, String assigned, String tag, String name, String address, String position,
+    public void verifyNewLeadInEdit(String leadName, String status, String source, String assigned, String tag, String name, String address, String position,
                                          String city, String emailAddress, String state, String website, String country, String phone, String zipCode,
                                          String leadValue, String language, String company, String description, String dateContacted) throws InterruptedException {
 
@@ -256,7 +256,7 @@ public class AddNewLeads extends LoginCRM {
 
         searchLeadsNewAdd(leadsNameTest);
 
-        verifyNewLeadInEditPopup(leadsNameTest, dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position,
+        verifyNewLeadInEdit(leadsNameTest, dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position,
                 city, emailAddress, state, website, country, phone, zipCode,
                 leadValue, language, company, description, lastContacted);
     }
