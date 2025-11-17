@@ -67,8 +67,8 @@ public class LocatorsLeadsCRM {
     public static String dropdownStatus = "//button[@data-id='status']";
     public static String inputStatusSearch = "//button[@data-id='status']/following-sibling::div//input";
     public static String listStatus(String value){
-        String listStatus = "//button[@data-id='status']/following-sibling::div//span[normalize-space()='"+value+"']";
-        return listStatus;
+        String xpath = "//button[@data-id='status']/following-sibling::div//span[contains(normalize-space(),'" + value + "')]";
+        return xpath;
     }
 
 
@@ -158,6 +158,13 @@ public class LocatorsLeadsCRM {
 
     public static String buttonClose = "//div[@id ='tab_lead_profile']//button[normalize-space()='Close']";           // Close
     public static String buttonSave = "//button[@id='lead-form-submit']";              // Save
+
+    public static String getFirstRowItemLeadName(String leadName) {
+        String xpath = "//table[@id='leads']//a[normalize-space()='" + leadName + "']";
+        return xpath;
+
+    }
+
 
 
 

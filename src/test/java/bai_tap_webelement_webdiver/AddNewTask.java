@@ -13,18 +13,14 @@ public class AddNewTask extends LoginCRM {
 
     public static void addNewTask(String Task) throws InterruptedException {
         System.out.println("Add New Task");
-
         driver.findElement(By.xpath(LocatorsCRMTask.menuTasks)).click();
-        Thread.sleep(2000);
-
+        Thread.sleep(1000);
         driver.findElement(By.xpath(LocatorsCRMTask.buttonNewTasks)).click();
         Thread.sleep(2000);
 
         boolean isPublicSelected = driver.findElement(By.xpath(LocatorsCRMTask.checkboxPublic)).isSelected();
         if (isPublicSelected == false) {
             driver.findElement(By.xpath(LocatorsCRMTask.checkboxPublic)).click();
-
-
         }
         Thread.sleep(2000);
         boolean isBillableSelected = driver.findElement(By.xpath(LocatorsCRMTask.checkboxBillable)).isSelected();
@@ -71,12 +67,12 @@ public class AddNewTask extends LoginCRM {
         Thread.sleep(2000);
 
 
-////---------------------------------Drowdown Assignees-----------------------------
-//        driver.findElement(By.xpath(LocatorsCRMTask.dropdownAssignees)).click();
-//        Thread.sleep(2000);
-//        String xpatAssignees = LocatorsCRMTask.listAssignees("Admin Anh Tester");
-//        driver.findElement(By.xpath(xpatAssignees)).click();
-//        Thread.sleep(2000);
+//---------------------------------Drowdown Assignees-----------------------------
+        driver.findElement(By.xpath(LocatorsCRMTask.dropdownAssignees)).click();
+        Thread.sleep(2000);
+        String xpatAssignees = LocatorsCRMTask.listAssignees("Admin Anh Tester");
+        driver.findElement(By.xpath(xpatAssignees)).click();
+        Thread.sleep(2000);
 
         //---------------------------------Drowdown Followers-----------------------------
         driver.findElement(By.xpath(LocatorsCRMTask.dropdownFollowers)).click();
