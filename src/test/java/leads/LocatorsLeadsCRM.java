@@ -57,6 +57,7 @@ public class LocatorsLeadsCRM {
         String buttonDelete = "//td[./a[normalize-space()='" + leadName +"']]//a[normalize-space()='Delete']";
         return buttonDelete;
     }
+    public static String checkDelete = "//td[@class='dataTables_empty']";
 
 
     // ====== Add New Lead Form ======
@@ -82,7 +83,7 @@ public class LocatorsLeadsCRM {
 
 
     public static String labelAssignedAdd = "//label[@for='assigned']";
-    public static  String dropdownAssignedButton = "//button[@title='Admin Example']";
+    public static  String dropdownAssignedButton = "//button[@data-id='assigned']";
     public static String inputAssignedSearch = "//div[@class='dropdown bootstrap-select bs3 open']//input[@aria-label='Search']";
     public static String listAssigned(String value){
         String listAssigned = "//button[@data-id='assigned']/following-sibling::div//span[normalize-space()='" + value + "']";
@@ -90,6 +91,8 @@ public class LocatorsLeadsCRM {
     }
 
     public static  String labelTag = "//label[normalize-space()='Tags']";
+    public static  String inputTagTrong = "//div[@id='inputTagsWrapper']//ul[@class='tagit ui-widget ui-widget-content ui-corner-all']//input[@type='text']";
+    public static  String inputClearTag = "//div[@id='inputTagsWrapper']//li[1]";
     public static String inputTag = "//div[@id='inputTagsWrapper']//input[@placeholder='Tag']";
     public static String listdropdownTag = "//div[@id='inputTagsWrapper']//ul[@id='ui-id-2']/li[@class='ui-menu-item']/div";
     public static String listTags(String value){
@@ -151,6 +154,8 @@ public class LocatorsLeadsCRM {
 
     public static String labelDateContacted = "//label[@for='custom_contact_date']";
     public static String inputDateContacted = "//input[@id='custom_contact_date']";
+    public static String inputLastContacted = "//input[@id='lastcontact']";
+
 
     public static String firstRowLeads = "//table[@id='leads']//tbody/tr[1]/td[3]/a";
     public static String iconCloseProfile = "//div[@id='lead-modal']//button[@class='close']";
