@@ -66,7 +66,7 @@ public class LocatorsCRMTask {
         return listFollowers;
     }
 
-
+    public static String dropdownValueForRepeatTo = "//button[@data-id='rel_id']";
 
     public static String inputTag = "//div[@id='inputTagsWrapper']//input[@placeholder='Tag']";
     public static String dropdownTag = "//div[@id='inputTagsWrapper']//ul[@id='ui-id-2']";
@@ -75,6 +75,15 @@ public class LocatorsCRMTask {
         return listTag ;
     }
 
+    public static String getValueForRepeatTo(String valueForRepeatTo) {
+        String xpathValueForRepeatTo = "//button[@data-id='rel_id']/following-sibling::div//span[normalize-space()='"+valueForRepeatTo +"']";
+        return xpathValueForRepeatTo;
+    }
+    public static String inputSearchValueForRepeatTo = "//button[@data-id='rel_id']/following-sibling::div//input[@type='search']";
+    public static String getValueRepeatTo(String valueRepeatTo) {
+        String xpathRepeatTo = "//button[@data-id='rel_type']/following-sibling::div//span[normalize-space()='" +valueRepeatTo+ "']";
+        return xpathRepeatTo;
+    }
 
     public static String inputTaskDescription = "//textarea[@id='description']";
     public static String buttonSave = "//button[@type='submit' and text()='Save']";

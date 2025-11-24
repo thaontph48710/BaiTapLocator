@@ -4,13 +4,27 @@ import leads.LocatorsLeadsCRM;
 import leads.LocatorsLogin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
+import java.util.List;
 
 public class LoginCRM {
+
+    public boolean checkExistsElement(String xpathElement) {
+        List<WebElement> element = driver.findElements(By.xpath(xpathElement));
+        if (element.size() > 0) {
+            System.out.println("Phần tử tồn tại: true" + xpathElement);
+            return true;
+        } else {
+            System.out.println("Phần tử không tồn tại: false" + xpathElement);
+            return false;
+        }
+    }
+
     static WebDriver driver;
 @BeforeMethod
     public static void createChromeDriver() {
