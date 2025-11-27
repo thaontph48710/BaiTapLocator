@@ -1,6 +1,4 @@
-package task;
-
-import leads.LocatorsLogin;
+package bai_tap_locators;
 
 public class LocatorsCRMTask {
     public static   String inputSearch =  "//div[@id='tasks_filter']//input[@type='search']";
@@ -12,7 +10,7 @@ public class LocatorsCRMTask {
 
 
     //  Add New Task
-
+    public static String headerAddNewTask = "//div[@id='_task_modal']//h4[normalize-space()='Add new task']";
     public static String checkboxPublic = "//input[@id='task_is_public']";
     public static String checkboxBillable= "//input[@id='task_is_billable']";
 
@@ -93,6 +91,9 @@ public class LocatorsCRMTask {
     public static String firstRowTask= "//table[@id='tasks']//tbody/tr[1]/td[3]/a";
     public static String iconCloseProfile = "//div[@id='task-modal']//button[@class='close']";
 
+    public static String getFirstRowItemTask(String taskName) {
+    String xpath = "//table[@id='tasks']//a[normalize-space()='" + taskName + "']";
 
-
+    return xpath;
+}
 }

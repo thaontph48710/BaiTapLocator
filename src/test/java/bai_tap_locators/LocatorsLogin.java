@@ -1,4 +1,4 @@
-package leads;
+package bai_tap_locators;
 
 public class LocatorsLogin {
 

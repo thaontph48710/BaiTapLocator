@@ -1,4 +1,4 @@
-package leads;
+package bai_tap_locators;
 
 public class LocatorsLeadsCRM {
 
@@ -20,7 +20,7 @@ public class LocatorsLeadsCRM {
 
     public static   String inputSearch =  "//div[@id='leads_filter']//input[@type='search']";
 
-
+    public static String headerAddNewLead = "//h4[normalize-space()='Add new lead']";
     //Header
     public static String titleLeadsSummary = "//h4[normalize-space()='Leads Summary']";
     public static String titleActive = "//div[contains(@class,'leads-overview')]//span[normalize-space()='Active']";

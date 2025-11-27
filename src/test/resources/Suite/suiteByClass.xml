@@ -3,7 +3,7 @@
 <suite name="SuiteRunByClass" verbose="1">
     <test name="Add">
         <classes>
-            <class name="bai_tap_webelement_webdiver.AddNewLeads"/>
+            <class name="thuc_hanh.Leads"/>
         </classes>
     </test>
 </suite>

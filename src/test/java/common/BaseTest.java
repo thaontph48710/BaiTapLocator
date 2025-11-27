@@ -1,7 +1,6 @@
-package bai_tap_webelement_webdiver;
+package common;
 
-import leads.LocatorsLeadsCRM;
-import leads.LocatorsLogin;
+import bai_tap_locators.LocatorsLogin;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,20 +11,20 @@ import org.testng.annotations.BeforeMethod;
 import java.time.Duration;
 import java.util.List;
 
-public class LoginCRM {
+public class BaseTest {
 
     public boolean checkExistsElement(String xpathElement) {
         List<WebElement> element = driver.findElements(By.xpath(xpathElement));
         if (element.size() > 0) {
-            System.out.println("Phần tử tồn tại: true" + xpathElement);
+            System.out.println("Phần tử tồn tại: " + xpathElement);
             return true;
         } else {
-            System.out.println("Phần tử không tồn tại: false" + xpathElement);
+            System.out.println("Phần tử không tồn tại: " + xpathElement);
             return false;
         }
     }
 
-    static WebDriver driver;
+     public static WebDriver driver;
 @BeforeMethod
     public static void createChromeDriver() {
         System.out.println("Create Chrome Driver");

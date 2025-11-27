@@ -1,13 +1,16 @@
-package bai_tap_webelement_webdiver;
+package thuc_hanh;
 
+import bai_tap_locators.LocatorsLeadsCRM;
+import common.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import task.LocatorsCRMTask;
+import bai_tap_locators.LocatorsCRMTask;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,25 +19,27 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 
-public class AddNewTask extends LoginCRM {
+import static bai_tap_locators.LocatorsLeadsCRM.*;
+
+public class Task extends BaseTest {
 
     public void clickMenuTasks() throws InterruptedException {
         System.out.println("Click Menu Tasks");
         driver.findElement(By.xpath(LocatorsCRMTask.menuTasks)).click();
         Thread.sleep(1000);
+        Assert.assertTrue(checkExistsElement(LocatorsCRMTask.headerTasksPage), "Không truy cập được vào trang Tasks!");
     }
 
     public void clickButtonNewTask() throws InterruptedException {
         System.out.println("Click Button New Task");
         driver.findElement(By.xpath(LocatorsCRMTask.buttonNewTasks)).click();
         Thread.sleep(2000);
+        Assert.assertTrue(checkExistsElement(LocatorsCRMTask.headerAddNewTask), "Khong mo duoc new task!");
     }
 
     public static void addNewTask(String subject, String hourlyRate, String startDate, String dueDate, String priority, String repeatEvery,
                                   String relatedTo, String assignee, String follower, String tag, int flag) throws InterruptedException {
         System.out.println("Add New Task");
-
-
 
         if (flag == 1) {
             driver.findElement(By.xpath(LocatorsCRMTask.checkboxPublic)).click();
@@ -146,64 +151,70 @@ public class AddNewTask extends LoginCRM {
 
         // SUBJECT
         String actualSubject = driver.findElement(By.xpath(LocatorsCRMTask.inputSubject)).getAttribute("value").trim();
-        assert actualSubject.equals(subject) : "FAIL: Subject không khớp";
+        Assert.assertEquals(actualSubject, subject, "FAIL: Subject không khớp");
 
         // HOURLY RATE
         String actualRate = driver.findElement(By.xpath(LocatorsCRMTask.inputHourlyRate)).getAttribute("value").trim();
-        assert actualRate.equals(hourlyRate) : "FAIL: Hourly Rate không đúng";
+        Assert.assertEquals(actualRate, hourlyRate, "FAIL: Hourly Rate không khớp");
 
         // START DATE
         String actualStart = driver.findElement(By.xpath(LocatorsCRMTask.inputStartDate)).getAttribute("value").trim();
-        assert actualStart.equals(startDate) : "FAIL: Start Date không khớp";
+        Assert.assertEquals(actualStart, startDate, "FAIL: Start Date không khớp");
+
 
         // DUE DATE
         String actualDue = driver.findElement(By.xpath(LocatorsCRMTask.inputDueDate)).getAttribute("value").trim();
-        assert actualDue.equals(dueDate) : "FAIL: Due Date không khớp";
+        Assert.assertEquals(actualDue, dueDate, "FAIL: Due Date không khớp");
 
         // PRIORITY (Select2)
         String actualPriority = driver.findElement(By.xpath(
                 "//label[contains(text(),'Priority')]/following-sibling::div//span[contains(@class,'select2-chosen')]"
         )).getText().trim();
-        assert actualPriority.equals(priority) : "FAIL: Priority không đúng";
+        Assert.assertEquals(actualPriority, priority, "FAIL: Priority không đúng");
+
 
         // REPEAT EVERY (Select2)
         String actualRepeat = driver.findElement(By.xpath(
                 "//label[contains(text(),'Repeat every')]/following-sibling::div//span[contains(@class,'select2-chosen')]"
         )).getText().trim();
-        assert actualRepeat.equals(repeatEvery) : "FAIL: Repeat Every không đúng";
+        Assert.assertEquals(actualRepeat, repeatEvery, "FAIL: Repeat Every không đúng");
+
 
         // RELATED TO (Select2)
         String actualRelatedTo = driver.findElement(By.xpath(
                 "//label[contains(text(),'Related to')]/following-sibling::div//span[contains(@class,'select2-chosen')]"
         )).getText().trim();
-        assert actualRelatedTo.equals(relatedTo) : "FAIL: Related To không đúng";
+        Assert.assertEquals(actualRelatedTo, relatedTo, "FAIL: Related To không đúng");
+
 
         // ASSIGNEE (Select2)
         String actualAssignee = driver.findElement(By.xpath(
                 "//label[contains(text(),'Assignees')]/following-sibling::div//span[contains(@class,'select2-chosen')]"
         )).getText().trim();
-        assert actualAssignee.equals(assignee) : "FAIL: Assignee không đúng";
+        Assert.assertEquals(actualAssignee, assignee, "FAIL: Assignee không đúng");
+
 
         // FOLLOWER
-        List<WebElement> followers = driver.findElements(By.xpath("//label[contains(text(),'Followers')]/following-sibling::div//li//span"));
-        boolean followerFound = followers.stream().anyMatch(f -> f.getText().trim().equals(follower));
-        assert followerFound : "FAIL: Follower không đúng";
+        String actualFolower = driver.findElement(By.xpath(LocatorsCRMTask.dropdownFollowers)).getText().trim();
+        Assert.assertTrue(actualFolower.contains(follower), "FAIL: folower không chứa giá trị mong muốn");
 
-        // TAG (Tag-it)
-        List<WebElement> tags = driver.findElements(By.xpath("//ul[@class='tagit-choice']//span[@class='tagit-label']"));
-        boolean tagFound = tags.stream().anyMatch(t -> t.getText().trim().equals(tag));
-        assert tagFound : "FAIL: Tag không khớp";
+        // TAG
+        String actualTag = driver.findElement(By.xpath(inputTag)).getText().trim();
+        Assert.assertEquals(actualTag, tag, "FAIL: Source không khớp.");
+
 
         // PUBLIC or BILLABLE
         if (flag == 1) {
-            assert driver.findElement(By.xpath(LocatorsCRMTask.checkboxPublic)).isSelected()
-                    : "FAIL: Public phải được tick";
+            boolean isPublicChecked = driver.findElement(By.xpath(LocatorsCRMTask.checkboxPublic)).isSelected();
+            Assert.assertTrue(isPublicChecked, "FAIL: Checkbox Public không được chọn.");
+
         } else {
+            boolean isBillableChecked = driver.findElement(By.xpath(LocatorsCRMTask.checkboxBillable)).isSelected();
             assert driver.findElement(By.xpath(LocatorsCRMTask.checkboxBillable)).isSelected()
                     : "FAIL: Billable phải được tick";
         }
 
-        System.out.println("VERIFY SUCCESS — Task data matches perfectly!");
+        System.out.println("VERIFY SUCCESS — dữ liệu task KHỚP hoàn toàn!");
     }
 
     public static void editTasks(String subjectEdit, String hourlyRateEdit, String startDateEdit, String dueDateEdit,
@@ -326,75 +337,71 @@ public class AddNewTask extends LoginCRM {
         Thread.sleep(300);
     }
 
+    public void clickEditButton(String taskName) throws InterruptedException {
+        Actions action = new Actions(driver);
+        action.moveToElement(driver.findElement(By.xpath(LocatorsCRMTask.getFirstRowItemTask(taskName)))).perform();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath(LocatorsLeadsCRM.buttonEdit(taskName))).click();
+        Thread.sleep(2000);
+    }
+    String subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+    String hourlyRate = "50";
+    String startDate = "20/06/2024";
+    String dueDate = "25/06/2024";
+    String priority = "High";
+    String repeatEvery = "Week";
+    String relatedTo = "Project";
+    String assignee = "Admin Example";
+    String follower = "Admin Example";
+    String tag = "Selenium";
 
 
     @Test
-    public void testAddAndCheckNeưTask() throws InterruptedException {
-        String subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-        String hourlyRate = "50";
-        String startDate = "20/06/2024";
-        String dueDate = "25/06/2024";
-        String priority = "High";
-        String repeatEvery = "Week";
-        String relatedTo = "Project";
-        String assignee = "Admin Example";
-        String follower = "Admin Example";
-        String tag = "Selenium";
-        int flag = 1;
+    public void testAddAndCheckNewTask() throws InterruptedException {
+
 
         clickMenuTasks();
         clickButtonNewTask();
-        addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, flag);
+        addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, 1);
         clickSave();
         clickCloseProffile();
         searchTaskNewAdd(subject);
-        verifyNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, flag);
+        clickEditButton(subject);
+        verifyNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, 1);
 
     }
     @Test(priority = 1)
     public void testEditask() throws Exception {
-        String subject = "Thaont09";
-        String hourlyRate = "10";
-        String startDate = "14-12-2025";
-        String dueDate = "18-12-2025";
-        String priority = "High";
-        String repeatEvery = "1 Month";
-        String totalCycles = "56622";
-        String relatedTo = "Customer";
-        String typeRelatedTo = "An test 02";
-        String assignee = "Admin Anh Tester";
-        String follower = "Admin Example";
-        String tag = "JSC_NEW";
-        int flag = 0;
 
+         subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
        clickMenuTasks();
        clickButtonNewTask();
 
-        addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, flag);
+        addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, 0);
         Thread.sleep(2000);
         clickCloseProffile();
 
-        searchTaskNewAdd("Thaont09");
+        searchTaskNewAdd(subject);
         Thread.sleep(2000);
 
-        verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, flag);
+        verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, 0);
         Thread.sleep(2000);
 
 
-        String subjectEdit = "Thaont09 Task 2";
-        String hourlyRateEdit  = "20";
-        String startDateEdit  = "20-12-2025";
-        String dueDateEdit  = "25-12-2025";
-        String priorityEdit  = "High";
-        String repeatEveryEdit  = "2 Months";
-        String relatedToEdit  = "Lead";
-        String typeRelatedToEdit  = "Ha Ngoc Thao Leads";
+        String nameSubject = subject + "_Edit";
+         hourlyRate  = "20";
+         startDate  = "20-12-2025";
+         dueDate  = "25-12-2025";
+         priority  = "High";
+         repeatEvery  = "2 Months";
+         relatedTo = "Lead";
+        relatedTo  = "Ha Ngoc Thao Leads";
 
-        editTasks(subjectEdit, hourlyRateEdit, startDateEdit, dueDateEdit , priorityEdit , repeatEveryEdit , relatedToEdit , typeRelatedToEdit);
+        editTasks(nameSubject, hourlyRate, startDate, dueDate , priority , repeatEvery , relatedTo , relatedTo);
         clickSave();
 
         Thread.sleep(4000);
-
+        verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, assignee, follower, tag, 0);
         Thread.sleep(4000);
     }
 
