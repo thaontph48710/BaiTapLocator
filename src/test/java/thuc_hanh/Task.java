@@ -1,6 +1,7 @@
 package thuc_hanh;
 
 import bai_tap_locators.LocatorsLeadsCRM;
+import com.thaotest.WebUI;
 import common.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -25,16 +26,16 @@ public class Task extends BaseTest {
 
     public void clickMenuTasks() throws InterruptedException {
         System.out.println("Click Menu Tasks");
-        driver.findElement(By.xpath(LocatorsCRMTask.menuTasks)).click();
-        Thread.sleep(1000);
-        Assert.assertTrue(checkExistsElement(LocatorsCRMTask.headerTasksPage), "Không truy cập được vào trang Tasks!");
+        WebUI.clickElement(driver, LocatorsCRMTask.menuTasks);
+
+        Assert.assertTrue(WebUI.checkExistsElement(driver,LocatorsCRMTask.headerTasksPage), "Không truy cập được vào trang Tasks!");
     }
 
     public void clickButtonNewTask() throws InterruptedException {
         System.out.println("Click Button New Task");
-        driver.findElement(By.xpath(LocatorsCRMTask.buttonNewTasks)).click();
-        Thread.sleep(2000);
-        Assert.assertTrue(checkExistsElement(LocatorsCRMTask.headerAddNewTask), "Khong mo duoc new task!");
+        WebUI.clickElement(driver, LocatorsCRMTask.buttonNewTasks);
+
+        Assert.assertTrue(WebUI.checkExistsElement(driver,LocatorsCRMTask.headerAddNewTask), "Khong mo duoc new task!");
     }
 
     public static void addNewTask(String subject, String hourlyRate, String startDate, String dueDate, String priority, String repeatEvery,
@@ -42,75 +43,53 @@ public class Task extends BaseTest {
         System.out.println("Add New Task");
 
         if (flag == 1) {
-            driver.findElement(By.xpath(LocatorsCRMTask.checkboxPublic)).click();
-            Thread.sleep(500);
+            WebUI.clickElement(driver, LocatorsCRMTask.checkboxPublic);
+
         }
         if (flag == 0) {
-            driver.findElement(By.xpath(LocatorsCRMTask.checkboxBillable)).click();
-            Thread.sleep(500);
+            WebUI.clickElement(driver, LocatorsCRMTask.checkboxBillable);
+
         }
+        WebUI.setTextElement(driver, LocatorsCRMTask.inputSubject, subject);
+        WebUI.clearElementText(driver, LocatorsCRMTask.inputSubject);
+        WebUI.setTextElement(driver, LocatorsCRMTask.inputHourlyRate, hourlyRate);
+        WebUI.clearElementText(driver, LocatorsCRMTask.inputStartDate);
+        WebUI.setTextElement(driver, LocatorsCRMTask.inputStartDate, startDate);
+        WebUI.setTextElement(driver, LocatorsCRMTask.inputDueDate, dueDate);
 
-
-        Thread.sleep(2000);
-
-        driver.findElement(By.xpath(LocatorsCRMTask.inputSubject)).sendKeys(subject);
-        Thread.sleep(2000);
-
-        driver.findElement(By.xpath(LocatorsCRMTask.inputHourlyRate)).clear();
-        driver.findElement(By.xpath(LocatorsCRMTask.inputHourlyRate)).sendKeys(hourlyRate);
-        Thread.sleep(2000);
-
-        driver.findElement(By.xpath(LocatorsCRMTask.inputStartDate)).clear();
-        driver.findElement(By.xpath(LocatorsCRMTask.inputStartDate)).sendKeys(startDate);
-        Thread.sleep(2000);
-
-
-        driver.findElement(By.xpath(LocatorsCRMTask.inputDueDate)).sendKeys(dueDate);
-        Thread.sleep(2000);
 // ---------------------------------Drowdown Prioryty-----------------------------
-        driver.findElement(By.xpath(LocatorsCRMTask.dropdownPrioryty)).click();
-        Thread.sleep(2000);
-        String xpathPrioryty = LocatorsCRMTask.getValuePrioryty(priority);
-        driver.findElement(By.xpath(xpathPrioryty)).click();
+        WebUI.clickElement(driver, LocatorsCRMTask.dropdownPrioryty);
+        WebUI.clickElement(driver, LocatorsCRMTask.getValuePrioryty(priority));
         Thread.sleep(2000);
 
 //---------------------------------Drowdown Repeat Every-----------------------------
-        driver.findElement(By.xpath(LocatorsCRMTask.dropdownRepeatEvery)).click();
-        Thread.sleep(2000);
-        String xpathRepeatEvery = LocatorsCRMTask.getRepeatEvery(repeatEvery);
-        driver.findElement(By.xpath(xpathRepeatEvery)).click();
+        WebUI.clickElement(driver, LocatorsCRMTask.dropdownRepeatEvery);
+        WebUI.clickElement(driver, LocatorsCRMTask.getRepeatEvery(repeatEvery));
         Thread.sleep(2000);
 
 //---------------------------------Drowdown Related To-----------------------------
-        driver.findElement(By.xpath(LocatorsCRMTask.dropdownRelatedTo)).click();
-        Thread.sleep(2000);
-        String xpathRelatedTo = LocatorsCRMTask.listRelatedTo(relatedTo);
-        driver.findElement(By.xpath(xpathRelatedTo)).click();
+        WebUI.clickElement(driver, LocatorsCRMTask.dropdownRelatedTo);
+        WebUI.clickElement(driver, LocatorsCRMTask.listRelatedTo(relatedTo));
         Thread.sleep(2000);
 
 
 //---------------------------------Drowdown Assignees-----------------------------
-        driver.findElement(By.xpath(LocatorsCRMTask.dropdownAssignees)).click();
-        Thread.sleep(2000);
-        String xpatAssignees = LocatorsCRMTask.listAssignees(assignee);
-        driver.findElement(By.xpath(xpatAssignees)).click();
+        WebUI.clickElement(driver, LocatorsCRMTask.dropdownAssignees);
+        WebUI.clickElement(driver, LocatorsCRMTask.listAssignees(assignee));
         Thread.sleep(2000);
 
         //---------------------------------Drowdown Followers-----------------------------
-        driver.findElement(By.xpath(LocatorsCRMTask.dropdownFollowers)).click();
-        Thread.sleep(2000);
-        driver.findElement(By.xpath(LocatorsCRMTask.inputSearchFollowers)).sendKeys(follower, Keys.ENTER);
+        WebUI.clickElement(driver, LocatorsCRMTask.dropdownFollowers);
+        WebUI.clickElement(driver, LocatorsCRMTask.listFollowers(follower));
         Thread.sleep(2000);
 
         //------------------- Xác định dropdown Tag---------------------------
         // Mở dropdown
-        driver.findElement(By.xpath(LocatorsCRMTask.inputTag)).click();  // Tag
-        Thread.sleep(2000);
-        String xpathTags = LocatorsCRMTask.listTag(tag);
-        driver.findElement(By.xpath(xpathTags)).click();
+        WebUI.clickElement(driver,LocatorsCRMTask.inputTag);  // Tag
+        WebUI.clickElement(driver, LocatorsCRMTask.listTag(tag));
         Thread.sleep(2000);
 
-        driver.findElement(By.xpath(LocatorsCRMTask.inputTaskDescription)).sendKeys("Hoc tap va lam viec");
+        WebUI.setTextElement(driver, LocatorsCRMTask.inputTaskDescription, "Hoc tap va lam viec");
 
         Thread.sleep(2000);
 
@@ -120,24 +99,22 @@ public class Task extends BaseTest {
 
     public void clickSave() throws InterruptedException {
         System.out.println("Click Save Task");
-        driver.findElement(By.xpath(LocatorsCRMTask.buttonSave)).click();
+     WebUI.clickElement(driver,LocatorsCRMTask.buttonSave);
 
-        Thread.sleep(5000);
     }
 
     public void clickCloseProffile() throws InterruptedException {
         System.out.println("Close Profile");
-        driver.findElement(By.xpath(LocatorsCRMTask.iconCloseProfile)).click();
-        Thread.sleep(2000);
+        WebUI.clickElement(driver,LocatorsCRMTask.iconCloseProfile);
+
     }
     public static void searchTaskNewAdd(String Task) throws InterruptedException {
+        WebUI.clickElement(driver,LocatorsCRMTask.menuTasks);
+        WebUI.clearElementText(driver,LocatorsCRMTask.inputSearch);
 
-        driver.findElement(By.xpath(LocatorsCRMTask.menuTasks)).click();
+       WebUI.setTextElement(driver,LocatorsCRMTask.inputSearch,Task);
         Thread.sleep(2000);
-        driver.findElement(By.xpath(LocatorsCRMTask.inputSearch)).clear();
-        driver.findElement(By.xpath(LocatorsCRMTask.inputSearch)).sendKeys(Task);
-        Thread.sleep(2000);
-        String firstRowOfTask = driver.findElement(By.xpath(LocatorsCRMTask.firstRowTask)).getText();
+        String firstRowOfTask = WebUI.getText(driver,LocatorsCRMTask.firstRowTask);
         System.out.println("First row Task: " + firstRowOfTask);
         Thread.sleep(6000);
     }
@@ -150,20 +127,20 @@ public class Task extends BaseTest {
         Thread.sleep(2000);
 
         // SUBJECT
-        String actualSubject = driver.findElement(By.xpath(LocatorsCRMTask.inputSubject)).getAttribute("value").trim();
+        String actualSubject = WebUI.getElementAttribute(driver,LocatorsCRMTask.inputSubject,"value").trim();
         Assert.assertEquals(actualSubject, subject, "FAIL: Subject không khớp");
 
         // HOURLY RATE
-        String actualRate = driver.findElement(By.xpath(LocatorsCRMTask.inputHourlyRate)).getAttribute("value").trim();
+        String actualRate = WebUI.getElementAttribute(driver,LocatorsCRMTask.inputHourlyRate,"value").trim();
         Assert.assertEquals(actualRate, hourlyRate, "FAIL: Hourly Rate không khớp");
 
         // START DATE
-        String actualStart = driver.findElement(By.xpath(LocatorsCRMTask.inputStartDate)).getAttribute("value").trim();
+        String actualStart = WebUI.getElementAttribute(driver,LocatorsCRMTask.inputStartDate,"value").trim();
         Assert.assertEquals(actualStart, startDate, "FAIL: Start Date không khớp");
 
 
         // DUE DATE
-        String actualDue = driver.findElement(By.xpath(LocatorsCRMTask.inputDueDate)).getAttribute("value").trim();
+        String actualDue = WebUI.getElementAttribute(driver,LocatorsCRMTask.inputDueDate,"value").trim();
         Assert.assertEquals(actualDue, dueDate, "FAIL: Due Date không khớp");
 
         // PRIORITY (Select2)
@@ -195,23 +172,23 @@ public class Task extends BaseTest {
 
 
         // FOLLOWER
-        String actualFolower = driver.findElement(By.xpath(LocatorsCRMTask.dropdownFollowers)).getText().trim();
+        String actualFolower = WebUI.getText(driver,LocatorsCRMTask.dropdownFollowers).trim();
         Assert.assertTrue(actualFolower.contains(follower), "FAIL: folower không chứa giá trị mong muốn");
 
         // TAG
-        String actualTag = driver.findElement(By.xpath(LocatorsCRMTask.inputTag)).getText().trim();
+        String actualTag =  WebUI.getText(driver,LocatorsCRMTask.inputTag).trim();
         Assert.assertEquals(actualTag, tag, "FAIL: Source không khớp.");
 
 
         // PUBLIC or BILLABLE
         if (flag == 1) {
-            boolean isPublicChecked = driver.findElement(By.xpath(LocatorsCRMTask.checkboxPublic)).isSelected();
+            boolean isPublicChecked = WebUI.checkSeletedElement(driver,LocatorsCRMTask.checkboxPublic);
             Assert.assertTrue(isPublicChecked, "FAIL: Checkbox Public không được chọn.");
 
         } else {
-            boolean isBillableChecked = driver.findElement(By.xpath(LocatorsCRMTask.checkboxBillable)).isSelected();
-            assert driver.findElement(By.xpath(LocatorsCRMTask.checkboxBillable)).isSelected()
-                    : "FAIL: Billable phải được tick";
+            boolean isBillableChecked = WebUI.checkSeletedElement(driver,LocatorsCRMTask.checkboxBillable);
+            Assert.assertFalse(WebUI.checkSeletedElement(driver, LocatorsCRMTask.checkboxBillable), "Checkbox không được chọn");
+
         }
 
         System.out.println("VERIFY SUCCESS — dữ liệu task KHỚP hoàn toàn!");
@@ -227,7 +204,7 @@ public class Task extends BaseTest {
 
         // ======================= UNCHECK PUBLIC ==========================
         WebElement cbPublic = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(LocatorsCRMTask.checkboxPublic)
+                WebUI.getWebElement(driver,LocatorsCRMTask.checkboxPublic)
         ));
         if (cbPublic.isSelected()) {
             actions.click(cbPublic).perform();
@@ -236,7 +213,7 @@ public class Task extends BaseTest {
 
         // ======================= CHECK BILLABLE ==========================
         WebElement cbBillable = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(LocatorsCRMTask.checkboxBillable)
+                WebUI.getWebElement(driver,LocatorsCRMTask.checkboxBillable)
         ));
         if (!cbBillable.isSelected()) {
             actions.click(cbBillable).perform();
@@ -245,7 +222,7 @@ public class Task extends BaseTest {
 
         // ======================= SUBJECT ==========================
         WebElement elementSubject = wait.until(ExpectedConditions.elementToBeClickable(
-                By.xpath(LocatorsCRMTask.inputSubject)
+                WebUI.getWebElement(driver,LocatorsCRMTask.inputSubject)
         ));
         actions.click(elementSubject).perform();
         Thread.sleep(300);
@@ -255,7 +232,7 @@ public class Task extends BaseTest {
         Thread.sleep(800);
 
         // ======================= HOURLY RATE ==========================
-        WebElement elementHourlyRate = driver.findElement(By.xpath(LocatorsCRMTask.inputHourlyRate));
+        WebElement elementHourlyRate =  WebUI.getWebElement(driver,LocatorsCRMTask.inputHourlyRate);
         actions.click(elementHourlyRate).perform();
         Thread.sleep(300);
 
@@ -264,7 +241,7 @@ public class Task extends BaseTest {
         Thread.sleep(800);
 
         // ======================= START DATE ==========================
-        WebElement elementStartDate = driver.findElement(By.xpath(LocatorsCRMTask.inputStartDate));
+        WebElement elementStartDate =  WebUI.getWebElement(driver,LocatorsCRMTask.inputStartDate);
         actions.click(elementStartDate).perform();
         Thread.sleep(300);
 
@@ -273,7 +250,7 @@ public class Task extends BaseTest {
         Thread.sleep(800);
 
         // ======================= DUE DATE ==========================
-        WebElement elementDueDate = driver.findElement(By.xpath(LocatorsCRMTask.inputDueDate));
+        WebElement elementDueDate = WebUI.getWebElement(driver,LocatorsCRMTask.inputDueDate);
         actions.click(elementDueDate).perform();
         Thread.sleep(300);
 
@@ -282,31 +259,31 @@ public class Task extends BaseTest {
         Thread.sleep(800);
 
         // ======================= PRIORITY SELECT2 ==========================
-        actions.click(driver.findElement(By.xpath(LocatorsCRMTask.dropdownPrioryty))).perform();
+        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.dropdownPrioryty)).perform();
         Thread.sleep(600);
 
-        actions.click(driver.findElement(By.xpath(LocatorsCRMTask.getValuePrioryty(priorityEdit)))).perform();
+        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.getValuePrioryty(priorityEdit))).perform();
         Thread.sleep(800);
 
         // ======================= REPEAT EVERY SELECT2 ==========================
-        actions.click(driver.findElement(By.xpath(LocatorsCRMTask.dropdownRepeatEvery))).perform();
+        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.dropdownRepeatEvery)).perform();
         Thread.sleep(600);
 
-        actions.click(driver.findElement(By.xpath(LocatorsCRMTask.getRepeatEvery(repeatEveryEdit)))).perform();
+        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.getRepeatEvery(repeatEveryEdit))).perform();
         Thread.sleep(800);
 
         // ======================= RELATED TO (cấp 1) ==========================
-        actions.click(driver.findElement(By.xpath(LocatorsCRMTask.dropdownRelatedTo))).perform();
+        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.dropdownRelatedTo)).perform();
         Thread.sleep(800);
 
-        actions.click(driver.findElement(By.xpath(LocatorsCRMTask.getValueRepeatTo(relatedToEdit)))).perform();
+        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.getValueRepeatTo(relatedToEdit))).perform();
         Thread.sleep(800);
 
         // ======================= TYPE OF RELATED (cấp 2) ==========================
-        actions.click(driver.findElement(By.xpath(LocatorsCRMTask.dropdownValueForRepeatTo))).perform();
+        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.dropdownValueForRepeatTo)).perform();
         Thread.sleep(600);
 
-        WebElement searchBox = driver.findElement(By.xpath(LocatorsCRMTask.inputSearchValueForRepeatTo));
+        WebElement searchBox = WebUI.getWebElement(driver,LocatorsCRMTask.inputSearchValueForRepeatTo);
         actions.click(searchBox).perform();
         Thread.sleep(400);
 
@@ -318,7 +295,7 @@ public class Task extends BaseTest {
         robot.keyRelease(KeyEvent.VK_ENTER);
         Thread.sleep(800);
 
-        actions.click(driver.findElement(By.xpath(LocatorsCRMTask.getValueForRepeatTo(typeRelatedToEdit)))).perform();
+        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.getValueForRepeatTo(typeRelatedToEdit))).perform();
         Thread.sleep(1000);
 
         System.out.println("✔ Edit Task completed (Robot + Actions + Wait)");
@@ -339,10 +316,10 @@ public class Task extends BaseTest {
 
     public void clickEditButton(String taskName) throws InterruptedException {
         Actions action = new Actions(driver);
-        action.moveToElement(driver.findElement(By.xpath(LocatorsCRMTask.getFirstRowItemTask(taskName)))).perform();
+        action.moveToElement(WebUI.getWebElement(driver,LocatorsCRMTask.getFirstRowItemTask(taskName))).perform();
         Thread.sleep(1000);
-//        driver.findElement(By.xpath(LocatorsLeadsCRM.buttonEdit(taskName))).click();
-//        Thread.sleep(2000);
+        WebUI.clickElement(driver,LocatorsLeadsCRM.buttonEdit(taskName));
+        Thread.sleep(2000);
     }
     String subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
     String hourlyRate = "50";

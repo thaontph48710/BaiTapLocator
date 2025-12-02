@@ -1,98 +1,100 @@
 package bai_tap_locators;
 
-public class LocatorsCRMTask {
-    public static   String inputSearch =  "//div[@id='tasks_filter']//input[@type='search']";
-    // Menu Tasks
-    public static String menuTasks = "//a[@href='https://crm.anhtester.com/admin/tasks']";
+import org.openqa.selenium.By;
 
-    public static String headerTasksPage = "//span[normalize-space()='Tasks Summary']";
-    public static String buttonNewTasks= "//a[normalize-space()='New Task']";
+public class LocatorsCRMTask {
+    public static   By  inputSearch =  By.xpath("//div[@id='tasks_filter']//input[@type='search']");
+    // Menu Tasks
+     public static By menuTasks = By.xpath("//a[@href='https://crm.anhtester.com/admin/tasks']");
+
+     public static By headerTasksPage = By.xpath("//span[normalize-space()='Tasks Summary']");
+     public static By buttonNewTasks= By.xpath("//a[normalize-space()='New Task']");
 
 
     //  Add New Task
-    public static String headerAddNewTask = "//div[@id='_task_modal']//h4[normalize-space()='Add new task']";
-    public static String checkboxPublic = "//input[@id='task_is_public']";
-    public static String checkboxBillable= "//input[@id='task_is_billable']";
+     public static By headerAddNewTask = By.xpath("//div[@id='_task_modal']//h4[normalize-space()='Add new task']");
+     public static By checkboxPublic = By.xpath("//input[@id='task_is_public']");
+     public static By checkboxBillable= By.xpath("//input[@id='task_is_billable']");
 
 
-    public static String linkAttachFiles = "//a[normalize-space()='Attach Files']";
-    public String inputAttachment = "//div[@id='new-task-attachments']/descendant::input[@type='file']";
+     public static By linkAttachFiles = By.xpath("//a[normalize-space()='Attach Files']");
+    public static By inputAttachment = By.xpath("//div[@id='new-task-attachments']/descendant::input[@type='file']");
 
-    public static String inputSubject= "//input[@id='name']";
-    public static String inputHourlyRate = "//input[@id='hourly_rate']";
-    public static String inputStartDate = "//div[@app-field-wrapper='startdate']//input[@id='startdate']";
-    public static String iconStartDate = "//input[@id='startdate']/following-sibling::div";
-    public static String inputDueDate = "//input[@id='duedate']";
-    public static String iconDueDate= "//input[@id='duedate']/following-sibling::div";
+     public static By inputSubject= By.xpath("//input[@id='name']");
+     public static By inputHourlyRate = By.xpath("//input[@id='hourly_rate']");
+     public static By inputStartDate = By.xpath("//div[@app-field-wrapper='startdate']//input[@id='startdate']");
+     public static By iconStartDate = By.xpath("//input[@id='startdate']/following-sibling::div");
+     public static By inputDueDate = By.xpath("//input[@id='duedate']");
+     public static By iconDueDate= By.xpath("//input[@id='duedate']/following-sibling::div");
 
-    public static String dropdownPrioryty = "//button[@data-id='priority']";
+     public static By dropdownPrioryty = By.xpath("//button[@data-id='priority']");
 
-    public static String getValuePrioryty(String value) {
-        String getValuePrioryty = "//button[@data-id='priority']/following-sibling::div//span[normalize-space()='" +value+ "']";
+     public static By getValuePrioryty(String value) {
+         By getValuePrioryty = By.xpath("//button[@data-id='priority']/following-sibling::div//span[normalize-space()='" +value+ "']");
         return getValuePrioryty;
     }
 
-    public static String dropdownRepeatEvery = "//button[@data-id='repeat_every']";
-    public static String getRepeatEvery(String value) {
-        String getRepeatEvery = "//button[@data-id='repeat_every']/following-sibling::div//span[normalize-space()='" +value+ "']";
+     public static By dropdownRepeatEvery = By.xpath("//button[@data-id='repeat_every']");
+     public static By getRepeatEvery(String value) {
+         By getRepeatEvery = By.xpath("//button[@data-id='repeat_every']/following-sibling::div//span[normalize-space()='" +value+ "']");
         return getRepeatEvery;
     }
 
-    public static String LabelForRelatedTo = "//label[normalize-space()='Related To']";
-    public static String dropdownRelatedTo = "//button[@data-id='rel_type']";
-    public static String listRelatedTo(String value) {
-        String listRelatedTo = "//button[@data-id='rel_type']/following-sibling::div//span[normalize-space()='" +value+"']";
+     public static By LabelForRelatedTo = By.xpath("//label[normalize-space()='Related To']");
+     public static By dropdownRelatedTo = By.xpath("//button[@data-id='rel_type']");
+     public static By listRelatedTo(String value) {
+         By listRelatedTo = By.xpath("//button[@data-id='rel_type']/following-sibling::div//span[normalize-space()='" +value+"']");
         return listRelatedTo;
     }
-    public static String LabelProject = "//span[@class='rel_id_label']";
-    public static String inputSearchProject = "//button[@data-id='rel_id']";
+     public static By LabelProject = By.xpath("//span[@class='rel_id_label']");
+     public static By inputSearchProject = By.xpath("//button[@data-id='rel_id']");
 
 
 
-    public static String dropdownAssignees = "//button[@data-id='assignees']";
-    public static String inputSearchAssignees = "//button[@data-id='assignees']/following-sibling::div//input[@type='search']";
-    public static String listAssignees(String value) {
-        String listAssignees = "//button[@data-id='assignees']/following-sibling::div//span[normalize-space()='" +value+ "']";
+     public static By dropdownAssignees = By.xpath("//button[@data-id='assignees']");
+     public static By inputSearchAssignees = By.xpath("//button[@data-id='assignees']/following-sibling::div//input[@type='search']");
+     public static By listAssignees(String value) {
+         By listAssignees = By.xpath("//button[@data-id='assignees']/following-sibling::div//span[normalize-space()='" +value+ "']");
         return listAssignees;
     }
 
 
-    public static String dropdownFollowers= "//button[@data-id='followers[]']";
-    public static String inputSearchFollowers = "//button[@data-id='followers[]']/following-sibling::div//input[@type='search']";
-    public static String listFollowers(String value) {
-        String listFollowers = "//button[@data-id='followers[]']/following-sibling::div//span[normalize-space()='" +value+ "']";
+     public static By dropdownFollowers= By.xpath("//button[@data-id='followers[]']");
+     public static By inputSearchFollowers = By.xpath("//button[@data-id='followers[]']/following-sibling::div//input[@type='search']");
+     public static By listFollowers(String value) {
+         By listFollowers = By.xpath("//button[@data-id='followers[]']/following-sibling::div//span[normalize-space()='" +value+ "']");
         return listFollowers;
     }
 
-    public static String dropdownValueForRepeatTo = "//button[@data-id='rel_id']";
+     public static By dropdownValueForRepeatTo = By.xpath("//button[@data-id='rel_id']");
 
-    public static String inputTag = "//div[@id='inputTagsWrapper']//input[@placeholder='Tag']";
-    public static String dropdownTag = "//div[@id='inputTagsWrapper']//ul[@id='ui-id-2']";
-    public static String listTag (String value ) {
-        String listTag  = "//input[@id='tags']/following-sibling::ul[@id='ui-id-2']//div[normalize-space()='" +value+ "']";
+     public static By inputTag = By.xpath("//div[@id='inputTagsWrapper']//input[@placeholder='Tag']");
+     public static By dropdownTag = By.xpath("//div[@id='inputTagsWrapper']//ul[@id='ui-id-2']");
+     public static By listTag (String value ) {
+         By listTag  = By.xpath("//input[@id='tags']/following-sibling::ul[@id='ui-id-2']//div[normalize-space()='" +value+ "']");
         return listTag ;
     }
 
-    public static String getValueForRepeatTo(String valueForRepeatTo) {
-        String xpathValueForRepeatTo = "//button[@data-id='rel_id']/following-sibling::div//span[normalize-space()='"+valueForRepeatTo +"']";
+     public static By getValueForRepeatTo(String valueForRepeatTo) {
+         By xpathValueForRepeatTo = By.xpath("//button[@data-id='rel_id']/following-sibling::div//span[normalize-space()='"+valueForRepeatTo +"']");
         return xpathValueForRepeatTo;
     }
-    public static String inputSearchValueForRepeatTo = "//button[@data-id='rel_id']/following-sibling::div//input[@type='search']";
-    public static String getValueRepeatTo(String valueRepeatTo) {
-        String xpathRepeatTo = "//button[@data-id='rel_type']/following-sibling::div//span[normalize-space()='" +valueRepeatTo+ "']";
+     public static By inputSearchValueForRepeatTo = By.xpath("//button[@data-id='rel_id']/following-sibling::div//input[@type='search']");
+     public static By getValueRepeatTo(String valueRepeatTo) {
+         By xpathRepeatTo = By.xpath("//button[@data-id='rel_type']/following-sibling::div//span[normalize-space()='" +valueRepeatTo+ "']");
         return xpathRepeatTo;
     }
 
-    public static String inputTaskDescription = "//textarea[@id='description']";
-    public static String buttonSave = "//button[@type='submit' and text()='Save']";
-    public static String buttonClose= "//button[@type='submit' and text()='Save']/preceding-sibling::button";
+     public static By inputTaskDescription = By.xpath("//textarea[@id='description']");
+     public static By buttonSave = By.xpath("//button[@type='submit' and text()='Save']");
+     public static By buttonClose= By.xpath("//button[@type='submit' and text()='Save']/preceding-sibling::button");
 
 
-    public static String firstRowTask= "//table[@id='tasks']//tbody/tr[1]/td[3]/a";
-    public static String iconCloseProfile = "//div[@id='task-modal']//button[@class='close']";
+     public static By firstRowTask= By.xpath("//table[@id='tasks']//tbody/tr[1]/td[3]/a");
+     public static By iconCloseProfile = By.xpath("//div[@id='task-modal']//button[@class='close']");
 
-    public static String getFirstRowItemTask(String taskName) {
-    String xpath = "//table[@id='tasks']//a[normalize-space()='" + taskName + "']";
+     public static By getFirstRowItemTask(String taskName) {
+         By xpath = By.xpath("//table[@id='tasks']//a[normalize-space()='" + taskName + "']");
 
     return xpath;
 }
