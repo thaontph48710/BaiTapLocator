@@ -199,7 +199,7 @@ public class Task extends BaseTest {
         Assert.assertTrue(actualFolower.contains(follower), "FAIL: folower không chứa giá trị mong muốn");
 
         // TAG
-        String actualTag = driver.findElement(By.xpath(inputTag)).getText().trim();
+        String actualTag = driver.findElement(By.xpath(LocatorsCRMTask.inputTag)).getText().trim();
         Assert.assertEquals(actualTag, tag, "FAIL: Source không khớp.");
 
 
@@ -341,8 +341,8 @@ public class Task extends BaseTest {
         Actions action = new Actions(driver);
         action.moveToElement(driver.findElement(By.xpath(LocatorsCRMTask.getFirstRowItemTask(taskName)))).perform();
         Thread.sleep(1000);
-        driver.findElement(By.xpath(LocatorsLeadsCRM.buttonEdit(taskName))).click();
-        Thread.sleep(2000);
+//        driver.findElement(By.xpath(LocatorsLeadsCRM.buttonEdit(taskName))).click();
+//        Thread.sleep(2000);
     }
     String subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
     String hourlyRate = "50";
