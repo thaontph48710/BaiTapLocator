@@ -1,17 +1,18 @@
-package bai_tap_locators;
+package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-public class LocatorsCRMTask {
+public class TaskPage {
     public static   By  inputSearch =  By.xpath("//div[@id='tasks_filter']//input[@type='search']");
     // Menu Tasks
      public static By menuTasks = By.xpath("//a[@href='https://crm.anhtester.com/admin/tasks']");
 
      public static By headerTasksPage = By.xpath("//span[normalize-space()='Tasks Summary']");
-     public static By buttonNewTasks= By.xpath("//a[normalize-space()='New Task']");
+     public static By buttonNewTasks= By.xpath("//a[normalize-space()='New TaskTest']");
 
 
-    //  Add New Task
+    //  Add New TaskTest
      public static By headerAddNewTask = By.xpath("//div[@id='_task_modal']//h4[normalize-space()='Add new task']");
      public static By checkboxPublic = By.xpath("//input[@id='task_is_public']");
      public static By checkboxBillable= By.xpath("//input[@id='task_is_billable']");
@@ -29,7 +30,9 @@ public class LocatorsCRMTask {
 
      public static By dropdownPrioryty = By.xpath("//button[@data-id='priority']");
 
-     public static By getValuePrioryty(String value) {
+
+
+    public static By getValuePrioryty(String value) {
          By getValuePrioryty = By.xpath("//button[@data-id='priority']/following-sibling::div//span[normalize-space()='" +value+ "']");
         return getValuePrioryty;
     }

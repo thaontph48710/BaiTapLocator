@@ -1,0 +1,156 @@
+package testcase;
+
+import common.BaseTest;
+import pages.DashboardPage;
+import pages.LeadsPage;
+import org.testng.annotations.Test;
+import pages.LoginPage;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+public class LeadsTest extends BaseTest {
+
+    private LoginPage loginPage;
+    private DashboardPage dashboardPage;
+    private LeadsPage leadsPage;
+
+
+    String  leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+    String dropdownStatus = "Customer";
+    String dropdownSource = "Facebook";
+    String dropdownAssigned = "Admin Anh Tester";
+    String dropdownTag = "Selenium";
+    String address = "Hà Nội";
+    String position = "Tester";
+    String city = "Việt Nam";
+    String emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+    String state = "hangocthao";
+    String website = "thao.com.vn";
+    String country = "Vietnam";
+    String phone = "0966674456";
+    String zipCode = "123456";
+    String leadValue = "123456";
+    String language = "Vietnamese";
+    String company = "NDJSC";
+    String description = "Them moi leads cho CRM";
+    String lastContacted = "10-11-2025";
+
+    @Test(priority = 1)
+    public void testAddAndCheckNewLead() throws InterruptedException {
+        loginPage = new LoginPage(driver);
+        dashboardPage = loginPage.loginCRM();
+        leadsPage = dashboardPage.clickMenuLead();
+
+        leadsPage.clickButtonNewLeads();
+          leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 1,0);
+
+        leadsPage.clickCloseProfile();
+        leadsPage.searchLeads(leadsNameTest);
+        leadsPage.clickEditButton(leadsNameTest);
+
+        leadsPage.verifyNewLeadInEdit( dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position,
+                city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted,1);
+    }
+
+
+    @Test(priority = 2)
+    public void testEditLeads() throws InterruptedException {
+        loginPage = new LoginPage(driver);
+        dashboardPage = loginPage.loginCRM();
+        leadsPage = dashboardPage.clickMenuLead();
+
+
+
+        leadsPage.clickButtonNewLeads();
+          leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 1,0);
+        leadsPage.clickCloseProfile();
+        leadsPage.searchLeads(leadsNameTest);
+
+        String nameLead = leadsNameTest + "_Edit";
+         dropdownStatus = "Active";
+         dropdownSource = "Google";
+        dropdownAssigned = "Admin Anh Tester";
+        dropdownTag = "JSC_NEW";
+        address = "Lạng Sơn";
+        position = "Tester";
+        city = "NODO Việt Nam";
+        emailAddress = "ngocthao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        state = "hangocthao080604";
+        website = "thao123.com.vn";
+        country = "Vietnam";
+        phone = "0966674789";
+        zipCode = "123456789";
+        leadValue = "1234566789";
+        language = "Vietnamese";
+        company = "NDJSC";
+        description = "Edit leads cho CRM";
+        lastContacted = "20-11-2025";
+
+        leadsPage.clickEditButton(leadsNameTest);
+
+        leadsPage.fillDate( dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
+            leadValue, language, company, description, lastContacted,0,1);
+
+        leadsPage.searchLeads(nameLead);
+        leadsPage.verifyNewLeadInEdit( dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 0);
+
+    }
+
+    @Test(priority = 3)
+    public void testDeleteLeads() throws InterruptedException {
+
+
+//        String  leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+//        String dropdownStatus = "Customer";
+//        String dropdownSource = "Facebook";
+//        String dropdownAssigned = "Admin Anh Tester";
+//        String dropdownTag = "Selenium";
+//        String address = "Hà Nội";
+//        String position = "Tester";
+//        String city = "Việt Nam";
+//        String emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+//        String state = "hangocthao";
+//        String website = "thao.com.vn";
+//        String country = "Vietnam";
+//        String phone = "0966674456";
+//        String zipCode = "123456";
+//        String leadValue = "123456";
+//        String language = "Vietnamese";
+//        String company = "NDJSC";
+//        String description = "Them moi leads cho CRM";
+//        String lastContacted = "10-11-2025";
+
+        leadsPage.openLeads();
+        leadsPage.clickButtonNewLeads();
+        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+
+        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 1,0);
+        leadsPage.clickCloseProfile();
+        leadsPage.searchLeads(leadsNameTest);
+
+        leadsPage.clickbuttonDelete(leadsNameTest);
+        leadsPage.clickCloseProfile();
+        leadsPage.verifyAfterDeleteLead(leadsNameTest);
+
+
+
+    }
+
+
+
+
+
+
+}

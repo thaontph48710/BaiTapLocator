@@ -1,95 +1,91 @@
-package thuc_hanh;
+package testcase;
 
-import bai_tap_locators.LocatorsLeadsCRM;
+import pages.LeadsPage;
 import com.thaotest.WebUI;
 import common.BaseTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import bai_tap_locators.LocatorsCRMTask;
+import pages.TaskPage;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
-import java.util.List;
 
-import static bai_tap_locators.LocatorsLeadsCRM.*;
-
-public class Task extends BaseTest {
+public class TaskTest extends BaseTest {
 
     public void clickMenuTasks() throws InterruptedException {
         System.out.println("Click Menu Tasks");
-        WebUI.clickElement(driver, LocatorsCRMTask.menuTasks);
+        WebUI.clickElement(driver, TaskPage.menuTasks);
 
-        Assert.assertTrue(WebUI.checkExistsElement(driver,LocatorsCRMTask.headerTasksPage), "Không truy cập được vào trang Tasks!");
+        Assert.assertTrue(WebUI.checkExistsElement(driver, TaskPage.headerTasksPage), "Không truy cập được vào trang Tasks!");
     }
 
     public void clickButtonNewTask() throws InterruptedException {
-        System.out.println("Click Button New Task");
-        WebUI.clickElement(driver, LocatorsCRMTask.buttonNewTasks);
+        System.out.println("Click Button New TaskTest");
+        WebUI.clickElement(driver, TaskPage.buttonNewTasks);
 
-        Assert.assertTrue(WebUI.checkExistsElement(driver,LocatorsCRMTask.headerAddNewTask), "Khong mo duoc new task!");
+        Assert.assertTrue(WebUI.checkExistsElement(driver, TaskPage.headerAddNewTask), "Khong mo duoc new task!");
     }
 
     public static void addNewTask(String subject, String hourlyRate, String startDate, String dueDate, String priority, String repeatEvery,
                                   String relatedTo, String assignee, String follower, String tag, int flag) throws InterruptedException {
-        System.out.println("Add New Task");
+        System.out.println("Add New TaskTest");
 
         if (flag == 1) {
-            WebUI.clickElement(driver, LocatorsCRMTask.checkboxPublic);
+            WebUI.clickElement(driver, TaskPage.checkboxPublic);
 
         }
         if (flag == 0) {
-            WebUI.clickElement(driver, LocatorsCRMTask.checkboxBillable);
+            WebUI.clickElement(driver, TaskPage.checkboxBillable);
 
         }
-        WebUI.setTextElement(driver, LocatorsCRMTask.inputSubject, subject);
-        WebUI.clearElementText(driver, LocatorsCRMTask.inputSubject);
-        WebUI.setTextElement(driver, LocatorsCRMTask.inputHourlyRate, hourlyRate);
-        WebUI.clearElementText(driver, LocatorsCRMTask.inputStartDate);
-        WebUI.setTextElement(driver, LocatorsCRMTask.inputStartDate, startDate);
-        WebUI.setTextElement(driver, LocatorsCRMTask.inputDueDate, dueDate);
+        WebUI.setTextElement(driver, TaskPage.inputSubject, subject);
+        WebUI.clearElementText(driver, TaskPage.inputSubject);
+        WebUI.setTextElement(driver, TaskPage.inputHourlyRate, hourlyRate);
+        WebUI.clearElementText(driver, TaskPage.inputStartDate);
+        WebUI.setTextElement(driver, TaskPage.inputStartDate, startDate);
+        WebUI.setTextElement(driver, TaskPage.inputDueDate, dueDate);
 
 // ---------------------------------Drowdown Prioryty-----------------------------
-        WebUI.clickElement(driver, LocatorsCRMTask.dropdownPrioryty);
-        WebUI.clickElement(driver, LocatorsCRMTask.getValuePrioryty(priority));
+        WebUI.clickElement(driver, TaskPage.dropdownPrioryty);
+        WebUI.clickElement(driver, TaskPage.getValuePrioryty(priority));
         Thread.sleep(2000);
 
 //---------------------------------Drowdown Repeat Every-----------------------------
-        WebUI.clickElement(driver, LocatorsCRMTask.dropdownRepeatEvery);
-        WebUI.clickElement(driver, LocatorsCRMTask.getRepeatEvery(repeatEvery));
+        WebUI.clickElement(driver, TaskPage.dropdownRepeatEvery);
+        WebUI.clickElement(driver, TaskPage.getRepeatEvery(repeatEvery));
         Thread.sleep(2000);
 
 //---------------------------------Drowdown Related To-----------------------------
-        WebUI.clickElement(driver, LocatorsCRMTask.dropdownRelatedTo);
-        WebUI.clickElement(driver, LocatorsCRMTask.listRelatedTo(relatedTo));
+        WebUI.clickElement(driver, TaskPage.dropdownRelatedTo);
+        WebUI.clickElement(driver, TaskPage.listRelatedTo(relatedTo));
         Thread.sleep(2000);
 
 
 //---------------------------------Drowdown Assignees-----------------------------
-        WebUI.clickElement(driver, LocatorsCRMTask.dropdownAssignees);
-        WebUI.clickElement(driver, LocatorsCRMTask.listAssignees(assignee));
+        WebUI.clickElement(driver, TaskPage.dropdownAssignees);
+        WebUI.clickElement(driver, TaskPage.listAssignees(assignee));
         Thread.sleep(2000);
 
         //---------------------------------Drowdown Followers-----------------------------
-        WebUI.clickElement(driver, LocatorsCRMTask.dropdownFollowers);
-        WebUI.clickElement(driver, LocatorsCRMTask.listFollowers(follower));
+        WebUI.clickElement(driver, TaskPage.dropdownFollowers);
+        WebUI.clickElement(driver, TaskPage.listFollowers(follower));
         Thread.sleep(2000);
 
         //------------------- Xác định dropdown Tag---------------------------
         // Mở dropdown
-        WebUI.clickElement(driver,LocatorsCRMTask.inputTag);  // Tag
-        WebUI.clickElement(driver, LocatorsCRMTask.listTag(tag));
+        WebUI.clickElement(driver, TaskPage.inputTag);  // Tag
+        WebUI.clickElement(driver, TaskPage.listTag(tag));
         Thread.sleep(2000);
 
-        WebUI.setTextElement(driver, LocatorsCRMTask.inputTaskDescription, "Hoc tap va lam viec");
+        WebUI.setTextElement(driver, TaskPage.inputTaskDescription, "Hoc tap va lam viec");
 
         Thread.sleep(2000);
 
@@ -98,24 +94,24 @@ public class Task extends BaseTest {
     }
 
     public void clickSave() throws InterruptedException {
-        System.out.println("Click Save Task");
-     WebUI.clickElement(driver,LocatorsCRMTask.buttonSave);
+        System.out.println("Click Save TaskTest");
+     WebUI.clickElement(driver, TaskPage.buttonSave);
 
     }
 
     public void clickCloseProffile() throws InterruptedException {
         System.out.println("Close Profile");
-        WebUI.clickElement(driver,LocatorsCRMTask.iconCloseProfile);
+        WebUI.clickElement(driver, TaskPage.iconCloseProfile);
 
     }
     public static void searchTaskNewAdd(String Task) throws InterruptedException {
-        WebUI.clickElement(driver,LocatorsCRMTask.menuTasks);
-        WebUI.clearElementText(driver,LocatorsCRMTask.inputSearch);
+        WebUI.clickElement(driver, TaskPage.menuTasks);
+        WebUI.clearElementText(driver, TaskPage.inputSearch);
 
-       WebUI.setTextElement(driver,LocatorsCRMTask.inputSearch,Task);
+       WebUI.setTextElement(driver, TaskPage.inputSearch,Task);
         Thread.sleep(2000);
-        String firstRowOfTask = WebUI.getText(driver,LocatorsCRMTask.firstRowTask);
-        System.out.println("First row Task: " + firstRowOfTask);
+        String firstRowOfTask = WebUI.getText(driver, TaskPage.firstRowTask);
+        System.out.println("First row TaskTest: " + firstRowOfTask);
         Thread.sleep(6000);
     }
     public void verifyNewTask(String subject, String hourlyRate, String startDate, String dueDate,
@@ -127,20 +123,20 @@ public class Task extends BaseTest {
         Thread.sleep(2000);
 
         // SUBJECT
-        String actualSubject = WebUI.getElementAttribute(driver,LocatorsCRMTask.inputSubject,"value").trim();
+        String actualSubject = WebUI.getElementAttribute(driver, TaskPage.inputSubject,"value").trim();
         Assert.assertEquals(actualSubject, subject, "FAIL: Subject không khớp");
 
         // HOURLY RATE
-        String actualRate = WebUI.getElementAttribute(driver,LocatorsCRMTask.inputHourlyRate,"value").trim();
+        String actualRate = WebUI.getElementAttribute(driver, TaskPage.inputHourlyRate,"value").trim();
         Assert.assertEquals(actualRate, hourlyRate, "FAIL: Hourly Rate không khớp");
 
         // START DATE
-        String actualStart = WebUI.getElementAttribute(driver,LocatorsCRMTask.inputStartDate,"value").trim();
+        String actualStart = WebUI.getElementAttribute(driver, TaskPage.inputStartDate,"value").trim();
         Assert.assertEquals(actualStart, startDate, "FAIL: Start Date không khớp");
 
 
         // DUE DATE
-        String actualDue = WebUI.getElementAttribute(driver,LocatorsCRMTask.inputDueDate,"value").trim();
+        String actualDue = WebUI.getElementAttribute(driver, TaskPage.inputDueDate,"value").trim();
         Assert.assertEquals(actualDue, dueDate, "FAIL: Due Date không khớp");
 
         // PRIORITY (Select2)
@@ -172,22 +168,22 @@ public class Task extends BaseTest {
 
 
         // FOLLOWER
-        String actualFolower = WebUI.getText(driver,LocatorsCRMTask.dropdownFollowers).trim();
+        String actualFolower = WebUI.getText(driver, TaskPage.dropdownFollowers).trim();
         Assert.assertTrue(actualFolower.contains(follower), "FAIL: folower không chứa giá trị mong muốn");
 
         // TAG
-        String actualTag =  WebUI.getText(driver,LocatorsCRMTask.inputTag).trim();
+        String actualTag =  WebUI.getText(driver, TaskPage.inputTag).trim();
         Assert.assertEquals(actualTag, tag, "FAIL: Source không khớp.");
 
 
         // PUBLIC or BILLABLE
         if (flag == 1) {
-            boolean isPublicChecked = WebUI.checkSeletedElement(driver,LocatorsCRMTask.checkboxPublic);
+            boolean isPublicChecked = WebUI.checkSeletedElement(driver, TaskPage.checkboxPublic);
             Assert.assertTrue(isPublicChecked, "FAIL: Checkbox Public không được chọn.");
 
         } else {
-            boolean isBillableChecked = WebUI.checkSeletedElement(driver,LocatorsCRMTask.checkboxBillable);
-            Assert.assertFalse(WebUI.checkSeletedElement(driver, LocatorsCRMTask.checkboxBillable), "Checkbox không được chọn");
+            boolean isBillableChecked = WebUI.checkSeletedElement(driver, TaskPage.checkboxBillable);
+            Assert.assertFalse(WebUI.checkSeletedElement(driver, TaskPage.checkboxBillable), "Checkbox không được chọn");
 
         }
 
@@ -204,7 +200,7 @@ public class Task extends BaseTest {
 
         // ======================= UNCHECK PUBLIC ==========================
         WebElement cbPublic = wait.until(ExpectedConditions.elementToBeClickable(
-                WebUI.getWebElement(driver,LocatorsCRMTask.checkboxPublic)
+                WebUI.getWebElement(driver, TaskPage.checkboxPublic)
         ));
         if (cbPublic.isSelected()) {
             actions.click(cbPublic).perform();
@@ -213,7 +209,7 @@ public class Task extends BaseTest {
 
         // ======================= CHECK BILLABLE ==========================
         WebElement cbBillable = wait.until(ExpectedConditions.elementToBeClickable(
-                WebUI.getWebElement(driver,LocatorsCRMTask.checkboxBillable)
+                WebUI.getWebElement(driver, TaskPage.checkboxBillable)
         ));
         if (!cbBillable.isSelected()) {
             actions.click(cbBillable).perform();
@@ -222,7 +218,7 @@ public class Task extends BaseTest {
 
         // ======================= SUBJECT ==========================
         WebElement elementSubject = wait.until(ExpectedConditions.elementToBeClickable(
-                WebUI.getWebElement(driver,LocatorsCRMTask.inputSubject)
+                WebUI.getWebElement(driver, TaskPage.inputSubject)
         ));
         actions.click(elementSubject).perform();
         Thread.sleep(300);
@@ -232,7 +228,7 @@ public class Task extends BaseTest {
         Thread.sleep(800);
 
         // ======================= HOURLY RATE ==========================
-        WebElement elementHourlyRate =  WebUI.getWebElement(driver,LocatorsCRMTask.inputHourlyRate);
+        WebElement elementHourlyRate =  WebUI.getWebElement(driver, TaskPage.inputHourlyRate);
         actions.click(elementHourlyRate).perform();
         Thread.sleep(300);
 
@@ -241,7 +237,7 @@ public class Task extends BaseTest {
         Thread.sleep(800);
 
         // ======================= START DATE ==========================
-        WebElement elementStartDate =  WebUI.getWebElement(driver,LocatorsCRMTask.inputStartDate);
+        WebElement elementStartDate =  WebUI.getWebElement(driver, TaskPage.inputStartDate);
         actions.click(elementStartDate).perform();
         Thread.sleep(300);
 
@@ -250,7 +246,7 @@ public class Task extends BaseTest {
         Thread.sleep(800);
 
         // ======================= DUE DATE ==========================
-        WebElement elementDueDate = WebUI.getWebElement(driver,LocatorsCRMTask.inputDueDate);
+        WebElement elementDueDate = WebUI.getWebElement(driver, TaskPage.inputDueDate);
         actions.click(elementDueDate).perform();
         Thread.sleep(300);
 
@@ -259,31 +255,31 @@ public class Task extends BaseTest {
         Thread.sleep(800);
 
         // ======================= PRIORITY SELECT2 ==========================
-        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.dropdownPrioryty)).perform();
+        actions.click(WebUI.getWebElement(driver, TaskPage.dropdownPrioryty)).perform();
         Thread.sleep(600);
 
-        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.getValuePrioryty(priorityEdit))).perform();
+        actions.click(WebUI.getWebElement(driver, TaskPage.getValuePrioryty(priorityEdit))).perform();
         Thread.sleep(800);
 
         // ======================= REPEAT EVERY SELECT2 ==========================
-        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.dropdownRepeatEvery)).perform();
+        actions.click(WebUI.getWebElement(driver, TaskPage.dropdownRepeatEvery)).perform();
         Thread.sleep(600);
 
-        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.getRepeatEvery(repeatEveryEdit))).perform();
+        actions.click(WebUI.getWebElement(driver, TaskPage.getRepeatEvery(repeatEveryEdit))).perform();
         Thread.sleep(800);
 
         // ======================= RELATED TO (cấp 1) ==========================
-        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.dropdownRelatedTo)).perform();
+        actions.click(WebUI.getWebElement(driver, TaskPage.dropdownRelatedTo)).perform();
         Thread.sleep(800);
 
-        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.getValueRepeatTo(relatedToEdit))).perform();
+        actions.click(WebUI.getWebElement(driver, TaskPage.getValueRepeatTo(relatedToEdit))).perform();
         Thread.sleep(800);
 
         // ======================= TYPE OF RELATED (cấp 2) ==========================
-        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.dropdownValueForRepeatTo)).perform();
+        actions.click(WebUI.getWebElement(driver, TaskPage.dropdownValueForRepeatTo)).perform();
         Thread.sleep(600);
 
-        WebElement searchBox = WebUI.getWebElement(driver,LocatorsCRMTask.inputSearchValueForRepeatTo);
+        WebElement searchBox = WebUI.getWebElement(driver, TaskPage.inputSearchValueForRepeatTo);
         actions.click(searchBox).perform();
         Thread.sleep(400);
 
@@ -295,10 +291,10 @@ public class Task extends BaseTest {
         robot.keyRelease(KeyEvent.VK_ENTER);
         Thread.sleep(800);
 
-        actions.click(WebUI.getWebElement(driver,LocatorsCRMTask.getValueForRepeatTo(typeRelatedToEdit))).perform();
+        actions.click(WebUI.getWebElement(driver, TaskPage.getValueForRepeatTo(typeRelatedToEdit))).perform();
         Thread.sleep(1000);
 
-        System.out.println("✔ Edit Task completed (Robot + Actions + Wait)");
+        System.out.println("✔ Edit TaskTest completed (Robot + Actions + Wait)");
     }
 
     /** Hàm rút gọn: Ctrl + A + Delete */
@@ -316,9 +312,9 @@ public class Task extends BaseTest {
 
     public void clickEditButton(String taskName) throws InterruptedException {
         Actions action = new Actions(driver);
-        action.moveToElement(WebUI.getWebElement(driver,LocatorsCRMTask.getFirstRowItemTask(taskName))).perform();
+        action.moveToElement(WebUI.getWebElement(driver, TaskPage.getFirstRowItemTask(taskName))).perform();
         Thread.sleep(1000);
-        WebUI.clickElement(driver,LocatorsLeadsCRM.buttonEdit(taskName));
+        WebUI.clickElement(driver, LeadsPage.buttonEdit(taskName));
         Thread.sleep(2000);
     }
     String subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
@@ -372,7 +368,7 @@ public class Task extends BaseTest {
          priority  = "High";
          repeatEvery  = "2 Months";
          relatedTo = "Lead";
-        relatedTo  = "Ha Ngoc Thao Leads";
+        relatedTo  = "Ha Ngoc Thao LeadsTest";
 
         editTasks(nameSubject, hourlyRate, startDate, dueDate , priority , repeatEvery , relatedTo , relatedTo);
         clickSave();
