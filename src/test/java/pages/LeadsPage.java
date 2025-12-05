@@ -23,7 +23,7 @@ public class LeadsPage extends BasePage {
 
 
     private By labelLeadTotalCustomer = By.xpath("//div[@class='clearfix']/following-sibling::div//span[normalize-space()='Customer']/preceding-sibling::span");
-    private By labelLeadTotalActive = By.xpath("//div[@class='clearfix']/following-sibling::div//span[normalize-space()='Active']/preceding-sibling::span");
+    private By labelLeadTotalActive = By.xpath("//span[normalize-space()='Active']//preceding-sibling::span");
 
 
 
@@ -34,7 +34,7 @@ public class LeadsPage extends BasePage {
     // Xpath Button of LeadsTest
 
     private By buttonNewLeads = By.xpath(" //a[normalize-space()='New Lead']");
-   private  By buttonLeadsSummary = By.xpath(" //a[@data-title='LeadsTest Summary']");
+   private  By buttonLeadsSummary = By.xpath(" //a[@data-title='Leads Summary']");
    private  By buttonKanban = By.xpath(" //a[@data-title='Switch to Kanban']");
    private   By buttonFilterBy = By.xpath(" //button[normalize-space()='Filter by']");
    private  By buttoExport = By.xpath(" //button[normalize-space()='Export']");
@@ -198,7 +198,10 @@ public class LeadsPage extends BasePage {
         return xpath;
 
     }
-
+    public void clickButtonLeadsSummary() throws InterruptedException {
+        WebUI.clickElement(driver, buttonLeadsSummary);
+        Thread.sleep(1000);
+    }
     public  void openLeads() throws InterruptedException {
         System.out.println("Open Page LeadsTest");
         WebUI.clickElement(driver, menuLeads);
@@ -476,6 +479,24 @@ public class LeadsPage extends BasePage {
         Thread.sleep(1000);
         Assert.assertFalse(WebUI.checkExistsElement(driver, getFirstRowItemLeadName(name)), "Xóa Lead không thành công");
         Thread.sleep(1000);
+    }
+
+    public String getTotalStatusCustomer(){
+        String totalCustomer = WebUI.getText(driver, labelLeadTotalCustomer).trim();
+        System.out.println("Total Customer Lead: " + totalCustomer);
+        return totalCustomer;
+    }
+    public String getTotalStatusActive(){
+        String totalActive = WebUI.getText(driver, labelLeadTotalActive).trim();
+        System.out.println("Total Active Lead: " + totalActive);
+        return totalActive;
+    }
+
+    public String getTotalStatusLeads(){
+        String totalActive = getTotalStatusActive();
+        String totalCustomer = getTotalStatusCustomer();
+        int toltalStatusLeads = Integer.parseInt(totalActive) + Integer.parseInt(totalCustomer);
+        return String.valueOf(toltalStatusLeads);
     }
 
 
