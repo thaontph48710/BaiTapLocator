@@ -38,7 +38,7 @@ public class LeadsTest extends BaseTest {
     String lastContacted = "10-11-2025";
 
     @Test(priority = 1)
-    public void testAddAndCheckNewLead() throws InterruptedException {
+    public void testAndLeadsCheckNewLead() throws InterruptedException {
         loginPage = new LoginPage(driver);
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
@@ -99,10 +99,11 @@ public class LeadsTest extends BaseTest {
 
         leadsPage.fillDate( dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
             leadValue, language, company, description, lastContacted,0,1);
-
+        leadsPage.clickCloseProfile();
         leadsPage.searchLeads(nameLead);
+        leadsPage.clickEditButton(nameLead);
         leadsPage.verifyNewLeadInEdit( dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted, 0);
+                leadValue, language, company, description, lastContacted, 1);
 
     }
 
@@ -110,27 +111,11 @@ public class LeadsTest extends BaseTest {
     public void testDeleteLeads() throws InterruptedException {
 
 
-//        String  leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-//        String dropdownStatus = "Customer";
-//        String dropdownSource = "Facebook";
-//        String dropdownAssigned = "Admin Anh Tester";
-//        String dropdownTag = "Selenium";
-//        String address = "Hà Nội";
-//        String position = "Tester";
-//        String city = "Việt Nam";
-//        String emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
-//        String state = "hangocthao";
-//        String website = "thao.com.vn";
-//        String country = "Vietnam";
-//        String phone = "0966674456";
-//        String zipCode = "123456";
-//        String leadValue = "123456";
-//        String language = "Vietnamese";
-//        String company = "NDJSC";
-//        String description = "Them moi leads cho CRM";
-//        String lastContacted = "10-11-2025";
+        loginPage = new LoginPage(driver);
+        dashboardPage = loginPage.loginCRM();
+        leadsPage = dashboardPage.clickMenuLead();
 
-        leadsPage.openLeads();
+       ;
         leadsPage.clickButtonNewLeads();
         leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
@@ -141,7 +126,7 @@ public class LeadsTest extends BaseTest {
         leadsPage.searchLeads(leadsNameTest);
 
         leadsPage.clickbuttonDelete(leadsNameTest);
-        leadsPage.clickCloseProfile();
+
         leadsPage.verifyAfterDeleteLead(leadsNameTest);
 
 

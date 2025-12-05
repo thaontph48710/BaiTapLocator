@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="SuiteRunByClass" verbose="1">
+    <test name="Add">
+        <classes>
+            <class name="testcase.LeadsTest">
+            <methods>
+                <include name="testAndLeadsCheckNewLead"/>
+            </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

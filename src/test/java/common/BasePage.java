@@ -15,7 +15,7 @@ public class BasePage {
         }
 
         public By menuDashboard = By.xpath("//ul[@id='side-menu']//span[normalize-space()='Dashboard' and @class='menu-text']");
-        public By menuLead = By.xpath("//ul[@id='side-menu']//span[normalize-space()='LeadsTest' and @class='menu-text']");
+        public By menuLeads = By.xpath("//span[@class='menu-text' and normalize-space()='Leads']");
         public By menuTasks = By.xpath("//ul[@id='side-menu']//span[normalize-space()='Tasks' and @class='menu-text']");
 
         public DashboardPage clickMenuDashboard() {
@@ -24,7 +24,7 @@ public class BasePage {
         }
 
         public LeadsPage clickMenuLead() {
-                WebUI.clickElement(driver, menuLead);
+                WebUI.clickElement(driver, menuLeads);
                 return new LeadsPage(driver);
         }
 

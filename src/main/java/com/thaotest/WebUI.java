@@ -65,13 +65,12 @@ public class WebUI {
        waitForElementToBeClickAble(driver, by);
         getWebElement(driver,by).click();
     }
+    private static int WAIT_TIMEOUT = 7;
 
     public static String getText(WebDriver driver, By by){
         waitForElementVisible(driver, by);
         return getWebElement(driver,by).getText();
     }
-
-
     public static String getElementAttribute(WebDriver driver, By by, String attribute){
         waitForElementVisible(driver, by);
         WebElement element = getWebElement(driver, by);
@@ -79,6 +78,20 @@ public class WebUI {
         return textAttribute;
 
     }
+    public static void switchToFrame(WebDriver driver, By by) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
+    }
+
+    public static void switchToParentFrame(WebDriver driver) {
+        driver.switchTo().parentFrame();
+    }
+
+    public static void switchToDefaultContentFrame(WebDriver driver) {
+        driver.switchTo().defaultContent();
+    }
+
+
 
     public static void scrollAtTop(WebDriver driver, By by){
         JavascriptExecutor js = (JavascriptExecutor) driver;
