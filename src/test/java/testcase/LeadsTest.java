@@ -20,7 +20,7 @@ public class LeadsTest extends BaseTest {
     private LeadsPage leadsPage;
 
 
-    String  leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+    String leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
     String dropdownStatus = "Customer";
     String dropdownSource = "Facebook";
     String dropdownAssigned = "Admin Anh Tester";
@@ -47,18 +47,18 @@ public class LeadsTest extends BaseTest {
         leadsPage = dashboardPage.clickMenuLead();
 
         leadsPage.clickButtonNewLeads();
-          leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
         leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted, 1,0);
+                leadValue, language, company, description, lastContacted, 1, 0);
 
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(leadsNameTest);
         leadsPage.clickEditButton(leadsNameTest);
 
-        leadsPage.verifyNewLeadInEdit( dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position,
+        leadsPage.verifyNewLeadInEdit(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position,
                 city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted,1);
+                leadValue, language, company, description, lastContacted, 1);
     }
 
 
@@ -69,18 +69,17 @@ public class LeadsTest extends BaseTest {
         leadsPage = dashboardPage.clickMenuLead();
 
 
-
         leadsPage.clickButtonNewLeads();
-          leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
         leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted, 1,0);
+                leadValue, language, company, description, lastContacted, 1, 0);
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(leadsNameTest);
 
         String nameLead = leadsNameTest + "_Edit";
-         dropdownStatus = "Active";
-         dropdownSource = "Google";
+        dropdownStatus = "Active";
+        dropdownSource = "Google";
         dropdownAssigned = "Admin Anh Tester";
         dropdownTag = "JSC_NEW";
         address = "Lạng Sơn";
@@ -100,12 +99,12 @@ public class LeadsTest extends BaseTest {
 
         leadsPage.clickEditButton(leadsNameTest);
 
-        leadsPage.fillDate( dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
-            leadValue, language, company, description, lastContacted,0,1);
+        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 0, 1);
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(nameLead);
         leadsPage.clickEditButton(nameLead);
-        leadsPage.verifyNewLeadInEdit( dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
+        leadsPage.verifyNewLeadInEdit(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
                 leadValue, language, company, description, lastContacted, 1);
 
     }
@@ -118,20 +117,19 @@ public class LeadsTest extends BaseTest {
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
 
-       ;
+        ;
         leadsPage.clickButtonNewLeads();
         leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
 
         leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted, 1,0);
+                leadValue, language, company, description, lastContacted, 1, 0);
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(leadsNameTest);
 
         leadsPage.clickbuttonDelete(leadsNameTest);
 
         leadsPage.verifyAfterDeleteLead(leadsNameTest);
-
 
 
     }
@@ -144,23 +142,22 @@ public class LeadsTest extends BaseTest {
         leadsPage = dashboardPage.clickMenuLead();
 
         leadsPage.clickButtonLeadsSummary();
-       String totalActiveBefore =  leadsPage.getTotalStatusActive();
+        String totalActiveBefore = leadsPage.getTotalStatusActive();
         leadsPage.clickButtonNewLeads();
         leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-         dropdownStatus = "Active";
-         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        dropdownStatus = "Active";
+        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
         leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted, 1,0);
+                leadValue, language, company, description, lastContacted, 1, 0);
 
         leadsPage.clickCloseProfile();
         driver.navigate().refresh();
         leadsPage.clickButtonLeadsSummary();
-        String totalActiveAfter =  leadsPage.getTotalStatusActive();
+        String totalActiveAfter = leadsPage.getTotalStatusActive();
         int totalActiveBeforeInt = Integer.parseInt(totalActiveBefore);
         int totalActiveAfterInt = Integer.parseInt(totalActiveAfter);
-        Assert.assertEquals(totalActiveAfterInt , totalActiveBeforeInt + 1 , "So sanh so luong Active truoc va sau khi them moi Lead khong dung");
+        Assert.assertEquals(totalActiveAfterInt, totalActiveBeforeInt + 1, "So sanh so luong Active truoc va sau khi them moi Lead khong dung");
     }
-
 
 
 }

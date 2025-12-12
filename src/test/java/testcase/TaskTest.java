@@ -33,28 +33,29 @@ public class TaskTest extends BaseTest {
         dashboardPage = loginPage.loginCRM();
         taskPage = dashboardPage.clickMenuTask();
 
-         subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
 
         taskPage.clickButtonNewTask();
-        taskPage.addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo,typeRelatedTo, assignee, follower,description, tag, 1);
+        taskPage.addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, description, tag, 1);
         taskPage.clickSave();
         taskPage.clickCloseProffile();
         taskPage.searchTaskNewAdd(subject);
         taskPage.clickEditButton(subject);
-        taskPage.verifyNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo,typeRelatedTo, assignee, follower, tag, 1);
+        taskPage.verifyNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 1);
 
     }
+
     @Test(priority = 2)
     public void testEditask() throws Exception {
         loginPage = new LoginPage(driver);
         dashboardPage = loginPage.loginCRM();
         taskPage = dashboardPage.clickMenuTask();
 
-         subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
 
         taskPage.clickButtonNewTask();
         Thread.sleep(2000);
-        taskPage.addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo,typeRelatedTo, assignee, follower, description, tag, 0);
+        taskPage.addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, description, tag, 0);
         Thread.sleep(2000);
         taskPage.clickSave();
         taskPage.clickCloseProffile();
@@ -63,31 +64,29 @@ public class TaskTest extends BaseTest {
         Thread.sleep(2000);
 
         taskPage.clickEditButton(subject);
-        taskPage.verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo,typeRelatedTo, assignee, follower, tag, 0);
+        taskPage.verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 0);
         Thread.sleep(2000);
 //        taskPage.clickCloseEdit();
 
 
         String nameSubject = subject + "_Edit";
-         hourlyRate  = "20";
-         startDate  = "20-12-2025";
-         dueDate  = "25-12-2025";
-         priority  = "High";
-         repeatEvery  = "2 Months";
-         relatedTo = "Lead";
+        hourlyRate = "20";
+        startDate = "20-12-2025";
+        dueDate = "25-12-2025";
+        priority = "High";
+        repeatEvery = "2 Months";
+        relatedTo = "Lead";
 //        typeRelatedTo  = "Giang Test";
 
-        taskPage.editTasks(nameSubject, hourlyRate, startDate, dueDate , priority , repeatEvery , relatedTo , typeRelatedTo, 1);
+        taskPage.editTasks(nameSubject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, 1);
         taskPage.clickSave();
         taskPage.clickCloseProffile();
         taskPage.searchTaskNewAdd(nameSubject);
         taskPage.clickEditButton(nameSubject);
         Thread.sleep(4000);
-        taskPage.verifyNewTask(nameSubject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo,typeRelatedTo, assignee, follower, tag, 0);
+        taskPage.verifyNewTask(nameSubject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 0);
         Thread.sleep(4000);
     }
-
-
 
 
 }

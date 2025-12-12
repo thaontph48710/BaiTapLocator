@@ -31,29 +31,26 @@ public class CustomerPage extends BasePage {
 
 
     public void searchCustomerByName(String customerName) throws InterruptedException {
-        WebUI.setTextElement(  inputSearchCustomer, customerName);
+        WebUI.setTextElement(inputSearchCustomer, customerName);
 
     }
 
     public List<WebElement> getAllRowsCustomerName() {
-       return WebUI.getWebElements(  table);
-    }
-    private By buttonDelete(String customerName){
-        By buttonDelete = By.xpath("//td[./a[contains(normalize-space(),'" + customerName +"')]]//a[normalize-space()='Delete']");
+        return WebUI.getWebElements(table);
+    } //  co trong ham chung
+
+    private By buttonDelete(String customerName) {
+        By buttonDelete = By.xpath("//td[./a[contains(normalize-space(),'" + customerName + "')]]//a[normalize-space()='Delete']");
         return buttonDelete;
     }
+
     public void clickbuttonDelete(String customerName) throws InterruptedException {
         Actions action = new Actions(driver);
-        action.moveToElement(WebUI.getWebElement(  firstRowCustomers)).perform();
-        WebUI.clickElement(  buttonDelete(customerName));
+        action.moveToElement(WebUI.getWebElement(firstRowCustomers)).perform(); // co trong ham chung
+        WebUI.clickElement(buttonDelete(customerName));
         Thread.sleep(1000);
         driver.switchTo().alert().accept();
     }
-
-
-
-
-
 
 
 }

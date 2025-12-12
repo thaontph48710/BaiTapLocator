@@ -17,6 +17,7 @@ public class CustomerTest extends BaseTest {
     private CustomerPage customerPage;
 
     String customerNameTest = "w";
+
     @Test
     public void testDeleteALL() throws InterruptedException {
         loginPage = new LoginPage(driver);
@@ -25,10 +26,8 @@ public class CustomerTest extends BaseTest {
 
         for (int i = 1; i <= 100; i++) {
             customerPage.searchCustomerByName(customerNameTest);
-           customerPage.clickbuttonDelete(customerNameTest);
+            customerPage.clickbuttonDelete(customerNameTest);
         }
-
-
 
 
     }
