@@ -1,6 +1,9 @@
 package testcase;
 
+import com.thaotest.WebUI;
 import common.BaseTest;
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import pages.DashboardPage;
 import pages.LeadsPage;
 import org.testng.annotations.Test;
@@ -134,7 +137,29 @@ public class LeadsTest extends BaseTest {
     }
 
 
+    @Test(priority = 4)
+    public void testSoSanhActiveTruocVaSauKhiThemMoi() throws InterruptedException {
+        loginPage = new LoginPage(driver);
+        dashboardPage = loginPage.loginCRM();
+        leadsPage = dashboardPage.clickMenuLead();
 
+        leadsPage.clickButtonLeadsSummary();
+       String totalActiveBefore =  leadsPage.getTotalStatusActive();
+        leadsPage.clickButtonNewLeads();
+        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+         dropdownStatus = "Active";
+         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 1,0);
+
+        leadsPage.clickCloseProfile();
+        driver.navigate().refresh();
+        leadsPage.clickButtonLeadsSummary();
+        String totalActiveAfter =  leadsPage.getTotalStatusActive();
+        int totalActiveBeforeInt = Integer.parseInt(totalActiveBefore);
+        int totalActiveAfterInt = Integer.parseInt(totalActiveAfter);
+        Assert.assertEquals(totalActiveAfterInt , totalActiveBeforeInt + 1 , "So sanh so luong Active truoc va sau khi them moi Lead khong dung");
+    }
 
 
 

@@ -14,6 +14,7 @@ public class LoginPage extends BasePage {
      public LoginPage(WebDriver driver) {
           super(driver);
           this.driver = driver;
+          new WebUI(driver);
      }
 
      private String url = "https://crm.anhtester.com/admin/authentication";
@@ -29,23 +30,23 @@ public class LoginPage extends BasePage {
      private By errorMessagePasswordRequired = By.xpath("//div[text()='The Password field is required.' and contains(@class,'alert-danger')]");
 
      public void navigateToCRM() {
-          WebUI.openUrl(driver, url);
+          WebUI.openUrl(  url);
      }
 
      public void verifyHeaderLogin() {
-          Assert.assertTrue(WebUI.checkExistsElement(driver, headerLoginPage), "The header Login is not display.");
+          Assert.assertTrue(WebUI.checkExistsElement(  headerLoginPage), "The header Login is not display.");
      }
 
      public void enterEmail(String email) {
-          WebUI.setTextElement(driver, inputEmail, email);
+          WebUI.setTextElement(  inputEmail, email);
      }
 
      public void enterPassword(String password) {
-          WebUI.setTextElement(driver, inputPassword, password);
+          WebUI.setTextElement(  inputPassword, password);
      }
 
      public void clickButtonLogin() {
-          WebUI.clickElement(driver, buttonLogin);
+          WebUI.clickElement(  buttonLogin);
      }
 
      public void loginCRM(String email, String password) throws InterruptedException {
@@ -69,31 +70,31 @@ public class LoginPage extends BasePage {
           String actualCurrentURL = WebUI.getCurrentURL(driver);
           String expectedURL = "https://crm.anhtester.com/admin/";
 
-          Assert.assertTrue((WebUI.checkExistsElement(driver, menuDashboard) && actualCurrentURL.equals(expectedURL)),
+          Assert.assertTrue((WebUI.checkExistsElement(  menuDashboard) && actualCurrentURL.equals(expectedURL)),
                   "Login failed!");
      }
 
      public void verifyLoginFailedWithEmailRequired() throws InterruptedException {
           Thread.sleep(1000);
-          Assert.assertTrue(WebUI.checkExistsElement(driver, errorMessageEmailRequired),
+          Assert.assertTrue(WebUI.checkExistsElement(  errorMessageEmailRequired),
                   "The email required error message is not displayed");
      }
 
      public void verifyLoginFailedWithPasswordRequired() throws InterruptedException {
           Thread.sleep(1000);
-          Assert.assertTrue(WebUI.checkExistsElement(driver, errorMessagePasswordRequired),
+          Assert.assertTrue(WebUI.checkExistsElement(  errorMessagePasswordRequired),
                   "The password required error message is not displayed.");
      }
 
      public void verifyLoginFailedWithEmailInvalid() throws InterruptedException {
           Thread.sleep(1000);
-          Assert.assertTrue(WebUI.checkExistsElement(driver, errorMessageInvalidEmailOrPassword),
+          Assert.assertTrue(WebUI.checkExistsElement(  errorMessageInvalidEmailOrPassword),
                   "The invalid email error message is not displayed.");
      }
 
      public void verifyLoginFailedWithPasswordInvalid() throws InterruptedException {
           Thread.sleep(1000);
-          Assert.assertTrue(WebUI.checkExistsElement(driver, errorMessageInvalidEmailOrPassword),
+          Assert.assertTrue(WebUI.checkExistsElement(  errorMessageInvalidEmailOrPassword),
                   "The invalid password error message is not displayed.");
      }
 

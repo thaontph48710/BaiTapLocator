@@ -19,6 +19,7 @@ public class LeadsPage extends BasePage {
     public LeadsPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
+        new WebUI(driver);
     }
 
 
@@ -199,23 +200,23 @@ public class LeadsPage extends BasePage {
 
     }
     public void clickButtonLeadsSummary() throws InterruptedException {
-        WebUI.clickElement(driver, buttonLeadsSummary);
+        WebUI.clickElement(  buttonLeadsSummary);
         Thread.sleep(1000);
     }
     public  void openLeads() throws InterruptedException {
         System.out.println("Open Page LeadsTest");
-        WebUI.clickElement(driver, menuLeads);
-        WebUI.clickElement(driver, buttonLeadsSummary);
+        WebUI.clickElement(  menuLeads);
+        WebUI.clickElement(  buttonLeadsSummary);
         Thread.sleep(1000);
 
-        Assert.assertTrue(WebUI.checkExistsElement(driver, titleLeadsSummary), "FAIL: Không mở được trang LeadsTest");
+        Assert.assertTrue(WebUI.checkExistsElement(  titleLeadsSummary), "FAIL: Không mở được trang LeadsTest");
     }
 
     public void clickButtonNewLeads() throws InterruptedException {
-        WebUI.clickElement(driver, buttonNewLeads);
+        WebUI.clickElement(  buttonNewLeads);
 //            driver.findElement(By.xpath(buttonNewLeads)).click();
         Thread.sleep(2000);
-        Assert.assertTrue(WebUI.checkExistsElement(driver, headerAddNewLead), "FAIL: Không mở được popup Add New LeadsTest");
+        Assert.assertTrue(WebUI.checkExistsElement(  headerAddNewLead), "FAIL: Không mở được popup Add New LeadsTest");
     }
 
 
@@ -226,21 +227,21 @@ public class LeadsPage extends BasePage {
 
         if (flagEdit == 1){
             System.out.println("Edit LeadsTest");
-            WebUI.clickElement(driver, closeTag);
-            WebUI.clearElementText(driver, inputState);
-            WebUI.clearElementText(driver, inputName);
-            WebUI.clearElementText(driver, inputAddress);
-            WebUI.clearElementText(driver, inputPosition);
-            WebUI.clearElementText(driver, inputCity);
-            WebUI.clearElementText(driver, inputEmailAddress);
-            WebUI.clearElementText(driver, inputWebsite);
-            WebUI.clearElementText(driver, inputPhone);
-            WebUI.clearElementText(driver, inputZipCode);
-            WebUI.clearElementText(driver, inputLeadValue);
-            WebUI.clearElementText(driver, inputCompany);
-            WebUI.clearElementText(driver, inputDescription);
-            WebUI.clearElementText(driver, inputLastContacted);
-            WebUI.setTextElement(driver, inputLastContacted, dateContacted );
+            WebUI.clickElement(  closeTag);
+            WebUI.clearElementText(  inputState);
+            WebUI.clearElementText(  inputName);
+            WebUI.clearElementText(  inputAddress);
+            WebUI.clearElementText(  inputPosition);
+            WebUI.clearElementText(  inputCity);
+            WebUI.clearElementText(  inputEmailAddress);
+            WebUI.clearElementText(  inputWebsite);
+            WebUI.clearElementText(  inputPhone);
+            WebUI.clearElementText(  inputZipCode);
+            WebUI.clearElementText(  inputLeadValue);
+            WebUI.clearElementText(  inputCompany);
+            WebUI.clearElementText(  inputDescription);
+            WebUI.clearElementText(  inputLastContacted);
+            WebUI.setTextElement(  inputLastContacted, dateContacted );
 
         }else {
             System.out.println("Add New LeadsTest");
@@ -250,28 +251,28 @@ public class LeadsPage extends BasePage {
 
         //------------------- Xác định dropdown Status---------------------------
         // Click vào dropdown
-        WebUI.clickElement(driver, dropdownStatus);
+        WebUI.clickElement(  dropdownStatus);
         //Tìm kiếm giá trị cần chọn và nhấn Enter
-        WebUI.setTextElement(driver, inputStatusSearch, status);
-        WebUI.clickElement(driver, listStatus(status));
+        WebUI.setTextElement(  inputStatusSearch, status);
+        WebUI.clickElement(  listStatus(status));
 
         //-----------------------Cách 2: Chỉ dùng khi giá trị mở dropdown bằng cách gọi hàm-----------------------------
         //------------------- Xác định dropdown Source---------------------------
-        WebUI.clickElement(driver, dropdownSourceButton);
-        WebUI.setTextElement(driver, inputSourceSearch, dropdownSource);
-        WebUI.clickElement(driver, listSource(dropdownSource));// Source
+        WebUI.clickElement(  dropdownSourceButton);
+        WebUI.setTextElement(  inputSourceSearch, dropdownSource);
+        WebUI.clickElement(  listSource(dropdownSource));// Source
 
         //------------------- Xác định dropdown Assigned---------------------------
 
-        WebUI.clickElement(driver, dropdownAssignedButton);
-        WebUI.setTextElement(driver, inputAssignedSearch, dropdownAssigned);
-        WebUI.clickElement(driver, listAssigned(dropdownAssigned));
+        WebUI.clickElement(  dropdownAssignedButton);
+        WebUI.setTextElement(  inputAssignedSearch, dropdownAssigned);
+        WebUI.clickElement(  listAssigned(dropdownAssigned));
 
         //------------------- Xác định dropdown Tag---------------------------
         // Mở dropdown
 
-        WebUI.clickElement(driver, inputTag);
-        List<WebElement> allOptionsTags = WebUI.getWebElements(driver, listdropdownTag);
+        WebUI.clickElement(  inputTag);
+        List<WebElement> allOptionsTags = WebUI.getWebElements(  listdropdownTag);
 
         for (WebElement option : allOptionsTags) {
             if (option.getText().equals(dropdownTag)) {
@@ -279,37 +280,37 @@ public class LeadsPage extends BasePage {
                 break;
             }
         }
-        WebUI.setTextElement(driver, inputName,leadsNameTest  );
-        WebUI.setTextElement(driver, inputAddress,address  );
-        WebUI.setTextElement(driver, inputPosition,position  );
-        WebUI.setTextElement(driver, inputCity,city  );
-        WebUI.setTextElement(driver, inputEmailAddress,emailAddress  );
-        WebUI.setTextElement(driver, inputState,state  );
-        WebUI.setTextElement(driver, inputWebsite,website  );
+        WebUI.setTextElement(  inputName,leadsNameTest  );
+        WebUI.setTextElement(  inputAddress,address  );
+        WebUI.setTextElement(  inputPosition,position  );
+        WebUI.setTextElement(  inputCity,city  );
+        WebUI.setTextElement(  inputEmailAddress,emailAddress  );
+        WebUI.setTextElement(  inputState,state  );
+        WebUI.setTextElement(  inputWebsite,website  );
 
 
         //------------------- Dropdown Country----------------------------
-        WebUI.clickElement(driver, dropdownCountry);
-        WebUI.setTextElement(driver, inputSearchCountry,country  );
-        WebUI.clickElement(driver, listCountry(country));
+        WebUI.clickElement(  dropdownCountry);
+        WebUI.setTextElement(  inputSearchCountry,country  );
+        WebUI.clickElement(  listCountry(country));
 
-        WebUI.setTextElement(driver, inputPhone,phone  );
-        WebUI.setTextElement(driver, inputZipCode,zipCode  );
-        WebUI.setTextElement(driver, inputLeadValue,leadValue  );
+        WebUI.setTextElement(  inputPhone,phone  );
+        WebUI.setTextElement(  inputZipCode,zipCode  );
+        WebUI.setTextElement(  inputLeadValue,leadValue  );
 
 
 
 //    -------------------- Drowpdown Default Language ---------------------------
-        WebUI.clickElement(driver, dropdownDefaultLanguage);
-        WebUI.setTextElement(driver, inputSearchDefaultLanguage,language  );
-        WebUI.clickElement(driver, listDefaultLanguage(language));
+        WebUI.clickElement(  dropdownDefaultLanguage);
+        WebUI.setTextElement(  inputSearchDefaultLanguage,language  );
+        WebUI.clickElement(  listDefaultLanguage(language));
 //         String xpathDefaultLanguage = listDefaultLanguage(language); // Tạo xpath tương ứng với giá trị muốn chọn
 //        driver.findElement(By.xpath(xpathDefaultLanguage)).click();
 //        Thread.sleep(1000);
 
-        WebUI.setTextElement(driver, inputCompany,company  );
+        WebUI.setTextElement(  inputCompany,company  );
 
-        WebUI.setTextElement(driver, inputDescription,description  );
+        WebUI.setTextElement(  inputDescription,description  );
 
 
 
@@ -317,17 +318,17 @@ public class LeadsPage extends BasePage {
 
 
         if (flag == 0){
-            WebUI.clickElement(driver, labelCheckboxPublic);
+            WebUI.clickElement(  labelCheckboxPublic);
         }
 
         else if (flag == 1){
-            WebUI.clickElement(driver, labelCheckboxContactedToday);
+            WebUI.clickElement(  labelCheckboxContactedToday);
             Thread.sleep(1000);
-            WebUI.setTextElement(driver, inputDateContacted,dateContacted  );
+            WebUI.setTextElement(  inputDateContacted,dateContacted  );
 
         }
 
-        WebUI.clickElement(driver, buttonSave);
+        WebUI.clickElement(  buttonSave);
 
         Thread.sleep(3000);
 
@@ -335,34 +336,34 @@ public class LeadsPage extends BasePage {
 
     public void clickCloseProfile() throws InterruptedException {
 
-        WebUI.clickElement(driver, iconCloseProfile);
+        WebUI.clickElement(  iconCloseProfile);
         Thread.sleep(1000);
     }
 //    public void searchLeads(String leadsName) {
 //
 //        // Click menu Leads trước nếu đang ở trang khác
-//        WebUI.clickElement(driver, menuLeads);
+//        WebUI.clickElement(  menuLeads);
 //
 //        // Clear trước khi gõ search
-//        WebUI.clearElementText(driver, inputSearch);
+//        WebUI.clearElementText(  inputSearch);
 //
 //        // Gõ search
-//        WebUI.setTextElement(driver, inputSearch, leadsName);
+//        WebUI.setTextElement(  inputSearch, leadsName);
 //
 //        // ĐỢI bảng load lại bằng wait
-//        WebUI.waitForElementVisible(driver, firstRowLeads, 5);
+//        WebUI.waitForElementVisible(  firstRowLeads, 5);
 //
 //        // Lấy text
-//        String firstRowOfLeads = WebUI.getText(driver, firstRowLeads);
+//        String firstRowOfLeads = WebUI.getText(  firstRowLeads);
 //        System.out.println("First row leader " + firstRowOfLeads);
 //    }
 
     public void searchLeads(String leadsname) throws InterruptedException {
         driver.navigate().refresh();
         Thread.sleep(1000);
-        WebUI.setTextElement(driver, inputSearch, leadsname);
-        WebUI.waitForElementVisible(driver, getFirstRowItemLeadName(leadsname));
-        Assert.assertTrue(WebUI.checkExistsElement(driver, getFirstRowItemLeadName(leadsname)), "Không đúng giá trị Lead vừa thêm mới");
+        WebUI.setTextElement(  inputSearch, leadsname);
+        WebUI.waitForElementVisible(  getFirstRowItemLeadName(leadsname));
+        Assert.assertTrue(WebUI.checkExistsElement(  getFirstRowItemLeadName(leadsname)), "Không đúng giá trị Lead vừa thêm mới");
         Thread.sleep(1000);
     }
 
@@ -377,16 +378,16 @@ public class LeadsPage extends BasePage {
 
         // Status ]
 
-        String actualStatus = WebUI.getText(driver, dropdownStatus).trim();
+        String actualStatus = WebUI.getText(  dropdownStatus).trim();
         Assert.assertTrue(actualStatus.contains(status), "FAIL: Status không chứa giá trị mong muốn. Expected fragment: " + status + " Actual: " + actualStatus);
 
 
         // Source
-        String actualSource = WebUI.getText(driver, dropdownSourceButton).trim();
+        String actualSource = WebUI.getText(  dropdownSourceButton).trim();
         Assert.assertEquals(actualSource, source, "FAIL: Source không khớp.");
 
 
-        String actualAssigned = WebUI.getText(driver, dropdownAssignedButton).trim();
+        String actualAssigned = WebUI.getText(  dropdownAssignedButton).trim();
         Assert.assertEquals(actualAssigned, assigned, "FAIL: Assigned không chứa giá trị mong muốn.");
 
 
@@ -394,57 +395,57 @@ public class LeadsPage extends BasePage {
 //        Assert.assertEquals(actualTag, tag, "FAIL: Tag không khớp.");
 
 
-        String actualName = WebUI.getElementAttribute(driver, inputName, "value").trim();
+        String actualName = WebUI.getElementAttribute(  inputName, "value").trim();
         Assert.assertEquals(actualName, leadName, "FAIL: Tên Lead không khớp.");
 
-        String actualAddress = WebUI.getElementAttribute(driver, inputAddress, "value").trim();
+        String actualAddress = WebUI.getElementAttribute(  inputAddress, "value").trim();
         Assert.assertEquals(actualAddress, address, "FAIL: Dia chi không khớp.");
 
-        String actualPosition = WebUI.getElementAttribute(driver, inputPosition, "value").trim();
+        String actualPosition = WebUI.getElementAttribute(  inputPosition, "value").trim();
         Assert.assertEquals(actualPosition, position, "FAIL: không khớp.");
 
-        String actualCity = WebUI.getElementAttribute(driver, inputCity, "value").trim();
+        String actualCity = WebUI.getElementAttribute(  inputCity, "value").trim();
         Assert.assertEquals(actualCity, city, "FAIL: không khớp.");
 
-        String actualEmail = WebUI.getElementAttribute(driver, inputEmailAddress, "value").trim();
+        String actualEmail = WebUI.getElementAttribute(  inputEmailAddress, "value").trim();
         Assert.assertEquals(actualEmail, emailAddress, "FAIL: không khớp.");
 
-        String actualState = WebUI.getElementAttribute(driver, inputState, "value").trim();
+        String actualState = WebUI.getElementAttribute(  inputState, "value").trim();
         Assert.assertEquals(actualState, state, "FAIL: không khớp.");
 
-        String actualWebsite = WebUI.getElementAttribute(driver, inputWebsite, "value").trim();
+        String actualWebsite = WebUI.getElementAttribute(  inputWebsite, "value").trim();
         Assert.assertEquals(actualWebsite, website, "FAIL: không khớp.");
 
-        String actualCountry = WebUI.getText(driver, dropdownCountry).trim();
+        String actualCountry = WebUI.getText(  dropdownCountry).trim();
         Assert.assertTrue(actualCountry.contains(country), "FAIL: country không khớp.");
 
-        String actualphone = WebUI.getElementAttribute(driver, inputPhone, "value").trim();
+        String actualphone = WebUI.getElementAttribute(  inputPhone, "value").trim();
         Assert.assertEquals(actualphone, phone, "FAIL: không khớp.");
 
-        String actualZipCode = WebUI.getElementAttribute(driver, inputZipCode, "value").trim();
+        String actualZipCode = WebUI.getElementAttribute(  inputZipCode, "value").trim();
         Assert.assertEquals(actualZipCode, zipCode, "FAIL: không khớp.");
 
 
-        String actualLeadValue = WebUI.getElementAttribute(driver, inputLeadValue, "value").trim();
+        String actualLeadValue = WebUI.getElementAttribute(  inputLeadValue, "value").trim();
         Assert.assertTrue(actualLeadValue.contains(leadValue), "FAIL: không khớp.");
 
-        String actualLanluage = WebUI.getText(driver, dropdownDefaultLanguage).trim();
+        String actualLanluage = WebUI.getText(  dropdownDefaultLanguage).trim();
         Assert.assertEquals(actualLanluage, language, "FAIL: không khớp.");
 
-        String actualCompany = WebUI.getElementAttribute(driver, inputCompany, "value").trim();
+        String actualCompany = WebUI.getElementAttribute(  inputCompany, "value").trim();
         Assert.assertEquals(actualCompany, company, "FAIL: không khớp.");
-        String actualDescription = WebUI.getElementAttribute(driver, inputDescription, "value").trim();
+        String actualDescription = WebUI.getElementAttribute(  inputDescription, "value").trim();
         Assert.assertEquals(actualDescription, description, "FAIL: không khớp.");
 
 
         // Checkbox Public
         if (flag == 1) {
-            Assert.assertFalse(WebUI.checkSeletedElement(driver, labelCheckboxPublic), "Đang không tích chọn checkbox public");
+            Assert.assertFalse(WebUI.checkSeletedElement(  labelCheckboxPublic), "Đang không tích chọn checkbox public");
             // Last Contacted (Phải xử lý substring như bạn đã làm, nhưng dùng Assert)
-            String actualDateContacted = WebUI.getElementAttribute(driver, inputLastContacted, "value").trim().substring(0, 10);
+            String actualDateContacted = WebUI.getElementAttribute(  inputLastContacted, "value").trim().substring(0, 10);
             Assert.assertEquals(actualDateContacted, dateContacted, "FAIL: Last Contacted Date không khớp.");
         } else if (flag == 0) {
-            Assert.assertTrue(WebUI.checkSeletedElement(driver, labelCheckboxPublic), "Đang tích chọn checkbox public");
+            Assert.assertTrue(WebUI.checkSeletedElement(  labelCheckboxPublic), "Đang tích chọn checkbox public");
             {
             }
 
@@ -456,8 +457,8 @@ public class LeadsPage extends BasePage {
 
     public void clickEditButton(String leadName) throws InterruptedException {
         Actions action = new Actions(driver);
-        action.moveToElement(WebUI.getWebElement(driver, getFirstRowItemLeadName(leadName))).perform();
-        WebUI.clickElement(driver, buttonEdit(leadName));
+        action.moveToElement(WebUI.getWebElement(  getFirstRowItemLeadName(leadName))).perform();
+        WebUI.clickElement(  buttonEdit(leadName));
 
 
 
@@ -465,8 +466,8 @@ public class LeadsPage extends BasePage {
 
     public void clickbuttonDelete(String leadName) throws InterruptedException {
         Actions action = new Actions(driver);
-        action.moveToElement(WebUI.getWebElement(driver, getFirstRowItemLeadName(leadName))).perform();
-        WebUI.clickElement(driver, buttonDelete(leadName));
+        action.moveToElement(WebUI.getWebElement(  getFirstRowItemLeadName(leadName))).perform();
+        WebUI.clickElement(  buttonDelete(leadName));
         Thread.sleep(1000);
         driver.switchTo().alert().accept();
     }
@@ -475,19 +476,19 @@ public class LeadsPage extends BasePage {
 
     public void verifyAfterDeleteLead(String name) throws InterruptedException {
         Thread.sleep(2000);
-        WebUI.setTextElement(driver, inputSearch,name );
+        WebUI.setTextElement(  inputSearch,name );
         Thread.sleep(1000);
-        Assert.assertFalse(WebUI.checkExistsElement(driver, getFirstRowItemLeadName(name)), "Xóa Lead không thành công");
+        Assert.assertFalse(WebUI.checkExistsElement(  getFirstRowItemLeadName(name)), "Xóa Lead không thành công");
         Thread.sleep(1000);
     }
 
     public String getTotalStatusCustomer(){
-        String totalCustomer = WebUI.getText(driver, labelLeadTotalCustomer).trim();
+        String totalCustomer = WebUI.getText(  labelLeadTotalCustomer).trim();
         System.out.println("Total Customer Lead: " + totalCustomer);
         return totalCustomer;
     }
     public String getTotalStatusActive(){
-        String totalActive = WebUI.getText(driver, labelLeadTotalActive).trim();
+        String totalActive = WebUI.getText(  labelLeadTotalActive).trim();
         System.out.println("Total Active Lead: " + totalActive);
         return totalActive;
     }
@@ -498,6 +499,8 @@ public class LeadsPage extends BasePage {
         int toltalStatusLeads = Integer.parseInt(totalActive) + Integer.parseInt(totalCustomer);
         return String.valueOf(toltalStatusLeads);
     }
+
+
 
 
 }

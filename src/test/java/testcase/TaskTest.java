@@ -75,15 +75,15 @@ public class TaskTest extends BaseTest {
          priority  = "High";
          repeatEvery  = "2 Months";
          relatedTo = "Lead";
-        typeRelatedTo  = "Giang Test";
+//        typeRelatedTo  = "Giang Test";
 
-        taskPage.editTasks(nameSubject, hourlyRate, startDate, dueDate , priority , repeatEvery , relatedTo , relatedTo, 1);
+        taskPage.editTasks(nameSubject, hourlyRate, startDate, dueDate , priority , repeatEvery , relatedTo , typeRelatedTo, 1);
         taskPage.clickSave();
         taskPage.clickCloseProffile();
         taskPage.searchTaskNewAdd(nameSubject);
         taskPage.clickEditButton(nameSubject);
         Thread.sleep(4000);
-        taskPage.verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo,typeRelatedTo, assignee, follower, tag, 0);
+        taskPage.verifyNewTask(nameSubject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo,typeRelatedTo, assignee, follower, tag, 0);
         Thread.sleep(4000);
     }
 

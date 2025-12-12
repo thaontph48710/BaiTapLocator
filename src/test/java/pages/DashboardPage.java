@@ -12,16 +12,17 @@ public class DashboardPage extends BasePage {
     public DashboardPage(WebDriver driver) {
         super(driver);
         this.driver = driver;
+        new WebUI(driver);
     }
     private By buttonDashboardOptions = By.xpath("//div[normalize-space()='Dashboard Options']");
 
     private By labelTotalConvertedLeads = By.xpath("(//span[normalize-space()='Converted Leads']/parent::div)/following-sibling::span");
 
     public String getTotalConvertedLeads() {
-        return WebUI.getText(driver,labelTotalConvertedLeads).trim();
+        return WebUI.getText( labelTotalConvertedLeads).trim();
     }
     public void verifyDashboardPageDisplayed() {
-        Assert.assertTrue(WebUI.checkExistsElement(driver, buttonDashboardOptions), "Dashboard page is not displayed.");
+        Assert.assertTrue(WebUI.checkExistsElement(  buttonDashboardOptions), "Dashboard page is not displayed.");
     }
 
 
