@@ -190,44 +190,44 @@ public class TaskPage extends BasePage {
 // ---------------------------------Drowdown Prioryty-----------------------------
         WebUI.clickElement(dropdownPrioryty);
         WebUI.clickElement(getValuePrioryty(priority));
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
 
 //---------------------------------Drowdown Repeat Every-----------------------------
         WebUI.clickElement(dropdownRepeatEvery);
         WebUI.clickElement(getRepeatEvery(repeatEvery));
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
 
 //---------------------------------Drowdown Related To-----------------------------
         WebUI.clickElement(dropdownRelatedTo);
         WebUI.clickElement(listRelatedTo(relatedTo));
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
 //---------------------------------Drowdown Type Related To-----------------------------
         WebUI.clickElement(dropdownValueForRepeatTo);
         WebUI.setTextElement(inputSearchTypeRelatedTo, typeRelatedTo);
-        Thread.sleep(1000);
+        WebUI.sleep(1000);
 //        Actions actions = new Actions(driver);
 //        actions.click(WebUI.getWebElement(  inputSearchTypeRelatedTo)).sendKeys(" ").build().perform();
-//        Thread.sleep(2000);
+//        WebUI.sleep(1000);
         WebUI.clickElement(getValueTypeRelatedTo(typeRelatedTo));
 
 
 //---------------------------------Drowdown Assignees-----------------------------
         WebUI.clickElement(dropdownAssignees);
         WebUI.clickElement(listAssignees(assignee));
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
 
         //---------------------------------Drowdown Followers-----------------------------
         WebUI.clickElement(dropdownFollowers);
         WebUI.clickElement(listFollowers(follower));
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
 
         //------------------- Xác định dropdown Tag---------------------------
         // Mở dropdown
         WebUI.clickElement(inputTag);
         WebUI.setTextElement(inputTag, tag);
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
         WebUI.clickElement(listTag(tag));
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
 
         WebUI.clickElement(headerAddNewTask);
 
@@ -236,7 +236,7 @@ public class TaskPage extends BasePage {
         WebUI.setTextElement(inputDescriptionFrame, description);
         WebUI.switchToParentFrame();
 
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
 
 
     }
@@ -263,10 +263,10 @@ public class TaskPage extends BasePage {
         WebUI.clearElementText(inputSearch);
 
         WebUI.setTextElement(inputSearch, Task);
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
         String firstRowOfTask = WebUI.getText(firstRowTask);
         System.out.println("First row TaskTest: " + firstRowOfTask);
-        Thread.sleep(6000);
+        WebUI.sleep(1000);
     }
 
     public void verifyNewTask(String subject, String hourlyRate, String startDate, String dueDate,
@@ -350,11 +350,11 @@ public class TaskPage extends BasePage {
         //checkbox
 //        if (flag == 1) {
 //            actions.click(WebUI.getWebElement(  checkboxPublic)).perform();
-//            Thread.sleep(2000);
+//            WebUI.sleep(1000);
 //        }
 //        if (flag == 0) {
 //            actions.click(WebUI.getWebElement(  checkboxBillable)).perform();
-//            Thread.sleep(2000);
+//            WebUI.sleep(1000);
 //        }
         // ======================= SUBJECT ==========================
 
@@ -362,81 +362,81 @@ public class TaskPage extends BasePage {
                 WebUI.getWebElement(inputSubject)
         ));
         actions.click(elementSubject).perform();
-        Thread.sleep(300);
+        WebUI.sleep(1000);
 
         pressCtrlA_Delete(robot);
         actions.sendKeys(subjectEdit).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         // ======================= HOURLY RATE ==========================
 
         WebElement elementHourlyRate = WebUI.getWebElement(inputHourlyRate);
         actions.click(elementHourlyRate).perform();
-        Thread.sleep(300);
+        WebUI.sleep(1000);
 
         pressCtrlA_Delete(robot);
         actions.sendKeys(hourlyRateEdit).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         // ======================= START DATE ==========================
         WebElement elementStartDate = WebUI.getWebElement(inputStartDate);
         actions.click(elementStartDate).perform();
-        Thread.sleep(300);
+        WebUI.sleep(1000);
 
         pressCtrlA_Delete(robot);
         actions.sendKeys(startDateEdit).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         // ======================= DUE DATE ==========================
         WebElement elementDueDate = WebUI.getWebElement(inputDueDate);
         actions.click(elementDueDate).perform();
-        Thread.sleep(300);
+        WebUI.sleep(1000);
 
         pressCtrlA_Delete(robot);
         actions.sendKeys(dueDateEdit).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         // ======================= PRIORITY SELECT2 ==========================
         actions.click(WebUI.getWebElement(dropdownPrioryty)).perform();
-        Thread.sleep(600);
+        WebUI.sleep(1000);
 
         actions.click(WebUI.getWebElement(getValuePrioryty(priorityEdit))).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         // ======================= REPEAT EVERY SELECT2 ==========================
         actions.click(WebUI.getWebElement(dropdownRepeatEvery)).perform();
-        Thread.sleep(600);
+        WebUI.sleep(1000);
 
         actions.click(WebUI.getWebElement(getRepeatEvery(repeatEveryEdit))).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         // ======================= RELATED TO (cấp 1) ==========================
         actions.click(WebUI.getWebElement(dropdownRelatedTo)).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         actions.click(WebUI.getWebElement(getValueRepeatTo(relatedToEdit))).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         // ======================= TYPE OF RELATED (cấp 2) ==========================
 
         actions.click(WebUI.getWebElement(dropdownValueForRepeatTo)).perform();
         pressCtrlA_Delete(robot);
-        Thread.sleep(600);
+        WebUI.sleep(1000);
 
         WebElement searchBox = WebUI.getWebElement(inputSearchValueForRepeatTo);
         actions.click(searchBox).perform();
-        Thread.sleep(400);
+        WebUI.sleep(1000);
 
         actions.sendKeys(typeRelatedToEdit).perform();
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
         // Enter để load option
         robot.keyPress(KeyEvent.VK_ENTER);
         robot.keyRelease(KeyEvent.VK_ENTER);
-        Thread.sleep(800);
+        WebUI.sleep(1000);
 
 //        actions.click(WebUI.getWebElement(  getValueForRepeatTo(typeRelatedToEdit))).perform();
-//        Thread.sleep(1000);
+//        WebUI.sleep(1000);
 
         System.out.println("✔ Edit TaskTest completed (Robot + Actions + Wait)");
     }
@@ -449,19 +449,20 @@ public class TaskPage extends BasePage {
         robot.keyPress(KeyEvent.VK_A);
         robot.keyRelease(KeyEvent.VK_A);
         robot.keyRelease(KeyEvent.VK_CONTROL);
-        Thread.sleep(200);
+        WebUI.sleep(1000);
 
         robot.keyPress(KeyEvent.VK_DELETE);
         robot.keyRelease(KeyEvent.VK_DELETE);
-        Thread.sleep(300);
+        WebUI.sleep(1000);
     }
 
     public void clickEditButton(String taskName) throws InterruptedException {
-        Actions action = new Actions(driver);
-        action.moveToElement(WebUI.getWebElement(getFirstRowItemTask(taskName))).perform();
-        Thread.sleep(1000);
+//        Actions action = new Actions(driver);
+//        action.moveToElement(WebUI.getWebElement(getFirstRowItemTask(taskName))).perform();
+        WebUI.moveToElement(getFirstRowItemTask(taskName));
+        WebUI.sleep(1000);
         WebUI.clickElement(buttonEdit(taskName));
-        Thread.sleep(2000);
+        WebUI.sleep(1000);
     }
 
 }

@@ -54,6 +54,7 @@ public class LeadsTest extends BaseTest {
 
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(leadsNameTest);
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
         leadsPage.clickEditButton(leadsNameTest);
 
         leadsPage.verifyNewLeadInEdit(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position,
@@ -76,6 +77,7 @@ public class LeadsTest extends BaseTest {
                 leadValue, language, company, description, lastContacted, 1, 0);
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(leadsNameTest);
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
 
         String nameLead = leadsNameTest + "_Edit";
         dropdownStatus = "Active";
@@ -103,6 +105,7 @@ public class LeadsTest extends BaseTest {
                 leadValue, language, company, description, lastContacted, 0, 1);
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(nameLead);
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(nameLead);
         leadsPage.clickEditButton(nameLead);
         leadsPage.verifyNewLeadInEdit(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
                 leadValue, language, company, description, lastContacted, 1);
@@ -126,6 +129,7 @@ public class LeadsTest extends BaseTest {
                 leadValue, language, company, description, lastContacted, 1, 0);
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(leadsNameTest);
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
 
         leadsPage.clickbuttonDelete(leadsNameTest);
 

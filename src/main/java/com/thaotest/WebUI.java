@@ -1,6 +1,7 @@
 package com.thaotest;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -25,6 +26,24 @@ public class WebUI {
             return false;
         }
     }
+    public static void sleep(double second) {
+        try {
+            Thread.sleep((long) second * 1000);
+        } catch (InterruptedException ie) {
+            throw new RuntimeException(ie);
+        }
+    }
+    public static boolean moveToElement(By by) {
+        try {
+            Actions action = new Actions(driver);
+            action.moveToElement(getWebElement(by)).perform();
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
 
     //Hàm kiểm tra hiển  với WebDriverWait - tương ứng driver.findElement(By).isDisplayed()
 //    public static boolean checkElementDisplay(By by, int timeoutSeconds) {
@@ -38,6 +57,8 @@ public class WebUI {
 //            return false;
 //        }
 //    }
+
+
 
     public static void waitForElementVisible(By by){
         WebDriverWait wait = new WebDriverWait(  driver, Duration.ofSeconds(10), Duration.ofMillis(500));
