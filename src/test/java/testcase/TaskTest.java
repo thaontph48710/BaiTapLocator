@@ -54,18 +54,18 @@ public class TaskTest extends BaseTest {
         subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
 
         taskPage.clickButtonNewTask();
-        Thread.sleep(2000);
+
         taskPage.addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, description, tag, 0);
-        Thread.sleep(2000);
+
         taskPage.clickSave();
         taskPage.clickCloseProffile();
 
         taskPage.searchTaskNewAdd(subject);
-        Thread.sleep(2000);
+
 
         taskPage.clickEditButton(subject);
         taskPage.verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 0);
-        Thread.sleep(2000);
+
 //        taskPage.clickCloseEdit();
 
 

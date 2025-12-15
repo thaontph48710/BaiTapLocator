@@ -206,14 +206,14 @@ public class LeadsPage extends BasePage {
 
     public void clickButtonLeadsSummary() throws InterruptedException {
         WebUI.clickElement(buttonLeadsSummary);
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
     }
 
     public void openLeads() throws InterruptedException {
         System.out.println("Open Page LeadsTest");
         WebUI.clickElement(menuLeads);
         WebUI.clickElement(buttonLeadsSummary);
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
 
         Assert.assertTrue(WebUI.checkExistsElement(titleLeadsSummary), "FAIL: Không mở được trang LeadsTest");
     }
@@ -221,7 +221,7 @@ public class LeadsPage extends BasePage {
     public void clickButtonNewLeads() throws InterruptedException {
         WebUI.clickElement(buttonNewLeads);
 //            driver.findElement(By.xpath(buttonNewLeads)).click();
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
         Assert.assertTrue(WebUI.checkExistsElement(headerAddNewLead), "FAIL: Không mở được popup Add New LeadsTest");
     }
 
@@ -310,7 +310,7 @@ public class LeadsPage extends BasePage {
         WebUI.clickElement(listDefaultLanguage(language));
 //         String xpathDefaultLanguage = listDefaultLanguage(language); // Tạo xpath tương ứng với giá trị muốn chọn
 //        driver.findElement(By.xpath(xpathDefaultLanguage)).click();
-//        WebUI.sleep(1000);
+//        WebUI.sleep(1);
 
         WebUI.setTextElement(inputCompany, company);
         WebUI.setTextElement(inputDescription, description);
@@ -318,32 +318,33 @@ public class LeadsPage extends BasePage {
             WebUI.clickElement(labelCheckboxPublic);
         } else if (flag == 1) {
             WebUI.clickElement(labelCheckboxContactedToday);
-            WebUI.sleep(1000);
+            WebUI.sleep(1);
             WebUI.setTextElement(inputDateContacted, dateContacted);
 
         }
 
         WebUI.clickElement(buttonSave);
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
 
     }
 
     public void clickCloseProfile() throws InterruptedException {
 
         WebUI.clickElement(iconCloseProfile);
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
     }
 
     public void searchLeads(String leadsname) throws InterruptedException {
         driver.navigate().refresh();
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
         WebUI.setTextElement(inputSearch, leadsname);
         WebUI.waitForElementVisible(getFirstRowItemLeadName(leadsname));
 
     }
+
     public void verifyNewLeadsFirstRowItemLeadName(String leadsname) throws InterruptedException {
         Assert.assertTrue(WebUI.checkExistsElement(getFirstRowItemLeadName(leadsname)), "Không đúng giá trị Lead vừa thêm mới");
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
     }
 
 
@@ -443,17 +444,17 @@ public class LeadsPage extends BasePage {
     public void clickbuttonDelete(String leadName) throws InterruptedException {
         WebUI.moveToElement(getFirstRowItemLeadName(leadName));
         WebUI.clickElement(buttonDelete(leadName));
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
         driver.switchTo().alert().accept();
     }
 
 
     public void verifyAfterDeleteLead(String name) throws InterruptedException {
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
         WebUI.setTextElement(inputSearch, name);
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
         Assert.assertFalse(WebUI.checkExistsElement(getFirstRowItemLeadName(name)), "Xóa Lead không thành công");
-        WebUI.sleep(1000);
+        WebUI.sleep(1);
     }
 
     public String getTotalStatusCustomer() {

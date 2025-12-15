@@ -66,7 +66,7 @@ public class LoginPage extends BasePage {
     }
 
     public void verifyLoginSuccess() throws InterruptedException {
-        WebUI.sleep(1000);
+      WebUI.sleep(1);
         String actualCurrentURL = WebUI.getCurrentURL(driver);
         String expectedURL = "https://crm.anhtester.com/admin/";
 
@@ -75,25 +75,25 @@ public class LoginPage extends BasePage {
     }
 
     public void verifyLoginFailedWithEmailRequired() throws InterruptedException {
-        WebUI.sleep(1000);
+      WebUI.sleep(1);
         Assert.assertTrue(WebUI.checkExistsElement(errorMessageEmailRequired),
                 "The email required error message is not displayed");
     }
 
     public void verifyLoginFailedWithPasswordRequired() throws InterruptedException {
-        WebUI.sleep(1000);
+      WebUI.sleep(1);
         Assert.assertTrue(WebUI.checkExistsElement(errorMessagePasswordRequired),
                 "The password required error message is not displayed.");
     }
 
     public void verifyLoginFailedWithEmailInvalid() throws InterruptedException {
-        WebUI.sleep(1000);
+      WebUI.sleep(1);
         Assert.assertTrue(WebUI.checkExistsElement(errorMessageInvalidEmailOrPassword),
                 "The invalid email error message is not displayed.");
     }
 
     public void verifyLoginFailedWithPasswordInvalid() throws InterruptedException {
-        WebUI.sleep(1000);
+      WebUI.sleep(1);
         Assert.assertTrue(WebUI.checkExistsElement(errorMessageInvalidEmailOrPassword),
                 "The invalid password error message is not displayed.");
     }
