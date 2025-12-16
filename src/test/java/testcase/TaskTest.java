@@ -52,23 +52,14 @@ public class TaskTest extends BaseTest {
         taskPage = dashboardPage.clickMenuTask();
 
         subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-
         taskPage.clickButtonNewTask();
-
         taskPage.addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, description, tag, 0);
-
         taskPage.clickSave();
         taskPage.clickCloseProffile();
-
         taskPage.searchTaskNewAdd(subject);
-
-
         taskPage.clickEditButton(subject);
+
         taskPage.verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 0);
-
-//        taskPage.clickCloseEdit();
-
-
         String nameSubject = subject + "_Edit";
         hourlyRate = "20";
         startDate = "20-12-2025";
@@ -83,9 +74,7 @@ public class TaskTest extends BaseTest {
         taskPage.clickCloseProffile();
         taskPage.searchTaskNewAdd(nameSubject);
         taskPage.clickEditButton(nameSubject);
-        Thread.sleep(4000);
         taskPage.verifyNewTask(nameSubject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 0);
-        Thread.sleep(4000);
     }
 
 

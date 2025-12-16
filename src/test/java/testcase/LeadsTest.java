@@ -8,6 +8,7 @@ import pages.DashboardPage;
 import pages.LeadsPage;
 import org.testng.annotations.Test;
 import pages.LoginPage;
+import pages.TaskPage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,8 @@ public class LeadsTest extends BaseTest {
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
     private LeadsPage leadsPage;
+    private TaskPage taskPage;
+
 
 
     String leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
@@ -100,7 +103,6 @@ public class LeadsTest extends BaseTest {
         lastContacted = "20-11-2025";
 
         leadsPage.clickEditButton(leadsNameTest);
-
         leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
                 leadValue, language, company, description, lastContacted, 0, 1);
         leadsPage.clickCloseProfile();
@@ -162,6 +164,86 @@ public class LeadsTest extends BaseTest {
         int totalActiveAfterInt = Integer.parseInt(totalActiveAfter);
         Assert.assertEquals(totalActiveAfterInt, totalActiveBeforeInt + 1, "So sanh so luong Active truoc va sau khi them moi Lead khong dung");
     }
+    @Test(priority = 5)
+    public void testAddNewLeadsEditTask() throws Exception {
+        loginPage = new LoginPage(driver);
+        dashboardPage = loginPage.loginCRM();
+        leadsPage = dashboardPage.clickMenuLead();
 
+        //Add new leads and edit leads
+        leadsPage.clickButtonNewLeads();
+        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 1, 0);
+        leadsPage.clickCloseProfile();
+        leadsPage.searchLeads(leadsNameTest);
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
+
+        String nameLead = leadsNameTest + "_Edit";
+        dropdownStatus = "Active";
+        dropdownSource = "Google";
+        dropdownAssigned = "Admin Anh Tester";
+        dropdownTag = "JSC_NEW";
+        address = "Lạng Sơn";
+        position = "Tester";
+        city = "NODO Việt Nam";
+        emailAddress = "ngocthao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        state = "hangocthao080604";
+        website = "thao123.com.vn";
+        country = "Vietnam";
+        phone = "0966674789";
+        zipCode = "123456789";
+        leadValue = "1234566789";
+        language = "Vietnamese";
+        company = "NDJSC";
+        description = "Edit leads cho CRM";
+        lastContacted = "20-11-2025";
+
+        leadsPage.clickEditButton(leadsNameTest);
+        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 0, 1);
+        leadsPage.clickCloseProfile();
+        leadsPage.searchLeads(nameLead);
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(nameLead);
+        leadsPage.clickEditButton(nameLead);
+        leadsPage.verifyNewLeadInEdit(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
+                leadValue, language, company, description, lastContacted, 1);
+
+        //Add new task and edit task
+        TaskTest taskTest = new TaskTest();
+        taskPage = dashboardPage.clickMenuTask();
+       taskTest.subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        taskTest.typeRelatedTo = nameLead;
+        taskPage.clickButtonNewTask();
+        taskPage.addNewTask(taskTest.subject, taskTest.hourlyRate, taskTest.startDate, taskTest.dueDate, taskTest.priority, taskTest.repeatEvery, taskTest.relatedTo,
+                taskTest.typeRelatedTo, taskTest.assignee, taskTest.follower, taskTest.description, taskTest.tag, 0);
+        taskPage.clickSave();
+        taskPage.clickCloseProffile();
+        taskPage.searchTaskNewAdd(taskTest.subject);
+        taskPage.clickEditButton(taskTest.subject);
+
+        taskPage.verifyNewTask(taskTest.subject, taskTest.hourlyRate + ".00", taskTest.startDate, taskTest.dueDate,
+                taskTest.priority, taskTest.repeatEvery, taskTest.relatedTo, taskTest.typeRelatedTo, taskTest.assignee, taskTest.follower, taskTest.tag, 0);
+        String nameSubject = taskTest.subject + "_Edit";
+        taskTest.hourlyRate = "20";
+        taskTest.startDate = "20-12-2025";
+        taskTest.dueDate = "25-12-2025";
+        taskTest.priority = "High";
+        taskTest.repeatEvery = "2 Months";
+        taskTest.relatedTo = "Lead";
+//      typeRelatedTo  = "Giang Test";
+
+        taskPage.editTasks(nameSubject, taskTest.hourlyRate, taskTest.startDate, taskTest.dueDate, taskTest.priority,
+                taskTest.repeatEvery, taskTest.relatedTo, taskTest.typeRelatedTo, 1);
+        taskPage.clickSave();
+        taskPage.clickCloseProffile();
+        taskPage.searchTaskNewAdd(nameSubject);
+        taskPage.clickEditButton(nameSubject);
+        taskPage.verifyNewTask(nameSubject, taskTest.hourlyRate + ".00", taskTest.startDate, taskTest.dueDate,
+                taskTest.priority, taskTest.repeatEvery, taskTest.relatedTo, taskTest.typeRelatedTo, taskTest.assignee, taskTest.follower, taskTest.tag, 0);
+
+
+    }
 
 }
