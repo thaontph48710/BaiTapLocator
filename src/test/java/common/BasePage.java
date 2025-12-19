@@ -1,6 +1,7 @@
 package common;
 
-import com.thaotest.WebUI;
+import com.drivers.DriverManager;
+import com.keywors.WebUI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.CustomerPage;
@@ -9,11 +10,7 @@ import pages.LeadsPage;
 import pages.TaskPage;
 
 public class BasePage {
-        private WebDriver driver;
 
-        public BasePage(WebDriver driver) {
-                this.driver = driver;
-        }
 
         public By menuDashboard = By.xpath("//ul[@id='side-menu']//span[normalize-space()='Dashboard' and @class='menu-text']");
         public By menuLeads = By.xpath("//span[@class='menu-text' and normalize-space()='Leads']");
@@ -22,20 +19,20 @@ public class BasePage {
 
         public DashboardPage clickMenuDashboard() {
                 WebUI.clickElement(  menuDashboard);
-                return new DashboardPage(driver);
+                return new DashboardPage();
         }
 
         public LeadsPage clickMenuLead() {
                 WebUI.clickElement(  menuLeads);
-                return new LeadsPage(driver);
+                return new LeadsPage();
         }
 
         public TaskPage clickMenuTask() {
-                WebUI.clickElement(  menuTasks);
-                return new TaskPage(driver);
+                WebUI.clickElement(menuTasks);
+                return new TaskPage();
         }
         public CustomerPage clickMenuCustomer() {
                 WebUI.clickElement(  menuCustomers);
-                return new CustomerPage(driver);
+                return new CustomerPage();
         }
 }

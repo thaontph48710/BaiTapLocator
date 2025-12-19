@@ -1,8 +1,7 @@
 package testcase;
 
-import com.thaotest.WebUI;
+import com.keywors.WebUI;
 import common.BaseTest;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pages.DashboardPage;
 import pages.LeadsPage;
@@ -45,7 +44,7 @@ public class LeadsTest extends BaseTest {
 
     @Test(priority = 1)
     public void testAndLeadsCheckNewLead() throws InterruptedException {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
 
@@ -68,7 +67,7 @@ public class LeadsTest extends BaseTest {
 
     @Test(priority = 2)
     public void testEditLeads() throws InterruptedException {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
 
@@ -118,7 +117,7 @@ public class LeadsTest extends BaseTest {
     public void testDeleteLeads() throws InterruptedException {
 
 
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
 
@@ -134,7 +133,7 @@ public class LeadsTest extends BaseTest {
         leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
 
         leadsPage.clickbuttonDelete(leadsNameTest);
-
+        leadsPage.searchLeads(leadsNameTest);
         leadsPage.verifyAfterDeleteLead(leadsNameTest);
 
 
@@ -143,7 +142,7 @@ public class LeadsTest extends BaseTest {
 
     @Test(priority = 4)
     public void testSoSanhActiveTruocVaSauKhiThemMoi() throws InterruptedException {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
 
@@ -157,7 +156,7 @@ public class LeadsTest extends BaseTest {
                 leadValue, language, company, description, lastContacted, 1, 0);
 
         leadsPage.clickCloseProfile();
-        driver.navigate().refresh();
+        WebUI.refreshWeb();
         leadsPage.clickButtonLeadsSummary();
         String totalActiveAfter = leadsPage.getTotalStatusActive();
         int totalActiveBeforeInt = Integer.parseInt(totalActiveBefore);
@@ -166,7 +165,7 @@ public class LeadsTest extends BaseTest {
     }
     @Test(priority = 5)
     public void testAddNewLeadsEditTask() throws Exception {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
 
@@ -179,6 +178,7 @@ public class LeadsTest extends BaseTest {
         leadsPage.clickCloseProfile();
         leadsPage.searchLeads(leadsNameTest);
         leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
+        leadsPage.clickEditButton(leadsNameTest);
 
         String nameLead = leadsNameTest + "_Edit";
         dropdownStatus = "Active";
@@ -200,7 +200,7 @@ public class LeadsTest extends BaseTest {
         description = "Edit leads cho CRM";
         lastContacted = "20-11-2025";
 
-        leadsPage.clickEditButton(leadsNameTest);
+        WebUI.sleep(2);
         leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
                 leadValue, language, company, description, lastContacted, 0, 1);
         leadsPage.clickCloseProfile();
@@ -209,10 +209,11 @@ public class LeadsTest extends BaseTest {
         leadsPage.clickEditButton(nameLead);
         leadsPage.verifyNewLeadInEdit(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
                 leadValue, language, company, description, lastContacted, 1);
+        leadsPage.clickCloseProfile();
 
         //Add new task and edit task
         TaskTest taskTest = new TaskTest();
-        taskPage = dashboardPage.clickMenuTask();
+        taskPage = leadsPage.clickMenuTask();
        taskTest.subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
         taskTest.typeRelatedTo = nameLead;
         taskPage.clickButtonNewTask();
@@ -222,7 +223,6 @@ public class LeadsTest extends BaseTest {
         taskPage.clickCloseProffile();
         taskPage.searchTaskNewAdd(taskTest.subject);
         taskPage.clickEditButton(taskTest.subject);
-
         taskPage.verifyNewTask(taskTest.subject, taskTest.hourlyRate + ".00", taskTest.startDate, taskTest.dueDate,
                 taskTest.priority, taskTest.repeatEvery, taskTest.relatedTo, taskTest.typeRelatedTo, taskTest.assignee, taskTest.follower, taskTest.tag, 0);
         String nameSubject = taskTest.subject + "_Edit";

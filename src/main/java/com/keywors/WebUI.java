@@ -1,5 +1,6 @@
-package com.thaotest;
+package com.keywors;
 
+import com.drivers.DriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,11 +11,9 @@ import java.time.Duration;
 import java.util.List;
 
 public class WebUI {
-    private static  WebDriver driver;
 
-    public WebUI( WebDriver driver) {
-        WebUI.driver = driver;
-    }
+
+
     public static boolean checkExistsElement( By by) {
 
         List<WebElement> element = getWebElements( by);
@@ -35,7 +34,7 @@ public class WebUI {
     }
     public static boolean moveToElement(By by) {
         try {
-            Actions action = new Actions(driver);
+            Actions action = new Actions(DriverManager.getDriver());
             action.moveToElement(getWebElement(by)).perform();
             return true;
         } catch (Exception e) {
@@ -45,7 +44,7 @@ public class WebUI {
     }
 
 
-    //Hàm kiểm tra hiển  với WebDriverWait - tương ứng driver.findElement(By).isDisplayed()
+    //Hàm kiểm tra hiển  với WebDriverManager.getDriver()Wait - tương ứng DriverManager.getDriver().findElement(By).isDisplayed()
 //    public static boolean checkElementDisplay(By by, int timeoutSeconds) {
 //        try {
 //            WebElement element = waitForElementVisible(by, timeoutSeconds);
@@ -61,34 +60,37 @@ public class WebUI {
 
 
     public static void waitForElementVisible(By by){
-        WebDriverWait wait = new WebDriverWait(  driver, Duration.ofSeconds(10), Duration.ofMillis(500));
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     public static void waitForElementVisible(By by, int timeoutInSeconds){
-        WebDriverWait wait = new WebDriverWait( driver, Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(500));
+        WebDriverWait wait = new WebDriverWait( DriverManager.getDriver(),
+ Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(500));
         wait.until(ExpectedConditions.visibilityOfElementLocated(by));
     }
 
     public static void waitForElementToBeClickAble(By by){
-        WebDriverWait wait = new WebDriverWait( driver, Duration.ofSeconds(10), Duration.ofMillis(500));
+        WebDriverWait wait = new WebDriverWait( DriverManager.getDriver(),
+ Duration.ofSeconds(10), Duration.ofMillis(500));
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
 
     public static void waitForElementToBeClickAble(   By by, int timeoutInSeconds){
-        WebDriverWait wait = new WebDriverWait( driver, Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(500));
+        WebDriverWait wait = new WebDriverWait( DriverManager.getDriver(),
+ Duration.ofSeconds(timeoutInSeconds), Duration.ofMillis(500));
         wait.until(ExpectedConditions.elementToBeClickable(by));
     }
     public static List<WebElement> getWebElements(  By by){
-        return  driver.findElements(by);
+        return  DriverManager.getDriver().findElements(by);
     }
 
     public static WebElement getWebElement(By by){
-        return  driver.findElement(by);
+        return  DriverManager.getDriver().findElement(by);
 
     }
     public  static void openUrl(   String url){
-        driver.get(url);
+        DriverManager.getDriver().get(url);
         System.out.println("Open URL: " + url);
 
     }
@@ -103,7 +105,7 @@ public class WebUI {
       getWebElement( by).sendKeys(text);
     }
     public static void clickElement(By by){
-       waitForElementToBeClickAble(by);
+       waitForElementToBeClickAble(by,2);
         getWebElement(by).click();
     }
     private static int WAIT_TIMEOUT = 7;
@@ -123,7 +125,8 @@ public class WebUI {
 
     public static void switchToFrame(By by) {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(WAIT_TIMEOUT));
+            WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(),
+ Duration.ofSeconds(WAIT_TIMEOUT));
             wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(by));
         } catch (Throwable error) {
             System.out.println("Timeout waiting for Switch To Frame. " + by.toString());
@@ -132,22 +135,22 @@ public class WebUI {
     }
 
     public static void switchToParentFrame() {
-        driver.switchTo().parentFrame();
+        DriverManager.getDriver().switchTo().parentFrame();
     }
 
     public static void switchToDefaultContentFrame() {
-        driver.switchTo().defaultContent();
+        DriverManager.getDriver().switchTo().defaultContent();
     }
 
 
 
     public static void scrollAtTop(   By by){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
         js.executeScript("arguments[0].scrollIntoView(true);", getWebElement(  by));
 
     }
     public static void scrollAtBottom(   By by){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
         js.executeScript("arguments[0].scrollIntoView(false);", getWebElement( by));
 
     }
@@ -171,7 +174,12 @@ public class WebUI {
             return false;
         }
     }
-
+    public static void alerAccept() {
+        DriverManager.getDriver().switchTo().alert().accept();
+    }
+    public static void refreshWeb() {
+        DriverManager.getDriver().navigate().refresh();
+    }
 
 
 

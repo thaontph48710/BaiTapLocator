@@ -1,26 +1,16 @@
 package pages;
 
-import com.thaotest.WebUI;
+import com.keywors.WebUI;
 import common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.time.Duration;
 import java.util.List;
 
 public class LeadsPage extends BasePage {
-    private WebDriver driver;
 
-    public LeadsPage(WebDriver driver) {
-        super(driver);
-        this.driver = driver;
-        new WebUI(driver);
-    }
 
 
     private By labelLeadTotalCustomer = By.xpath("//div[@class='clearfix']/following-sibling::div//span[normalize-space()='Customer']/preceding-sibling::span");
@@ -335,10 +325,10 @@ public class LeadsPage extends BasePage {
     }
 
     public void searchLeads(String leadsname) throws InterruptedException {
-        driver.navigate().refresh();
+        WebUI.refreshWeb();
         WebUI.sleep(1);
         WebUI.setTextElement(inputSearch, leadsname);
-        WebUI.waitForElementVisible(getFirstRowItemLeadName(leadsname));
+
 
     }
 
@@ -435,7 +425,11 @@ public class LeadsPage extends BasePage {
     public void clickEditButton(String leadName) throws InterruptedException {
 //        Actions action = new Actions(driver);
 //        action.moveToElement(WebUI.getWebElement(getFirstRowItemLeadName(leadName))).perform(); //ham chung
+        WebUI.sleep(2);
+        WebUI.waitForElementVisible(getFirstRowItemLeadName(leadName));
+        WebUI.sleep(2);
         WebUI.moveToElement(getFirstRowItemLeadName(leadName));
+        WebUI.sleep(2);
         WebUI.clickElement(buttonEdit(leadName));
 
 
@@ -445,14 +439,12 @@ public class LeadsPage extends BasePage {
         WebUI.moveToElement(getFirstRowItemLeadName(leadName));
         WebUI.clickElement(buttonDelete(leadName));
         WebUI.sleep(1);
-        driver.switchTo().alert().accept();
+        WebUI.alerAccept();
     }
 
 
     public void verifyAfterDeleteLead(String name) throws InterruptedException {
-        WebUI.sleep(1);
-        WebUI.setTextElement(inputSearch, name);
-        WebUI.sleep(1);
+
         Assert.assertFalse(WebUI.checkExistsElement(getFirstRowItemLeadName(name)), "Xóa Lead không thành công");
         WebUI.sleep(1);
     }

@@ -1,15 +1,10 @@
 package testcase;
 
-import com.thaotest.WebUI;
 import common.BaseTest;
-import org.openqa.selenium.WebElement;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.CustomerPage;
 import pages.DashboardPage;
 import pages.LoginPage;
-
-import javax.lang.model.element.Element;
 
 public class CustomerTest extends BaseTest {
     private LoginPage loginPage;
@@ -20,7 +15,7 @@ public class CustomerTest extends BaseTest {
 
     @Test
     public void testDeleteALL() throws InterruptedException {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         customerPage = dashboardPage.clickMenuCustomer();
 

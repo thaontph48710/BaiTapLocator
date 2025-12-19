@@ -1,9 +1,9 @@
 package pages;
 
-import com.thaotest.WebUI;
+import com.drivers.DriverManager;
+import com.keywors.WebUI;
 import common.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -16,13 +16,7 @@ import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 public class TaskPage extends BasePage {
-    private WebDriver driver;
 
-    public TaskPage(WebDriver driver) {
-        super(driver);
-        this.driver = driver;
-        new WebUI(driver);
-    }
 
     private By inputSearch = By.xpath("//div[@id='tasks_filter']//input[@type='search']");
     // Menu Tasks
@@ -193,6 +187,7 @@ public class TaskPage extends BasePage {
         WebUI.sleep(1);
 
 //---------------------------------Drowdown Repeat Every-----------------------------
+        WebUI.clickElement(headerAddNewTask); // Click ra ngoai de an calendar
         WebUI.clickElement(dropdownRepeatEvery);
         WebUI.clickElement(getRepeatEvery(repeatEvery));
         WebUI.sleep(1);
@@ -342,9 +337,9 @@ public class TaskPage extends BasePage {
                           String priorityEdit, String repeatEveryEdit,
                           String relatedToEdit, String typeRelatedToEdit, int flag) throws Exception {
 
-        Actions actions = new Actions(driver);
+        Actions actions = new Actions(DriverManager.getDriver());
         Robot robot = new Robot();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(10));
 
 
         //checkbox
@@ -460,7 +455,7 @@ public class TaskPage extends BasePage {
 //        Actions action = new Actions(driver);
 //        action.moveToElement(WebUI.getWebElement(getFirstRowItemTask(taskName))).perform();
         WebUI.moveToElement(getFirstRowItemTask(taskName));
-        WebUI.sleep(1);
+        WebUI.sleep(2);
         WebUI.clickElement(buttonEdit(taskName));
         WebUI.sleep(1);
     }

@@ -29,7 +29,7 @@ public class TaskTest extends BaseTest {
 
     @Test(priority = 1)
     public void testAddTaskAndCheckNewTask() throws InterruptedException {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         taskPage = dashboardPage.clickMenuTask();
 
@@ -47,7 +47,7 @@ public class TaskTest extends BaseTest {
 
     @Test(priority = 2)
     public void testEditask() throws Exception {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         taskPage = dashboardPage.clickMenuTask();
 

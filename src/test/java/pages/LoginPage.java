@@ -1,6 +1,8 @@
 package pages;
 
-import com.thaotest.WebUI;
+import com.drivers.DriverManager;
+import com.helpers.PropertiesHelper;
+import com.keywors.WebUI;
 import common.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,13 +11,6 @@ import org.testng.Assert;
 public class LoginPage extends BasePage {
 
 
-    private WebDriver driver;
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
-        this.driver = driver;
-        new WebUI(driver);
-    }
 
     private String url = "https://crm.anhtester.com/admin/authentication";
 
@@ -30,7 +25,7 @@ public class LoginPage extends BasePage {
     private By errorMessagePasswordRequired = By.xpath("//div[text()='The Password field is required.' and contains(@class,'alert-danger')]");
 
     public void navigateToCRM() {
-        WebUI.openUrl(url);
+        WebUI.openUrl(PropertiesHelper.getValue("url"));
     }
 
     public void verifyHeaderLogin() {
@@ -58,16 +53,16 @@ public class LoginPage extends BasePage {
     public DashboardPage loginCRM() throws InterruptedException {
         navigateToCRM();
         verifyHeaderLogin();
-        enterEmail("admin@example.com");
-        enterPassword("123456");
+        enterEmail(PropertiesHelper.getValue("email"));
+        enterPassword(PropertiesHelper.getValue("password"));
         clickButtonLogin();
         verifyLoginSuccess();
-        return new DashboardPage(driver);
+        return new DashboardPage();
     }
 
     public void verifyLoginSuccess() throws InterruptedException {
       WebUI.sleep(1);
-        String actualCurrentURL = WebUI.getCurrentURL(driver);
+        String actualCurrentURL = WebUI.getCurrentURL(DriverManager.getDriver());
         String expectedURL = "https://crm.anhtester.com/admin/";
 
         Assert.assertTrue((WebUI.checkExistsElement(menuDashboard) && actualCurrentURL.equals(expectedURL)),

@@ -1,7 +1,5 @@
 package testcase;
 
-import com.thaotest.WebUI;
-import common.BasePage;
 import common.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,7 +16,7 @@ public class DashboardTest extends BaseTest {
 
     @Test
     public void testConvertedLeads() throws InterruptedException {
-        loginPage = new LoginPage(driver);
+        loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         dashboardPage.verifyDashboardPageDisplayed();
 
