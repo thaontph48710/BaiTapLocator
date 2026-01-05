@@ -1,7 +1,10 @@
 package testcase;
 
+import com.helpers.ExcelHelper;
+import com.helpers.PropertiesHelper;
 import com.keywors.WebUI;
 import common.BaseTest;
+import models.LeadsDTO;
 import org.testng.Assert;
 import pages.DashboardPage;
 import pages.LeadsPage;
@@ -20,48 +23,75 @@ public class LeadsTest extends BaseTest {
     private LeadsPage leadsPage;
     private TaskPage taskPage;
 
+    private LeadsDTO getLeadDataFromExcel(int rowIndex) {
 
+        ExcelHelper excel = new ExcelHelper();
+        excel.setExcelFile("src/test/resources/datatest/dataCRM.xlsx", "Leads");
 
-    String leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-    String dropdownStatus = "Customer";
-    String dropdownSource = "Facebook";
-    String dropdownAssigned = "Admin Anh Tester";
-    String dropdownTag = "Selenium";
-    String address = "Hà Nội";
-    String position = "Tester";
-    String city = "Việt Nam";
-    String emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
-    String state = "hangocthao";
-    String website = "thao.com.vn";
-    String country = "Vietnam";
-    String phone = "0966674456";
-    String zipCode = "123456";
-    String leadValue = "123456";
-    String language = "Vietnamese";
-    String company = "NDJSC";
-    String description = "Them moi leads cho CRM";
-    String lastContacted = "10-11-2025";
+        LeadsDTO lead = new LeadsDTO();
+        lead.setLeadsNameTest(excel.getCellData("LEAD_NAME_TEST", rowIndex));
+        lead.setDropdownStatus(excel.getCellData("STATUS", rowIndex));
+        lead.setDropdownSource(excel.getCellData("SOURCE", rowIndex));
+        lead.setDropdownAssigned(excel.getCellData("ASSIGNED", rowIndex));
+        lead.setDropdownTag(excel.getCellData("TAG", rowIndex));
+        lead.setPosition(excel.getCellData("POSITION", rowIndex));
+        lead.setCity(excel.getCellData("CITY", rowIndex));
+        lead.setEmailAddress(excel.getCellData("EMAIL_ADDRESS", rowIndex));
+        lead.setState(excel.getCellData("STATE", rowIndex));
+        lead.setWebsite(excel.getCellData("WEBSITE", rowIndex));
+        lead.setCountry(excel.getCellData("COUNTRY", rowIndex));
+        lead.setPhone(excel.getCellData("PHONE", rowIndex));
+        lead.setZipCode(excel.getCellData("ZIP_CODE", rowIndex));
+        lead.setLeadValue(excel.getCellData("LEAD_VALUE", rowIndex));
+        lead.setLanguage(excel.getCellData("LANGUAGE", rowIndex));
+        lead.setCompany(excel.getCellData("COMPANY", rowIndex));
+        lead.setDescription(excel.getCellData("DESCRIPTION", rowIndex));
+        lead.setLastContacted(excel.getCellData("LAST_CONTACTED", rowIndex));
+        lead.setFlag(Integer.parseInt(excel.getCellData("FLAG", rowIndex)));
+        lead.setFlagEdit(Integer.parseInt(excel.getCellData("FLAG_EDIT", rowIndex)));
+
+        return lead;
+    }
+
+//    String leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+//    String dropdownStatus = "Customer";
+//    String dropdownSource = "Facebook";
+//    String dropdownAssigned = "Admin Anh Tester";
+//    String dropdownTag = "Selenium";
+//    String address = "Hà Nội";
+//    String position = "Tester";
+//    String city = "Việt Nam";
+//    String emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+//    String state = "hangocthao";
+//    String website = "thao.com.vn";
+//    String country = "Vietnam";
+//    String phone = "0966674456";
+//    String zipCode = "123456";
+//    String leadValue = "123456";
+//    String language = "Vietnamese";
+//    String company = "NDJSC";
+//    String description = "Them moi leads cho CRM";
+//    String lastContacted = "10-11-2025";
 
     @Test(priority = 1)
     public void testAndLeadsCheckNewLead() throws InterruptedException {
         loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
-
+        LeadsDTO leadData = getLeadDataFromExcel(1);
         leadsPage.clickButtonNewLeads();
-        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
-        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted, 1, 0);
+        String dateTime = new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date()) ;
+        leadData.setLeadsNameTest(leadData.getLeadsNameTest() + dateTime);
+        leadsPage.fillDate(leadData);
 
         leadsPage.clickCloseProfile();
-        leadsPage.searchLeads(leadsNameTest);
-        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
-        leadsPage.clickEditButton(leadsNameTest);
+        leadsPage.searchLeads(leadData.getLeadsNameTest());
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadData.getLeadsNameTest());
+        leadsPage.clickEditButton(leadData.getLeadsNameTest());
 
-        leadsPage.verifyNewLeadInEdit(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position,
-                city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted, 1);
+        leadsPage.verifyNewLeadInEdit(leadData);
+
+//        PropertiesHelper.setValue("leadsNameTest", leadsNameTest);
     }
 
 
@@ -70,37 +100,38 @@ public class LeadsTest extends BaseTest {
         loginPage = new LoginPage();
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
-
+        LeadsDTO leadData = getLeadDataFromExcel(2);
 
         leadsPage.clickButtonNewLeads();
-        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
-        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
-                leadValue, language, company, description, lastContacted, 1, 0);
+//        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+//        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+        String dateTime = new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date()) ;
+        leadData.setLeadsNameTest(leadData.getLeadsNameTest() + dateTime);
+        leadsPage.fillDate(leadData);
         leadsPage.clickCloseProfile();
-        leadsPage.searchLeads(leadsNameTest);
-        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
+        leadsPage.searchLeads(leadData.getLeadsNameTest());
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadData.getLeadsNameTest());
 
-        String nameLead = leadsNameTest + "_Edit";
-        dropdownStatus = "Active";
-        dropdownSource = "Google";
-        dropdownAssigned = "Admin Anh Tester";
-        dropdownTag = "JSC_NEW";
-        address = "Lạng Sơn";
-        position = "Tester";
-        city = "NODO Việt Nam";
-        emailAddress = "ngocthao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
-        state = "hangocthao080604";
-        website = "thao123.com.vn";
-        country = "Vietnam";
-        phone = "0966674789";
-        zipCode = "123456789";
-        leadValue = "1234566789";
-        language = "Vietnamese";
-        company = "NDJSC";
-        description = "Edit leads cho CRM";
-        lastContacted = "20-11-2025";
-
+//        String nameLead = leadsNameTest + "_Edit";
+//        dropdownStatus = "Active";
+//        dropdownSource = "Google";
+//        dropdownAssigned = "Admin Anh Tester";
+//        dropdownTag = "JSC_NEW";
+//        address = "Lạng Sơn";
+//        position = "Tester";
+//        city = "NODO Việt Nam";
+//        emailAddress = "ngocthao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
+//        state = "hangocthao080604";
+//        website = "thao123.com.vn";
+//        country = "Vietnam";
+//        phone = "0966674789";
+//        zipCode = "123456789";
+//        leadValue = "1234566789";
+//        language = "Vietnamese";
+//        company = "NDJSC";
+//        description = "Edit leads cho CRM";
+//        lastContacted = "20-11-2025";
+        LeadsDTO leadDataEdit = getLeadDataFromExcel(3);
         leadsPage.clickEditButton(leadsNameTest);
         leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, nameLead, address, position, city, emailAddress, state, website, country, phone, zipCode,
                 leadValue, language, company, description, lastContacted, 0, 1);
@@ -121,7 +152,6 @@ public class LeadsTest extends BaseTest {
         dashboardPage = loginPage.loginCRM();
         leadsPage = dashboardPage.clickMenuLead();
 
-        ;
         leadsPage.clickButtonNewLeads();
         leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
         emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";

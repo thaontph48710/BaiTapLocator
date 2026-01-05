@@ -32,9 +32,13 @@ public class BaseTest {
         System.out.println("Khởi tạo trình duyệt Chrome");
         WebDriver driver;
 
-        if (PropertiesHelper.getValue("browser").isEmpty()|| PropertiesHelper.getValue("browser")== null){
-            browersName = browersName;
-        } else {
+//        if (PropertiesHelper.getValue("browser").isBlank()|| PropertiesHelper.getValue("browser")== null){
+//            browersName = browersName;
+//        } else {
+//            browersName = PropertiesHelper.getValue("browser");
+//        }
+
+        if (PropertiesHelper.getValue("browser") != null && !PropertiesHelper.getValue("browser").isBlank()) {
             browersName = PropertiesHelper.getValue("browser");
         }
 
@@ -44,7 +48,7 @@ public class BaseTest {
                 ChromeOptions option = new ChromeOptions();
                 if(PropertiesHelper.getValue("headless").equalsIgnoreCase("true")) {
                     option.addArguments("--headless=new"); // chay headless
-                    option.addArguments("--window-size=1920,1080"); // set kich thuoc cua trinh duyet
+                    option.addArguments("--window-size=" + PropertiesHelper.getValue("window_size")); // set kich thuoc cua trinh duyet
                 }
                 driver = new ChromeDriver(option);
 

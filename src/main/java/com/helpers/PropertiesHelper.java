@@ -31,9 +31,13 @@ public class PropertiesHelper {
 //        files.add("src/test/resources/configs/production.properties");
 
         try {
+            //Khởi tạo object Properties chính
+            //Load từng file và gộp vào object Properties chính
+            //Đây là object cuối cùng trả về
             properties = new Properties();
 
             for (String f : files) {
+                //Tạo Properties tạm thời để load từng file
                 Properties tempProp = new Properties();
                 linkFile = SystemHelper.getCurrentDir() + f;
                 file = new FileInputStream(linkFile);

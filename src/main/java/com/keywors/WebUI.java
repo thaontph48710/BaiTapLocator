@@ -100,7 +100,7 @@ public class WebUI {
         System.out.println("Current URL: " + currentUrl);
         return currentUrl;
     }
-    public static void setTextElement(   By by, String text){
+    public static void setTextElement(By by, String text){
         WebUI.waitForElementVisible(  by);
       getWebElement( by).sendKeys(text);
     }

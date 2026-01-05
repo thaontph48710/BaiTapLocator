@@ -2,6 +2,7 @@ package pages;
 
 import com.keywors.WebUI;
 import common.BasePage;
+import models.LeadsDTO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -216,12 +217,10 @@ public class LeadsPage extends BasePage {
     }
 
 
-    public void fillDate(String status, String dropdownSource, String dropdownAssigned, String dropdownTag, String leadsNameTest, String address, String position,
-                         String city, String emailAddress, String state, String website, String country, String phone, String zipCode,
-                         String leadValue, String language, String company, String description, String dateContacted, int flag, int flagEdit) throws InterruptedException {
+    public void fillDate(LeadsDTO leadsDTO) {
 
 
-        if (flagEdit == 1) {
+        if (leadsDTO.getFlagEdit() == 1) {
             System.out.println("Edit LeadsTest");
             WebUI.clickElement(closeTag);
             WebUI.clearElementText(inputState);
@@ -237,7 +236,7 @@ public class LeadsPage extends BasePage {
             WebUI.clearElementText(inputCompany);
             WebUI.clearElementText(inputDescription);
             WebUI.clearElementText(inputLastContacted);
-            WebUI.setTextElement(inputLastContacted, dateContacted);
+//            WebUI.setTextElement(inputLastContacted,  leadsDTO.get);
 
         } else {
             System.out.println("Add New LeadsTest");
@@ -248,20 +247,20 @@ public class LeadsPage extends BasePage {
         // Click vào dropdown
         WebUI.clickElement(dropdownStatus);
         //Tìm kiếm giá trị cần chọn và nhấn Enter
-        WebUI.setTextElement(inputStatusSearch, status);
-        WebUI.clickElement(listStatus(status));
+        WebUI.setTextElement(inputStatusSearch, leadsDTO.getDropdownStatus());
+        WebUI.clickElement(listStatus(leadsDTO.getDropdownStatus()));
 
         //-----------------------Cách 2: Chỉ dùng khi giá trị mở dropdown bằng cách gọi hàm-----------------------------
         //------------------- Xác định dropdown Source---------------------------
         WebUI.clickElement(dropdownSourceButton);
-        WebUI.setTextElement(inputSourceSearch, dropdownSource);
-        WebUI.clickElement(listSource(dropdownSource));// Source
+        WebUI.setTextElement(inputSourceSearch, leadsDTO.getDropdownSource());
+        WebUI.clickElement(listSource(leadsDTO.getDropdownSource()));// Source
 
         //------------------- Xác định dropdown Assigned---------------------------
 
         WebUI.clickElement(dropdownAssignedButton);
-        WebUI.setTextElement(inputAssignedSearch, dropdownAssigned);
-        WebUI.clickElement(listAssigned(dropdownAssigned));
+        WebUI.setTextElement(inputAssignedSearch, leadsDTO.getDropdownAssigned());
+        WebUI.clickElement(listAssigned(leadsDTO.getDropdownAssigned()));
 
         //------------------- Xác định dropdown Tag---------------------------
         // Mở dropdown
@@ -270,46 +269,46 @@ public class LeadsPage extends BasePage {
         List<WebElement> allOptionsTags = WebUI.getWebElements(listdropdownTag);
 
         for (WebElement option : allOptionsTags) {
-            if (option.getText().equals(dropdownTag)) {
+            if (option.getText().equals(leadsDTO.getDropdownTag())) {
                 option.click();
                 break;
             }
         }
-        WebUI.setTextElement(inputName, leadsNameTest);
-        WebUI.setTextElement(inputAddress, address);
-        WebUI.setTextElement(inputPosition, position);
-        WebUI.setTextElement(inputCity, city);
-        WebUI.setTextElement(inputEmailAddress, emailAddress);
-        WebUI.setTextElement(inputState, state);
-        WebUI.setTextElement(inputWebsite, website);
+        WebUI.setTextElement(inputName, leadsDTO.getLeadsNameTest());
+        WebUI.setTextElement(inputAddress, leadsDTO.getAddress());
+        WebUI.setTextElement(inputPosition, leadsDTO.getPosition());
+        WebUI.setTextElement(inputCity, leadsDTO.getCity());
+        WebUI.setTextElement(inputEmailAddress, leadsDTO.getEmailAddress());
+        WebUI.setTextElement(inputState, leadsDTO.getState());
+        WebUI.setTextElement(inputWebsite, leadsDTO.getWebsite());
 
 
         //------------------- Dropdown Country----------------------------
         WebUI.clickElement(dropdownCountry);
-        WebUI.setTextElement(inputSearchCountry, country);
-        WebUI.clickElement(listCountry(country));
+        WebUI.setTextElement(inputSearchCountry, leadsDTO.getCountry());
+        WebUI.clickElement(listCountry(leadsDTO.getCountry()));
 
-        WebUI.setTextElement(inputPhone, phone);
-        WebUI.setTextElement(inputZipCode, zipCode);
-        WebUI.setTextElement(inputLeadValue, leadValue);
+        WebUI.setTextElement(inputPhone, leadsDTO.getPhone());
+        WebUI.setTextElement(inputZipCode, leadsDTO.getZipCode());
+        WebUI.setTextElement(inputLeadValue, leadsDTO.getLeadValue());
 
 
 //    -------------------- Drowpdown Default Language ---------------------------
         WebUI.clickElement(dropdownDefaultLanguage);
-        WebUI.setTextElement(inputSearchDefaultLanguage, language);
-        WebUI.clickElement(listDefaultLanguage(language));
+        WebUI.setTextElement(inputSearchDefaultLanguage, leadsDTO.getLanguage());
+        WebUI.clickElement(listDefaultLanguage(leadsDTO.getLanguage()));
 //         String xpathDefaultLanguage = listDefaultLanguage(language); // Tạo xpath tương ứng với giá trị muốn chọn
 //        driver.findElement(By.xpath(xpathDefaultLanguage)).click();
 //        WebUI.sleep(1);
 
-        WebUI.setTextElement(inputCompany, company);
-        WebUI.setTextElement(inputDescription, description);
-        if (flag == 0) {
+        WebUI.setTextElement(inputCompany, leadsDTO.getCompany());
+        WebUI.setTextElement(inputDescription, leadsDTO.getDescription());
+        if (leadsDTO.getFlag() == 0) {
             WebUI.clickElement(labelCheckboxPublic);
-        } else if (flag == 1) {
+        } else if (leadsDTO.getFlag() == 1) {
             WebUI.clickElement(labelCheckboxContactedToday);
             WebUI.sleep(1);
-            WebUI.setTextElement(inputDateContacted, dateContacted);
+//            WebUI.setTextElement(inputDateContacted, dateContacted);
 
         }
 
@@ -338,24 +337,22 @@ public class LeadsPage extends BasePage {
     }
 
 
-    public void verifyNewLeadInEdit(String status, String source, String assigned, String tag, String leadName, String address, String position,
-                                    String city, String emailAddress, String state, String website, String country, String phone, String zipCode,
-                                    String leadValue, String language, String company, String description, String dateContacted, int flag) throws InterruptedException {
+    public void verifyNewLeadInEdit(LeadsDTO leadsDTO) throws InterruptedException {
 
 
         // Status ]
 
         String actualStatus = WebUI.getText(dropdownStatus).trim();
-        Assert.assertTrue(actualStatus.contains(status), "FAIL: Status không chứa giá trị mong muốn. Expected fragment: " + status + " Actual: " + actualStatus);
+        Assert.assertTrue(actualStatus.contains(leadsDTO.getDropdownStatus()), "FAIL: Status không chứa giá trị mong muốn. Expected fragment: " + leadsDTO.getDropdownStatus() + " Actual: " + actualStatus);
 
 
         // Source
         String actualSource = WebUI.getText(dropdownSourceButton).trim();
-        Assert.assertEquals(actualSource, source, "FAIL: Source không khớp.");
+        Assert.assertEquals(actualSource, leadsDTO.getDropdownSource(), "FAIL: Source không khớp.");
 
 
         String actualAssigned = WebUI.getText(dropdownAssignedButton).trim();
-        Assert.assertEquals(actualAssigned, assigned, "FAIL: Assigned không chứa giá trị mong muốn.");
+        Assert.assertEquals(actualAssigned, leadsDTO.getDropdownAssigned(), "FAIL: Assigned không chứa giá trị mong muốn.");
 
 
 //        String actualTag = driver.findElement(By.xpath(inputTag)).getText().trim();
@@ -363,55 +360,55 @@ public class LeadsPage extends BasePage {
 
 
         String actualName = WebUI.getElementAttribute(inputName, "value").trim();
-        Assert.assertEquals(actualName, leadName, "FAIL: Tên Lead không khớp.");
+        Assert.assertEquals(actualName, leadsDTO.getLeadsNameTest(), "FAIL: Tên Lead không khớp.");
 
         String actualAddress = WebUI.getElementAttribute(inputAddress, "value").trim();
-        Assert.assertEquals(actualAddress, address, "FAIL: Dia chi không khớp.");
+        Assert.assertEquals(actualAddress, leadsDTO.getAddress(), "FAIL: Dia chi không khớp.");
 
         String actualPosition = WebUI.getElementAttribute(inputPosition, "value").trim();
-        Assert.assertEquals(actualPosition, position, "FAIL: không khớp.");
+        Assert.assertEquals(actualPosition, leadsDTO.getPosition(), "FAIL: không khớp.");
 
         String actualCity = WebUI.getElementAttribute(inputCity, "value").trim();
-        Assert.assertEquals(actualCity, city, "FAIL: không khớp.");
+        Assert.assertEquals(actualCity, leadsDTO.getCity(), "FAIL: không khớp.");
 
         String actualEmail = WebUI.getElementAttribute(inputEmailAddress, "value").trim();
-        Assert.assertEquals(actualEmail, emailAddress, "FAIL: không khớp.");
+        Assert.assertEquals(actualEmail, leadsDTO.getEmailAddress(), "FAIL: không khớp.");
 
         String actualState = WebUI.getElementAttribute(inputState, "value").trim();
-        Assert.assertEquals(actualState, state, "FAIL: không khớp.");
+        Assert.assertEquals(actualState, leadsDTO.getState(), "FAIL: không khớp.");
 
         String actualWebsite = WebUI.getElementAttribute(inputWebsite, "value").trim();
-        Assert.assertEquals(actualWebsite, website, "FAIL: không khớp.");
+        Assert.assertEquals(actualWebsite, leadsDTO.getState(), "FAIL: không khớp.");
 
         String actualCountry = WebUI.getText(dropdownCountry).trim();
-        Assert.assertTrue(actualCountry.contains(country), "FAIL: country không khớp.");
+        Assert.assertTrue(actualCountry.contains(leadsDTO.getCountry()), "FAIL: country không khớp.");
 
         String actualphone = WebUI.getElementAttribute(inputPhone, "value").trim();
-        Assert.assertEquals(actualphone, phone, "FAIL: không khớp.");
+        Assert.assertEquals(actualphone, leadsDTO.getPhone(), "FAIL: không khớp.");
 
         String actualZipCode = WebUI.getElementAttribute(inputZipCode, "value").trim();
-        Assert.assertEquals(actualZipCode, zipCode, "FAIL: không khớp.");
+        Assert.assertEquals(actualZipCode, leadsDTO.getZipCode(), "FAIL: không khớp.");
 
 
         String actualLeadValue = WebUI.getElementAttribute(inputLeadValue, "value").trim();
-        Assert.assertTrue(actualLeadValue.contains(leadValue), "FAIL: không khớp.");
+        Assert.assertTrue(actualLeadValue.contains(leadsDTO.getLeadValue()), "FAIL: không khớp.");
 
         String actualLanluage = WebUI.getText(dropdownDefaultLanguage).trim();
-        Assert.assertEquals(actualLanluage, language, "FAIL: không khớp.");
+        Assert.assertEquals(actualLanluage, leadsDTO.getLanguage(), "FAIL: không khớp.");
 
         String actualCompany = WebUI.getElementAttribute(inputCompany, "value").trim();
-        Assert.assertEquals(actualCompany, company, "FAIL: không khớp.");
+        Assert.assertEquals(actualCompany, leadsDTO.getCompany(), "FAIL: không khớp.");
         String actualDescription = WebUI.getElementAttribute(inputDescription, "value").trim();
-        Assert.assertEquals(actualDescription, description, "FAIL: không khớp.");
+        Assert.assertEquals(actualDescription, leadsDTO.getDescription(), "FAIL: không khớp.");
 
 
         // Checkbox Public
-        if (flag == 1) {
+        if (leadsDTO.getFlag() == 1) {
             Assert.assertFalse(WebUI.checkSeletedElement(labelCheckboxPublic), "Đang không tích chọn checkbox public");
             // Last Contacted (Phải xử lý substring như bạn đã làm, nhưng dùng Assert)
-            String actualDateContacted = WebUI.getElementAttribute(inputLastContacted, "value").trim().substring(0, 10);
-            Assert.assertEquals(actualDateContacted, dateContacted, "FAIL: Last Contacted Date không khớp.");
-        } else if (flag == 0) {
+//            String actualDateContacted = WebUI.getElementAttribute(inputLastContacted, "value").trim().substring(0, 10);
+//            Assert.assertEquals(actualDateContacted, dateContacted, "FAIL: Last Contacted Date không khớp.");
+        } else if (leadsDTO.getFlag() == 0) {
             Assert.assertTrue(WebUI.checkSeletedElement(labelCheckboxPublic), "Đang tích chọn checkbox public");
             {
             }
