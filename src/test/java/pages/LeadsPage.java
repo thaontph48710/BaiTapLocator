@@ -378,7 +378,7 @@ public class LeadsPage extends BasePage {
         Assert.assertEquals(actualState, leadsDTO.getState(), "FAIL: không khớp.");
 
         String actualWebsite = WebUI.getElementAttribute(inputWebsite, "value").trim();
-        Assert.assertEquals(actualWebsite, leadsDTO.getState(), "FAIL: không khớp.");
+        Assert.assertEquals(actualWebsite, leadsDTO.getWebsite(), "FAIL: không khớp.");
 
         String actualCountry = WebUI.getText(dropdownCountry).trim();
         Assert.assertTrue(actualCountry.contains(leadsDTO.getCountry()), "FAIL: country không khớp.");
@@ -403,12 +403,12 @@ public class LeadsPage extends BasePage {
 
 
         // Checkbox Public
-        if (leadsDTO.getFlag() == 1) {
+        if (leadsDTO.getFlag() == 0) {
             Assert.assertFalse(WebUI.checkSeletedElement(labelCheckboxPublic), "Đang không tích chọn checkbox public");
             // Last Contacted (Phải xử lý substring như bạn đã làm, nhưng dùng Assert)
 //            String actualDateContacted = WebUI.getElementAttribute(inputLastContacted, "value").trim().substring(0, 10);
 //            Assert.assertEquals(actualDateContacted, dateContacted, "FAIL: Last Contacted Date không khớp.");
-        } else if (leadsDTO.getFlag() == 0) {
+        } else if (leadsDTO.getFlag() == 1) {
             Assert.assertTrue(WebUI.checkSeletedElement(labelCheckboxPublic), "Đang tích chọn checkbox public");
             {
             }
