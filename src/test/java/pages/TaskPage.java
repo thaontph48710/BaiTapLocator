@@ -3,6 +3,7 @@ package pages;
 import com.drivers.DriverManager;
 import com.keywors.WebUI;
 import common.BasePage;
+import models.TaskDTO;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -161,74 +162,73 @@ public class TaskPage extends BasePage {
         Assert.assertTrue(WebUI.checkExistsElement(headerAddNewTask), "Khong mo duoc new task!");
     }
 
-    public void addNewTask(String subject, String hourlyRate, String startDate, String dueDate, String priority, String repeatEvery,
-                           String relatedTo, String typeRelatedTo, String assignee, String follower, String description, String tag, int flag) throws InterruptedException {
+    public void addNewTask(TaskDTO taskDTO) throws InterruptedException {
         System.out.println("Add New TaskTest");
 
-        if (flag == 1) {
+        if (taskDTO.getFlag() == 1) {
             WebUI.clickElement(labelCheckboxPublic);
         }
-        if (flag == 0) {
+        if (taskDTO.getFlag() == 0) {
             WebUI.clickElement(labelCheckboxBillable);
         }
 
-        WebUI.setTextElement(inputSubject, subject);
-        WebUI.setTextElement(inputHourlyRate, hourlyRate);
+        WebUI.setTextElement(inputSubject, taskDTO.getSubject());
+        WebUI.setTextElement(inputHourlyRate, taskDTO.getHourlyRate());
         WebUI.clearElementText(inputStartDate);
         WebUI.clickElement(headerAddNewTask);
-        WebUI.setTextElement(inputStartDate, startDate);
+        WebUI.setTextElement(inputStartDate, taskDTO.getStartDate());
         WebUI.clickElement(headerAddNewTask);
-        WebUI.setTextElement(inputDueDate, dueDate);
+        WebUI.setTextElement(inputDueDate, taskDTO.getDueDate());
         WebUI.clickElement(headerAddNewTask);
 
 // ---------------------------------Drowdown Prioryty-----------------------------
         WebUI.clickElement(dropdownPrioryty);
-        WebUI.clickElement(getValuePrioryty(priority));
+        WebUI.clickElement(getValuePrioryty(taskDTO.getPriority()));
         WebUI.sleep(1);
 
 //---------------------------------Drowdown Repeat Every-----------------------------
         WebUI.clickElement(headerAddNewTask); // Click ra ngoai de an calendar
         WebUI.clickElement(dropdownRepeatEvery);
-        WebUI.clickElement(getRepeatEvery(repeatEvery));
+        WebUI.clickElement(getRepeatEvery(taskDTO.getRepeatEvery()));
         WebUI.sleep(1);
 
 //---------------------------------Drowdown Related To-----------------------------
         WebUI.clickElement(dropdownRelatedTo);
-        WebUI.clickElement(listRelatedTo(relatedTo));
+        WebUI.clickElement(listRelatedTo(taskDTO.getRelatedTo()));
         WebUI.sleep(1);
 //---------------------------------Drowdown Type Related To-----------------------------
         WebUI.clickElement(dropdownValueForRepeatTo);
-        WebUI.setTextElement(inputSearchTypeRelatedTo, typeRelatedTo);
+        WebUI.setTextElement(inputSearchTypeRelatedTo, taskDTO.getTypeRelatedTo());
         WebUI.sleep(1);
 //        Actions actions = new Actions(driver);
 //        actions.click(WebUI.getWebElement(  inputSearchTypeRelatedTo)).sendKeys(" ").build().perform();
 //       WebUI.sleep(1);
-        WebUI.clickElement(getValueTypeRelatedTo(typeRelatedTo));
+        WebUI.clickElement(getValueTypeRelatedTo(taskDTO.getTypeRelatedTo()));
 
 
 //---------------------------------Drowdown Assignees-----------------------------
         WebUI.clickElement(dropdownAssignees);
-        WebUI.clickElement(listAssignees(assignee));
+        WebUI.clickElement(listAssignees(taskDTO.getAssignee()));
         WebUI.sleep(1);
 
         //---------------------------------Drowdown Followers-----------------------------
         WebUI.clickElement(dropdownFollowers);
-        WebUI.clickElement(listFollowers(follower));
+        WebUI.clickElement(listFollowers(taskDTO.getFollower()));
         WebUI.sleep(1);
 
         //------------------- Xác định dropdown Tag---------------------------
         // Mở dropdown
         WebUI.clickElement(inputTag);
-        WebUI.setTextElement(inputTag, tag);
+        WebUI.setTextElement(inputTag, taskDTO.getTag());
         WebUI.sleep(1);
-        WebUI.clickElement(listTag(tag));
+        WebUI.clickElement(listTag(taskDTO.getTag()));
         WebUI.sleep(1);
 
         WebUI.clickElement(headerAddNewTask);
 
         WebUI.clickElement(inputTaskDescription);
         WebUI.switchToFrame(iframeDescription);
-        WebUI.setTextElement(inputDescriptionFrame, description);
+        WebUI.setTextElement(inputDescriptionFrame, taskDTO.getDescription());
         WebUI.switchToParentFrame();
 
         WebUI.sleep(1);
@@ -264,9 +264,7 @@ public class TaskPage extends BasePage {
         WebUI.sleep(1);
     }
 
-    public void verifyNewTask(String subject, String hourlyRate, String startDate, String dueDate,
-                              String priority, String repeatEvery, String relatedTo, String typeRelatedTo, String assignee,
-                              String follower, String tag, int flag) throws InterruptedException {
+    public void verifyNewTask(TaskDTO taskDTO) throws InterruptedException {
 
         System.out.println(" – Checking data after creating task...");
 
@@ -283,38 +281,38 @@ public class TaskPage extends BasePage {
 
         // SUBJECT
         String actualSubject = WebUI.getElementAttribute(inputSubject, "value").trim();
-        Assert.assertEquals(actualSubject, subject, "FAIL: Subject không khớp");
+        Assert.assertEquals(actualSubject, taskDTO.getSubject(), "FAIL: Subject không khớp");
 
         // HOURLY RATE
         String actualRate = WebUI.getElementAttribute(inputHourlyRate, "value").trim();
-        Assert.assertTrue(actualRate.contains(hourlyRate), "FAIL: Hourly Rate không khớp");
+        Assert.assertTrue(actualRate.contains(taskDTO.getHourlyRate()), "FAIL: Hourly Rate không khớp");
 
         // START DATE
         String actualStart = WebUI.getElementAttribute(inputStartDate, "value").trim();
-        Assert.assertEquals(actualStart, startDate, "FAIL: Start Date không khớp");
+        Assert.assertEquals(actualStart, taskDTO.getStartDate(), "FAIL: Start Date không khớp");
 
 
         // DUE DATE
         String actualDue = WebUI.getElementAttribute(inputDueDate, "value").trim();
-        Assert.assertEquals(actualDue, dueDate, "FAIL: Due Date không khớp");
+        Assert.assertEquals(actualDue, taskDTO.getDueDate(), "FAIL: Due Date không khớp");
 
         // PRIORITY (Select2)
         String actualPriority = WebUI.getText(dropdownPrioryty).trim();
-        Assert.assertEquals(actualPriority, priority, "FAIL: Priority không đúng");
+        Assert.assertEquals(actualPriority, taskDTO.getPriority(), "FAIL: Priority không đúng");
 
 
         // REPEAT EVERY (Select2)
         String actualRepeat = WebUI.getText(dropdownRepeatEvery).trim();
-        Assert.assertEquals(actualRepeat, repeatEvery, "FAIL: Repeat Every không đúng");
+        Assert.assertEquals(actualRepeat, taskDTO.getRepeatEvery(), "FAIL: Repeat Every không đúng");
 
 
         // RELATED TO (Select2)
         String actualRelatedTo = WebUI.getText(dropdownRelatedTo).trim();
-        Assert.assertTrue(actualRelatedTo.contains(relatedTo), "FAIL: Related To không đúng");
+        Assert.assertTrue(actualRelatedTo.contains(taskDTO.getRelatedTo()), "FAIL: Related To không đúng");
 
 //        Type Related To
         String actualTypeRelatedTo = WebUI.getText(typeRelatedToDropdown);
-        Assert.assertTrue(actualTypeRelatedTo.contains(typeRelatedTo), "FAIL: Type Related To");
+        Assert.assertTrue(actualTypeRelatedTo.contains(taskDTO.getTypeRelatedTo()), "FAIL: Type Related To");
 
         // ASSIGNEE (Select2)
 //        String actualAssignee = WebUI.getText(  dropdownAssignees).trim();
@@ -327,15 +325,13 @@ public class TaskPage extends BasePage {
 
         // TAG
         String actualTag = WebUI.getText(inputTagsEdit).trim().toLowerCase();
-        Assert.assertEquals(actualTag, tag, "FAIL: tag không khớp.");
+        Assert.assertEquals(actualTag, taskDTO.getTag(), "FAIL: tag không khớp.");
 
 
         System.out.println("VERIFY SUCCESS — dữ liệu task KHỚP hoàn toàn!");
     }
 
-    public void editTasks(String subjectEdit, String hourlyRateEdit, String startDateEdit, String dueDateEdit,
-                          String priorityEdit, String repeatEveryEdit,
-                          String relatedToEdit, String typeRelatedToEdit, int flag) throws Exception {
+    public void editTasks(TaskDTO taskDTO) throws Exception {
 
         Actions actions = new Actions(DriverManager.getDriver());
         Robot robot = new Robot();
@@ -360,7 +356,7 @@ public class TaskPage extends BasePage {
         WebUI.sleep(1);
 
         pressCtrlA_Delete(robot);
-        actions.sendKeys(subjectEdit).perform();
+        actions.sendKeys(taskDTO.getSubject()).perform();
         WebUI.sleep(1);
 
         // ======================= HOURLY RATE ==========================
@@ -370,7 +366,7 @@ public class TaskPage extends BasePage {
         WebUI.sleep(1);
 
         pressCtrlA_Delete(robot);
-        actions.sendKeys(hourlyRateEdit).perform();
+        actions.sendKeys(taskDTO.getHourlyRate()).perform();
         WebUI.sleep(1);
 
         // ======================= START DATE ==========================
@@ -379,7 +375,7 @@ public class TaskPage extends BasePage {
         WebUI.sleep(1);
 
         pressCtrlA_Delete(robot);
-        actions.sendKeys(startDateEdit).perform();
+        actions.sendKeys(taskDTO.getStartDate()).perform();
         WebUI.sleep(1);
 
         // ======================= DUE DATE ==========================
@@ -388,28 +384,28 @@ public class TaskPage extends BasePage {
         WebUI.sleep(1);
 
         pressCtrlA_Delete(robot);
-        actions.sendKeys(dueDateEdit).perform();
+        actions.sendKeys(taskDTO.getDueDate()).perform();
         WebUI.sleep(1);
 
         // ======================= PRIORITY SELECT2 ==========================
         actions.click(WebUI.getWebElement(dropdownPrioryty)).perform();
         WebUI.sleep(1);
 
-        actions.click(WebUI.getWebElement(getValuePrioryty(priorityEdit))).perform();
+        actions.click(WebUI.getWebElement(getValuePrioryty(taskDTO.getPriority()))).perform();
         WebUI.sleep(1);
 
         // ======================= REPEAT EVERY SELECT2 ==========================
         actions.click(WebUI.getWebElement(dropdownRepeatEvery)).perform();
         WebUI.sleep(1);
 
-        actions.click(WebUI.getWebElement(getRepeatEvery(repeatEveryEdit))).perform();
+        actions.click(WebUI.getWebElement(getRepeatEvery(taskDTO.getRepeatEvery()))).perform();
         WebUI.sleep(1);
 
         // ======================= RELATED TO (cấp 1) ==========================
         actions.click(WebUI.getWebElement(dropdownRelatedTo)).perform();
         WebUI.sleep(1);
 
-        actions.click(WebUI.getWebElement(getValueRepeatTo(relatedToEdit))).perform();
+        actions.click(WebUI.getWebElement(getValueRepeatTo(taskDTO.getRelatedTo()))).perform();
         WebUI.sleep(1);
 
         // ======================= TYPE OF RELATED (cấp 2) ==========================
@@ -422,7 +418,7 @@ public class TaskPage extends BasePage {
         actions.click(searchBox).perform();
         WebUI.sleep(1);
 
-        actions.sendKeys(typeRelatedToEdit).perform();
+        actions.sendKeys(taskDTO.getTypeRelatedTo()).perform();
         WebUI.sleep(1);
 
         // Enter để load option

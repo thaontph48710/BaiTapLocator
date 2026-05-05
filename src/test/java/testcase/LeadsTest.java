@@ -123,30 +123,29 @@ public class LeadsTest extends BaseTest {
 
     }
 
-//    @Test(priority = 3)
-//    public void testDeleteLeads() throws InterruptedException {
-//
-//
-//        loginPage = new LoginPage();
-//        dashboardPage = loginPage.loginCRM();
-//        leadsPage = dashboardPage.clickMenuLead();
-//
-//        leadsPage.clickButtonNewLeads();
-//        leadsNameTest = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-//        emailAddress = "thao" + new SimpleDateFormat("ddMMyyyyHHmmss").format(new Date()) + "@gmail.com";
-//
-//        leadsPage.fillDate(dropdownStatus, dropdownSource, dropdownAssigned, dropdownTag, leadsNameTest, address, position, city, emailAddress, state, website, country, phone, zipCode,
-//                leadValue, language, company, description, lastContacted, 1, 0);
-//        leadsPage.clickCloseProfile();
-//        leadsPage.searchLeads(leadsNameTest);
-//        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadsNameTest);
-//
-//        leadsPage.clickbuttonDelete(leadsNameTest);
-//        leadsPage.searchLeads(leadsNameTest);
-//        leadsPage.verifyAfterDeleteLead(leadsNameTest);
-//
-//
-//    }
+    @Test(priority = 3)
+    public void testDeleteLeads() throws InterruptedException {
+
+
+        loginPage = new LoginPage();
+        dashboardPage = loginPage.loginCRM();
+        leadsPage = dashboardPage.clickMenuLead();
+        LeadsDTO leadData = getLeadDataFromExcel(1);
+        leadsPage.clickButtonNewLeads();
+        String dateTime = new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date()) ;
+        leadData.setLeadsNameTest(leadData.getLeadsNameTest() + dateTime);
+        leadData.setEmailAddress(leadData.getEmailAddress() + dateTime + "@gmail.com");
+        leadsPage.fillDate(leadData);
+        leadsPage.clickCloseProfile();
+        leadsPage.searchLeads(leadData.getLeadsNameTest());
+        leadsPage.verifyNewLeadsFirstRowItemLeadName(leadData.getLeadsNameTest());
+
+        leadsPage.clickbuttonDelete(leadData.getLeadsNameTest());
+        leadsPage.searchLeads(leadData.getLeadsNameTest());
+        leadsPage.verifyAfterDeleteLead(leadData.getLeadsNameTest());
+
+
+    }
 //
 //
 //    @Test(priority = 4)

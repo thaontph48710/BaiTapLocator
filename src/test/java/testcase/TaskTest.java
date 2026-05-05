@@ -1,5 +1,8 @@
 package testcase;
 
+import com.helpers.ExcelHelper;
+import models.LeadsDTO;
+import models.TaskDTO;
 import pages.DashboardPage;
 import common.BaseTest;
 import org.testng.annotations.Test;
@@ -13,18 +16,27 @@ public class TaskTest extends BaseTest {
     private LoginPage loginPage;
     private DashboardPage dashboardPage;
     private TaskPage taskPage;
-    String subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
-    String hourlyRate = "50";
-    String startDate = "20-06-2024";
-    String dueDate = "25-06-2024";
-    String priority = "High";
-    String repeatEvery = "Week";
-    String relatedTo = "Lead";
-    String typeRelatedTo = "HaNgocThao_04122025_231550";
-    String assignee = "Admin Anh Tester";
-    String follower = "Admin Example";
-    String description = " description Admin Example";
-    String tag = "test";
+    private TaskDTO getTaskDataFromExcel(int rowIndex) {
+
+        ExcelHelper excel = new ExcelHelper();
+        excel.setExcelFile("src/test/resources/testdata/DataLogin.xlsx", "Task");
+        TaskDTO task = new TaskDTO();
+        task.setSubject(excel.getCellData("SUBJECT", rowIndex));
+        task.setHourlyRate(excel.getCellData("HOURLYRATE", rowIndex));
+        task.setStartDate(excel.getCellData("STARTDATE", rowIndex));
+        task.setDueDate(excel.getCellData("DUEDATE", rowIndex));
+        task.setPriority(excel.getCellData("PRIORITY", rowIndex));
+        task.setRepeatEvery(excel.getCellData("REPEATEVERY", rowIndex));
+        task.setRelatedTo(excel.getCellData("RELATEDTO", rowIndex));
+        task.setTypeRelatedTo(excel.getCellData("TYPERELATEDTO", rowIndex));
+        task.setAssignee(excel.getCellData("ASSIGNEE", rowIndex));
+        task.setFollower(excel.getCellData("FOLLOWER", rowIndex));
+        task.setDescription(excel.getCellData("DESCIPTION", rowIndex));
+        task.setTag(excel.getCellData("TAG", rowIndex));
+        task.setFlag(Integer.parseInt(excel.getCellData("FLAG", rowIndex)));
+        return task;
+    }
+
 
 
     @Test(priority = 1)
@@ -33,15 +45,17 @@ public class TaskTest extends BaseTest {
         dashboardPage = loginPage.loginCRM();
         taskPage = dashboardPage.clickMenuTask();
 
-        subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        TaskDTO taskData = getTaskDataFromExcel(1);
+        String dateTime =  new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        taskData.setSubject(taskData.getSubject() + dateTime);
 
         taskPage.clickButtonNewTask();
-        taskPage.addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, description, tag, 1);
+        taskPage.addNewTask(taskData);
         taskPage.clickSave();
         taskPage.clickCloseProffile();
-        taskPage.searchTaskNewAdd(subject);
-        taskPage.clickEditButton(subject);
-        taskPage.verifyNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 1);
+        taskPage.searchTaskNewAdd(taskData.getSubject());
+        taskPage.clickEditButton(taskData.getSubject());
+        taskPage.verifyNewTask(taskData);
 
     }
 
@@ -51,30 +65,27 @@ public class TaskTest extends BaseTest {
         dashboardPage = loginPage.loginCRM();
         taskPage = dashboardPage.clickMenuTask();
 
-        subject = "HaNgocThao" + new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        TaskDTO taskData = getTaskDataFromExcel(1);
+        String dateTime =  new SimpleDateFormat("_ddMMyyyy_HHmmss").format(new Date());
+        taskData.setSubject(taskData.getSubject() + dateTime);
         taskPage.clickButtonNewTask();
-        taskPage.addNewTask(subject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, description, tag, 0);
+        taskPage.addNewTask(taskData);
         taskPage.clickSave();
         taskPage.clickCloseProffile();
-        taskPage.searchTaskNewAdd(subject);
-        taskPage.clickEditButton(subject);
+        taskPage.searchTaskNewAdd(taskData.getSubject());
+        taskPage.clickEditButton(taskData.getSubject());
 
-        taskPage.verifyNewTask(subject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 0);
-        String nameSubject = subject + "_Edit";
-        hourlyRate = "20";
-        startDate = "20-12-2025";
-        dueDate = "25-12-2025";
-        priority = "High";
-        repeatEvery = "2 Months";
-        relatedTo = "Lead";
-//        typeRelatedTo  = "Giang Test";
+        taskPage.verifyNewTask(taskData);
+        TaskDTO taskDataEdit = getTaskDataFromExcel(2);
 
-        taskPage.editTasks(nameSubject, hourlyRate, startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, 1);
+        taskDataEdit.setSubject(taskDataEdit.getSubject() + dateTime);
+
+        taskPage.editTasks(taskDataEdit);
         taskPage.clickSave();
         taskPage.clickCloseProffile();
-        taskPage.searchTaskNewAdd(nameSubject);
-        taskPage.clickEditButton(nameSubject);
-        taskPage.verifyNewTask(nameSubject, hourlyRate + ".00", startDate, dueDate, priority, repeatEvery, relatedTo, typeRelatedTo, assignee, follower, tag, 0);
+        taskPage.searchTaskNewAdd(taskDataEdit.getSubject());
+        taskPage.clickEditButton(taskDataEdit.getSubject());
+        taskPage.verifyNewTask(taskDataEdit);
     }
 
 

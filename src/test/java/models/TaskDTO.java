@@ -1,8 +1,5 @@
 package models;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class TaskDTO {
     String subject ;
     String hourlyRate ;
@@ -12,7 +9,15 @@ public class TaskDTO {
     String repeatEvery ;
     String relatedTo;
     String typeRelatedTo ;
+    int flag;
 
+    public int getFlag() {
+        return flag;
+    }
+
+    public void setFlag(int flag) {
+        this.flag = flag;
+    }
 
     public String getSubject() {
         return subject;
